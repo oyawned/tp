@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.text.html.HTML.Tag;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -68,12 +66,14 @@ public class TagsContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("Alice","Bob").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTags("Alice", "Bob").build()));
 
         // Keywords match tags, phone, email and address, but does not match tags
-        predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Alice","12345", "alice@email.com", "Main", "Street"));
+        predicate = new TagsContainsKeywordsPredicate(
+            Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withTags("testing").build()));
+                .withEmail("alice@email.com").withAddress("Main Street")
+                .withTags("testing").build()));
     }
 
     @Test
