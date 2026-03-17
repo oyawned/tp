@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -41,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ROLE_AMY = "MID";
     public static final String VALID_ROLE_BOB = "SUPPORT";
+    public static final String VALID_IGN_AMY = "AmyBee88";
+    public static final String VALID_IGN_BOB = "BobChoo99";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_KILLS_SET_1 = "20";
@@ -58,6 +61,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
     public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
+    public static final String IGN_DESC_AMY = " " + PREFIX_IGN + VALID_IGN_AMY;
+    public static final String IGN_DESC_BOB = " " + PREFIX_IGN + VALID_IGN_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String KILLS_DESC_SET_1 = " " + PREFIX_KILLS + VALID_KILLS_SET_1;
@@ -68,6 +73,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "LANER"; // not a valid role
+    public static final String INVALID_IGN_DESC = " " + PREFIX_IGN; // empty string not allowed for IGN
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_KILLS_DESC = " " + PREFIX_KILLS + "-1"; // Negative not allowed
 
@@ -82,10 +88,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withRole(VALID_ROLE_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withRole(VALID_ROLE_AMY).withIgn(VALID_IGN_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withRole(VALID_ROLE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withRole(VALID_ROLE_BOB).withIgn(VALID_IGN_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         VALID_STATS_SET_1 = new Statistics.Builder().withKills(new Kills(VALID_KILLS_SET_1)).build();
         VALID_STATS_SET_2 = new Statistics.Builder().withKills(new Kills(VALID_KILLS_SET_2)).build();
         STATS_DESC_SET_1 = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
