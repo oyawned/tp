@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.STATS_DESC_SET_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEATHS_SET_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEATHS_SET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATS_SET_1;
@@ -31,7 +33,10 @@ public class StatsCommandTest {
     public void execute_statisticsSpecifiedUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withStatistics(VALID_STATS_SET_1).build();
-        EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+        EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder()
+                .withKills(VALID_KILLS_SET_1)
+                .withDeaths(VALID_DEATHS_SET_1)
+                .build();
         StatsCommand statsCommand = new StatsCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(StatsCommand.MESSAGE_STATS_SUCCESS, Messages.format(editedPerson));
@@ -62,7 +67,10 @@ public class StatsCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+        EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder()
+                .withKills(VALID_KILLS_SET_1)
+                .withDeaths(VALID_DEATHS_SET_1)
+                .build();
         StatsCommand statsCommand = new StatsCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(statsCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -70,11 +78,17 @@ public class StatsCommandTest {
 
     @Test
     public void editStatsDescriptor_equals() {
-        final EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+        final EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder()
+                .withKills(VALID_KILLS_SET_1)
+                .withDeaths(VALID_DEATHS_SET_1)
+                .build();
 
         // same values -> returns true
         EditStatsDescriptor descriptorWithSameValues =
-            new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+            new EditStatsDescriptorBuilder()
+                .withKills(VALID_KILLS_SET_1)
+                .withDeaths(VALID_DEATHS_SET_1)
+                .build();
         org.junit.jupiter.api.Assertions.assertTrue(descriptor.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -88,8 +102,18 @@ public class StatsCommandTest {
 
         // different values -> returns false
         EditStatsDescriptor descriptorWithDifferentValues =
-            new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_2).build();
+            new EditStatsDescriptorBuilder()
+                .withKills(VALID_KILLS_SET_2)
+                .withDeaths(VALID_DEATHS_SET_1)
+                .build();
         org.junit.jupiter.api.Assertions.assertFalse(descriptor.equals(descriptorWithDifferentValues));
+
+        EditStatsDescriptor descriptorWithDifferentDeaths =
+            new EditStatsDescriptorBuilder()
+                .withKills(VALID_KILLS_SET_1)
+                .withDeaths(VALID_DEATHS_SET_2)
+                .build();
+        org.junit.jupiter.api.Assertions.assertFalse(descriptor.equals(descriptorWithDifferentDeaths));
     }
 
     @Test
@@ -98,6 +122,10 @@ public class StatsCommandTest {
         org.junit.jupiter.api.Assertions.assertFalse(descriptor.isAnyFieldEdited());
 
         descriptor.setKills(new seedu.address.model.person.statistics.Kills(VALID_KILLS_SET_1));
+        org.junit.jupiter.api.Assertions.assertTrue(descriptor.isAnyFieldEdited());
+
+        descriptor = new EditStatsDescriptor();
+        descriptor.setDeaths(new seedu.address.model.person.statistics.Deaths(VALID_DEATHS_SET_1));
         org.junit.jupiter.api.Assertions.assertTrue(descriptor.isAnyFieldEdited());
     }
 }

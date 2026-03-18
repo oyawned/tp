@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.statistics.Deaths;
 import seedu.address.model.person.statistics.Kills;
 import seedu.address.model.person.statistics.Statistics;
 
@@ -25,8 +27,9 @@ public class StatsCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_KILLS + "KILLS]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_KILLS + "50";
+            + "[" + PREFIX_KILLS + "KILLS] "
+            + "[" + PREFIX_DEATHS + "DEATHS]\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_KILLS + "50 " + PREFIX_DEATHS + "10";
 
     public static final String MESSAGE_STATS_SUCCESS = "Updated Statistics for Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one statistics field to update must be provided.";
@@ -74,6 +77,7 @@ public class StatsCommand extends Command {
         // Build new statistics object using provided values or current ones
         Statistics updatedStats = new Statistics.Builder()
                 .withKills(descriptor.getKills().orElse(currentStats.getKills()))
+                .withDeaths(descriptor.getDeaths().orElse(currentStats.getDeaths()))
                 .build();
 
         return new Person(
@@ -110,6 +114,7 @@ public class StatsCommand extends Command {
      */
     public static class EditStatsDescriptor {
         private Kills kills;
+        private Deaths deaths;
 
         public EditStatsDescriptor() {}
 
@@ -118,13 +123,14 @@ public class StatsCommand extends Command {
          */
         public EditStatsDescriptor(EditStatsDescriptor toCopy) {
             setKills(toCopy.kills);
+            setDeaths(toCopy.deaths);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(kills);
+            return CollectionUtil.isAnyNonNull(kills, deaths);
         }
 
         public void setKills(Kills kills) {
@@ -133,6 +139,14 @@ public class StatsCommand extends Command {
 
         public Optional<Kills> getKills() {
             return Optional.ofNullable(kills);
+        }
+
+        public void setDeaths(Deaths deaths) {
+            this.deaths = deaths;
+        }
+
+        public Optional<Deaths> getDeaths() {
+            return Optional.ofNullable(deaths);
         }
 
         @Override
@@ -146,7 +160,8 @@ public class StatsCommand extends Command {
             }
 
             EditStatsDescriptor otherDescriptor = (EditStatsDescriptor) other;
-            return java.util.Objects.equals(kills, otherDescriptor.kills);
+            return java.util.Objects.equals(kills, otherDescriptor.kills)
+                    && java.util.Objects.equals(deaths, otherDescriptor.deaths);
         }
     }
 }

@@ -28,6 +28,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ROLE = "LANER";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_KILLS = "-1";
+    private static final String INVALID_DEATHS = "-1";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -137,10 +138,19 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidKills_throwsIllegalValueException() {
-        JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics(INVALID_KILLS);
+        JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics(INVALID_KILLS, "0");
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
             VALID_IGN, VALID_ROLE, VALID_TAGS, invalidStats);
         String expectedMessage = Kills.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDeaths_throwsIllegalValueException() {
+        JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics("0", INVALID_DEATHS);
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+            VALID_IGN, VALID_ROLE, VALID_TAGS, invalidStats);
+        String expectedMessage = seedu.address.model.person.statistics.Deaths.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

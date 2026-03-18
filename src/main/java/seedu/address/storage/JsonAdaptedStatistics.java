@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.statistics.Deaths;
 import seedu.address.model.person.statistics.Kills;
 import seedu.address.model.person.statistics.Statistics;
 
@@ -13,13 +14,15 @@ import seedu.address.model.person.statistics.Statistics;
 class JsonAdaptedStatistics {
 
     private final String kills;
+    private final String deaths;
 
     /**
      * Constructs a {@code JsonAdaptedStatistics} with the given details.
      */
     @JsonCreator
-    public JsonAdaptedStatistics(@JsonProperty("kills") String kills) {
+    public JsonAdaptedStatistics(@JsonProperty("kills") String kills, @JsonProperty("deaths") String deaths) {
         this.kills = kills;
+        this.deaths = deaths;
     }
 
     /**
@@ -27,6 +30,7 @@ class JsonAdaptedStatistics {
      */
     public JsonAdaptedStatistics(Statistics source) {
         kills = source.getKills().value.toString();
+        deaths = source.getDeaths().value.toString();
     }
 
     /**
@@ -42,6 +46,15 @@ class JsonAdaptedStatistics {
             throw new IllegalValueException(Kills.MESSAGE_CONSTRAINTS);
         }
         final Kills modelKills = new Kills(kills);
-        return new Statistics.Builder().withKills(modelKills).build();
+
+        if (deaths == null) {
+            throw new IllegalValueException(String.format("Statistics's deaths field is missing!"));
+        }
+        if (!Deaths.isValidDeaths(deaths)) {
+            throw new IllegalValueException(Deaths.MESSAGE_CONSTRAINTS);
+        }
+        final Deaths modelDeaths = new Deaths(deaths);
+
+        return new Statistics.Builder().withKills(modelKills).withDeaths(modelDeaths).build();
     }
 }

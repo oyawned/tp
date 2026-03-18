@@ -7,7 +7,7 @@
     "ign": "AliceP99",
     "role": "TOP",
     "tags": [ "friends" ],
-    "statistics": { "kills": "0" }
+    "statistics": { "kills": "0", "deaths": "0" }
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -15,6 +15,6 @@
     "address": "4th street",
     "ign": "AliceBB88",
     "role": "TOP",
-    "statistics": { "kills": "0" }
+    "statistics": { "kills": "0", "deaths": "0" }
   } ]
 }

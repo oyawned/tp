@@ -10,19 +10,26 @@ import java.util.Objects;
  */
 public class Statistics {
     private final Kills kills;
+    private final Deaths deaths;
 
     /**
      * Constructs a {@code Statistics}.
      *
      * @param kills A valid kills count.
+     * @param deaths A valid deaths count.
      */
-    private Statistics(Kills kills) {
-        requireAllNonNull(kills);
+    private Statistics(Kills kills, Deaths deaths) {
+        requireAllNonNull(kills, deaths);
         this.kills = kills;
+        this.deaths = deaths;
     }
 
     public Kills getKills() {
         return kills;
+    }
+
+    public Deaths getDeaths() {
+        return deaths;
     }
 
     /**
@@ -31,6 +38,7 @@ public class Statistics {
     public static class Builder {
         // Set statistics to default values
         private Kills kills = new Kills("0");
+        private Deaths deaths = new Deaths("0");
 
         /**
          * Sets the {@code Kills} of the {@code Statistics} that we are building.
@@ -43,10 +51,20 @@ public class Statistics {
         }
 
         /**
+         * Sets the {@code Deaths} of the {@code Statistics} that we are building.
+         */
+        public Builder withDeaths(Deaths deaths) {
+            if (deaths != null) {
+                this.deaths = deaths;
+            }
+            return this;
+        }
+
+        /**
          * Builds the {@code Statistics} object.
          */
         public Statistics build() {
-            return new Statistics(kills);
+            return new Statistics(kills, deaths);
         }
     }
 
@@ -71,12 +89,12 @@ public class Statistics {
         }
 
         Statistics otherStats = (Statistics) other;
-        return kills.equals(otherStats.kills);
+        return kills.equals(otherStats.kills) && deaths.equals(otherStats.deaths);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(kills);
+        return Objects.hash(kills, deaths);
     }
 
     /**
@@ -84,6 +102,6 @@ public class Statistics {
      */
     @Override
     public String toString() {
-        return "Kills: " + kills.toString();
+        return "Kills: " + kills.toString() + ", Deaths: " + deaths.toString();
     }
 }

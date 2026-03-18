@@ -15,6 +15,7 @@ import seedu.address.model.person.InGameName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.statistics.Deaths;
 import seedu.address.model.person.statistics.Kills;
 import seedu.address.model.tag.Tag;
 
@@ -168,5 +169,20 @@ public class ParserUtil {
             throw new ParseException(Kills.MESSAGE_CONSTRAINTS);
         }
         return new Kills(trimmedKills);
+    }
+
+    /**
+     * Parses a {@code String deaths} into a {@code Deaths}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deaths} is invalid.
+     */
+    public static Deaths parseDeaths(String deaths) throws ParseException {
+        requireNonNull(deaths);
+        String trimmedDeaths = deaths.trim();
+        if (!Deaths.isValidDeaths(trimmedDeaths)) {
+            throw new ParseException(Deaths.MESSAGE_CONSTRAINTS);
+        }
+        return new Deaths(trimmedDeaths);
     }
 }
