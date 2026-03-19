@@ -33,11 +33,21 @@ public class Result {
     }
 
     /**
+     * Constructs a {@code Result}.
+     *
+     * @param result A value result.
+     */
+    public Result(WinType result) {
+        requireNonNull(result);
+        value = result;
+    }
+
+    /**
      * Returns true if a given String is a valid result.
      */
     public static boolean isValidResult(String test) {
         try {
-            WinType.valueOf(test);
+            WinType.valueOf(test.toUpperCase());
             return true;
         } catch (IllegalArgumentException e) {
             return false;
