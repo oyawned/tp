@@ -101,10 +101,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withRole(VALID_ROLE_AMY).withIgn(VALID_IGN_AMY).withRank(VALID_RANK_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withRole(VALID_ROLE_AMY).withIgn(VALID_IGN_AMY).withRank(VALID_RANK_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withRole(VALID_ROLE_BOB).withIgn(VALID_IGN_BOB).withRank(VALID_RANK_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withRole(VALID_ROLE_BOB).withIgn(VALID_IGN_BOB).withRank(VALID_RANK_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         VALID_STATS_SET_1 = new Statistics.Builder()
                 .withKills(new Kills(VALID_KILLS_SET_1))
                 .withDeaths(new Deaths(VALID_DEATHS_SET_1))
