@@ -13,9 +13,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Rank {
 
-    public static final String MESSAGE_CONSTRAINTS = "Rank should be a valid League of Legends rank with optional division. "
-            + "Valid ranks are: IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND (each with I, II, III, or IV), "
-            + "and MASTER, GRANDMASTER, CHALLENGER (without divisions).";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Rank should be a valid League of Legends rank with optional division. "
+            + "Valid ranks are: IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND "
+            + "(each with I, II, III, or IV), and MASTER, GRANDMASTER, CHALLENGER "
+            + "(without divisions).";
 
     /**
      * Represents the set of supported League of Legends rank tiers.
@@ -135,9 +137,9 @@ public class Rank {
         }
 
         Rank otherRank = (Rank) other;
-        return tier.equals(otherRank.tier) &&
-               ((division == null && otherRank.division == null) ||
-                (division != null && division.equals(otherRank.division)));
+        return tier.equals(otherRank.tier)
+                && ((division == null && otherRank.division == null)
+                || (division != null && division.equals(otherRank.division)));
     }
 
     @Override
