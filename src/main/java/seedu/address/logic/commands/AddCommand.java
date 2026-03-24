@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_IGN + "JohnD88 "
             + PREFIX_ROLE + "MID "
-            + PREFIX_RANK + "GOLD "
+            + PREFIX_RANK + "GOLD I "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

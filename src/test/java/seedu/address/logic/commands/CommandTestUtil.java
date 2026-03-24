@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_BOB = "SUPPORT";
     public static final String VALID_IGN_AMY = "AmyBee88";
     public static final String VALID_IGN_BOB = "BobChoo99";
-    public static final String VALID_RANK_AMY = "GOLD";
-    public static final String VALID_RANK_BOB = "SILVER";
+    public static final String VALID_RANK_AMY = "GOLD I";
+    public static final String VALID_RANK_BOB = "SILVER II";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_KILLS_SET_1 = "20";
@@ -85,7 +85,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "LANER"; // not a valid role
     public static final String INVALID_IGN_DESC = " " + PREFIX_IGN; // empty string not allowed for IGN
-    public static final String INVALID_RANK_DESC = " " + PREFIX_RANK + "CHALLENGER1"; // not a valid rank
+    public static final String INVALID_RANK_DESC = " " + PREFIX_RANK + "PLATINUM V"; // V is not a valid division
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_KILLS_DESC = " " + PREFIX_KILLS + "-1"; // Negative not allowed
     public static final String INVALID_DEATHS_DESC = " " + PREFIX_DEATHS + "-1"; // Negative not allowed

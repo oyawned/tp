@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ROLE = "MID";
     public static final String DEFAULT_IGN = "AmyBee88";
-    public static final String DEFAULT_RANK = "GOLD";
+    public static final String DEFAULT_RANK = "GOLD II";
 
     private Name name;
     private Phone phone;
