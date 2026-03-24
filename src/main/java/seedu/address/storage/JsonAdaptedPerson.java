@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InGameName;
 import seedu.address.model.person.Name;
@@ -31,7 +30,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
     private final String ign;
     private final String role;
     private final String rank;
@@ -43,14 +41,13 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("email") String email,
             @JsonProperty("ign") String ign, @JsonProperty("role") String role,
             @JsonProperty("rank") String rank, @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("statistics") JsonAdaptedStatistics statistics) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.ign = ign;
         this.role = role;
         this.rank = rank;
@@ -67,7 +64,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         ign = source.getIgn().value;
         role = source.getRole().value.toString();
         rank = source.getRank().toString();
@@ -120,14 +116,6 @@ class JsonAdaptedPerson {
         }
         final Role modelRole = new Role(role);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
         if (ign == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     InGameName.class.getSimpleName()));
@@ -151,7 +139,7 @@ class JsonAdaptedPerson {
         final Statistics modelStatistics = statistics.toModelType(); // Convert nested object
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelIgn, modelRank, modelTags,
+        return new Person(modelName, modelPhone, modelEmail, modelRole, modelIgn, modelRank, modelTags,
                 modelStatistics);
     }
 

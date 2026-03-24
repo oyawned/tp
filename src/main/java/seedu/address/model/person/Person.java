@@ -23,7 +23,6 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Role role;
     private final InGameName ign;
     private final Rank rank;
@@ -33,13 +32,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role,
+    public Person(Name name, Phone phone, Email email, Role role,
         InGameName ign, Rank rank, Set<Tag> tags, Statistics statistics) {
-        requireAllNonNull(name, phone, email, address, role, ign, rank, tags, statistics);
+        requireAllNonNull(name, phone, email, role, ign, rank, tags, statistics);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.role = role;
         this.ign = ign;
         this.rank = rank;
@@ -57,10 +55,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public Role getRole() {
@@ -119,7 +113,6 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
                 && ign.equals(otherPerson.ign)
                 && rank.equals(otherPerson.rank)
@@ -130,7 +123,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, ign, rank, tags, statistics);
+        return Objects.hash(name, phone, email, role, ign, rank, tags, statistics);
     }
 
     @Override
@@ -139,7 +132,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("role", role)
                 .add("rank", rank)
                 .add("tags", tags)

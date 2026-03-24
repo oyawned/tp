@@ -36,7 +36,6 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_IGN + person.getIgn().value + " ");
         sb.append(PREFIX_ROLE + person.getRole().value.toString() + " ");
         sb.append(PREFIX_RANK + person.getRank().value.toString() + " ");
