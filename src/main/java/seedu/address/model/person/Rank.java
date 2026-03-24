@@ -135,8 +135,8 @@ public class Rank {
         }
 
         Rank otherRank = (Rank) other;
-        return tier.equals(otherRank.tier) && 
-               ((division == null && otherRank.division == null) || 
+        return tier.equals(otherRank.tier) &&
+               ((division == null && otherRank.division == null) ||
                 (division != null && division.equals(otherRank.division)));
     }
 
