@@ -42,7 +42,7 @@ public class RankTest {
         assertFalse(Rank.isValidRank("INVALID I"));
         assertFalse(Rank.isValidRank("GOLD V")); // Invalid division
         assertFalse(Rank.isValidRank("GOLD INVALID")); // Invalid division name
-        assertFalse(Rank.isValidRank("IRON"));  // IRON requires division
+        assertFalse(Rank.isValidRank("IRON")); // IRON requires division
         assertFalse(Rank.isValidRank("PLATINUM")); // PLATINUM requires division
 
         // invalid ranks - divisions on top tiers
