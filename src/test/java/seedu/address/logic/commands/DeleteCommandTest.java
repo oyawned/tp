@@ -67,15 +67,15 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexOutsideFilteredList_success() {
+    public void execute_validIndexOutOfFilteredView_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Index indexOutOfFilteredView = INDEX_SECOND_PERSON;
+        // ensures that indexOutOfFilteredView is still in bounds of address book list
+        assertTrue(indexOutOfFilteredView.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        Person personToDelete = model.getAddressBook().getPersonList().get(outOfBoundIndex.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        Person personToDelete = model.getAddressBook().getPersonList().get(indexOutOfFilteredView.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(indexOutOfFilteredView);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));

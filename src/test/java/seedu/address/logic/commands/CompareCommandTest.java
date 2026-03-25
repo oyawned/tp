@@ -85,12 +85,12 @@ public class CompareCommandTest {
     }
 
     @Test
-    public void execute_validIndexOutsideFilteredList_success() {
+    public void execute_validIndexOutOfFilteredView_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Index indexOutOfFilteredView = INDEX_SECOND_PERSON;
+        // ensures that indexOutOfFilteredView is still in bounds of address book list
+        assertTrue(indexOutOfFilteredView.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         Person person1 = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person person2 = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

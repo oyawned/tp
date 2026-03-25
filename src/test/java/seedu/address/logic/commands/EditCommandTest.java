@@ -137,12 +137,12 @@ public class EditCommandTest {
      * Edit a valid person whose index is outside the filtered list
      */
     @Test
-    public void execute_validIndexOutsideFilteredList_success() {
+    public void execute_validIndexOutOfFilteredView_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        Index indexOutOfFilteredView = INDEX_SECOND_PERSON;
+        // ensures that indexOutOfFilteredView is still in bounds of address book list
+        assertTrue(indexOutOfFilteredView.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         // INDEX_SECOND_PERSON is outside filtered list but valid in address book
         Person personToEdit = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
