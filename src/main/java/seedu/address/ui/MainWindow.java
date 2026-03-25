@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ComparePanel comparePanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane comparePanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -168,6 +172,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows the comparison panel.
+     */
+    private void showComparePanel() {
+        personListPanelPlaceholder.setVisible(false);
+        personListPanelPlaceholder.setManaged(false);
+        comparePanelPlaceholder.setVisible(true);
+        comparePanelPlaceholder.setManaged(true);
+    }
+
+    /**
+     * Hides the comparison panel and shows the person list.
+     */
+    private void hideComparePanel() {
+        comparePanelPlaceholder.setVisible(false);
+        comparePanelPlaceholder.setManaged(false);
+        personListPanelPlaceholder.setVisible(true);
+        personListPanelPlaceholder.setManaged(true);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -184,6 +208,17 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowCompare()) {
+                // Show comparison panel
+                comparePanelPlaceholder.getChildren().clear();
+                comparePanel = new ComparePanel(commandResult.getPerson1(), commandResult.getPerson2());
+                comparePanelPlaceholder.getChildren().add(comparePanel.getRoot());
+                showComparePanel();
+            } else {
+                // Hide comparison panel and show person list
+                hideComparePanel();
             }
 
             return commandResult;

@@ -350,3 +350,60 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+/* Comparison Panel Styles */
+.panel-with-border {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-color: derive(#1d1d1d, 50%);
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.player-comparison-name {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 0 0 10 0;
+}
+
+.field-label {
+    -fx-text-fill: #888888;
+    -fx-font-size: 11px;
+    -fx-font-family: "Segoe UI";
+    -fx-padding: 2 0 0 0;
+}
+
+.field-value {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 2 0 5 0;
+}
+
+.vs-label {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-background-color: #1d1d1d;
+    -fx-padding: 10 15 10 15;
+    -fx-background-radius: 5;
+}
+
+.indicator-better {
+    -fx-text-fill: #4caf50;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.indicator-worse {
+    -fx-text-fill: #f44336;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.indicator-equal {
+    -fx-text-fill: #888888;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI Semibold";
+}

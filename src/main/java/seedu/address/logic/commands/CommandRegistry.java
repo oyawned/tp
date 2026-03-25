@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javafx.util.Pair;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.AddCommandParser;
+import seedu.address.logic.parser.CompareCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.DraftCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
@@ -33,6 +34,8 @@ public class CommandRegistry {
             AddCommand.class, Optional.of(AddCommandParser.class)),
         new Pair<Class<? extends Command>, Optional<Class<? extends Parser<?>>>>(
             ClearCommand.class, Optional.empty()),
+        new Pair<Class<? extends Command>, Optional<Class<? extends Parser<?>>>>(
+            CompareCommand.class, Optional.of(CompareCommandParser.class)),
         new Pair<Class<? extends Command>, Optional<Class<? extends Parser<?>>>>(
             DeleteCommand.class, Optional.of(DeleteCommandParser.class)),
         new Pair<Class<? extends Command>, Optional<Class<? extends Parser<?>>>>(

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+
+   <!-- Player 1 Panel -->
+   <VBox HBox.hgrow="ALWAYS" styleClass="panel-with-border" spacing="10">
+      <padding>
+         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      </padding>
+
+      <Label fx:id="player1Name" styleClass="player-comparison-name">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+
+      <VBox spacing="8">
+         <Label text="Role:" styleClass="field-label" />
+         <Label fx:id="player1Role" styleClass="field-value" />
+
+         <Label text="Rank:" styleClass="field-label" />
+         <Label fx:id="player1Rank" styleClass="field-value" />
+
+         <Label text="Kills:" styleClass="field-label" />
+         <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="player1Kills" styleClass="field-value" />
+            <Label fx:id="player1KillsIndicator" />
+         </HBox>
+
+         <Label text="Deaths:" styleClass="field-label" />
+         <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="player1Deaths" styleClass="field-value" />
+            <Label fx:id="player1DeathsIndicator" />
+         </HBox>
+
+         <Label text="K/D Ratio:" styleClass="field-label" />
+         <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="player1KdRatio" styleClass="field-value" />
+            <Label fx:id="player1KdIndicator" />
+         </HBox>
+      </VBox>
+   </VBox>
+
+   <!-- Player 2 Panel -->
+   <VBox HBox.hgrow="ALWAYS" styleClass="panel-with-border" spacing="10">
+      <padding>
+         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      </padding>
+
+      <Label fx:id="player2Name" styleClass="player-comparison-name">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+
+      <VBox spacing="8">
+         <Label text="Role:" styleClass="field-label" />
+         <Label fx:id="player2Role" styleClass="field-value" />
+
+         <Label text="Rank:" styleClass="field-label" />
+         <Label fx:id="player2Rank" styleClass="field-value" />
+
+         <Label text="Kills:" styleClass="field-label" />
+         <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="player2Kills" styleClass="field-value" />
+            <Label fx:id="player2KillsIndicator" />
+         </HBox>
+
+         <Label text="Deaths:" styleClass="field-label" />
+         <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="player2Deaths" styleClass="field-value" />
+            <Label fx:id="player2DeathsIndicator" />
+         </HBox>
+
+         <Label text="K/D Ratio:" styleClass="field-label" />
+         <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="player2KdRatio" styleClass="field-value" />
+            <Label fx:id="player2KdIndicator" />
+         </HBox>
+      </VBox>
+   </VBox>
+
+</HBox>
