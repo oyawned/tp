@@ -133,4 +133,15 @@ public class Statistics {
     public String toString() {
         return "Kills: " + kills.toString() + ", Deaths: " + deaths.toString() + ", Assists: " + assists.toString();
     }
+
+    /**
+     * Add two statistics into one overall statistic object.
+     */
+    public Statistics add(Statistics altStats) {
+        return new Statistics(
+            this.kills.add(altStats.getKills()),
+            this.deaths.add(altStats.getDeaths()), 
+            this.assists.add(altStats.getAssists()));
+    }
+
 }

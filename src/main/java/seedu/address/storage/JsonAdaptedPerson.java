@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.InGameName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rank;
-import seedu.address.model.person.Role;
-import seedu.address.model.person.statistics.Statistics;
-import seedu.address.model.tag.Tag;
+  import seedu.address.commons.exceptions.IllegalValueException;
+  import seedu.address.model.person.Email;
+  import seedu.address.model.person.InGameName;
+  import seedu.address.model.person.Name;
+  import seedu.address.model.person.Person;
+  import seedu.address.model.person.Phone;
+  import seedu.address.model.person.Rank;
+  import seedu.address.model.person.Role;
+  import seedu.address.model.entity.EntityStatisticMap;
+  import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -34,7 +34,7 @@ class JsonAdaptedPerson {
     private final String role;
     private final String rank;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final JsonAdaptedStatistics statistics;
+    private final JsonAdaptedEntityStatisticMap statistics;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,7 +44,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email,
             @JsonProperty("ign") String ign, @JsonProperty("role") String role,
             @JsonProperty("rank") String rank, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("statistics") JsonAdaptedStatistics statistics) {
+            @JsonProperty("statistics") JsonAdaptedEntityStatisticMap statistics) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -67,7 +67,7 @@ class JsonAdaptedPerson {
         ign = source.getIgn().value;
         role = source.getRole().value.toString();
         rank = source.getRank().toString();
-        statistics = new JsonAdaptedStatistics(source.getStatistics());
+        statistics = new JsonAdaptedEntityStatisticMap(source.getOverallEntityStatistics());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -136,7 +136,7 @@ class JsonAdaptedPerson {
         if (statistics == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Statistics"));
         }
-        final Statistics modelStatistics = statistics.toModelType(); // Convert nested object
+        final EntityStatisticMap modelStatistics = statistics.toModelType(); // Convert nested object
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelRole, modelIgn, modelRank, modelTags,

@@ -1,15 +1,17 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+  import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+  import java.util.Collections;
+  import java.util.HashSet;
+  import java.util.Objects;
+  import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.statistics.Statistics;
-import seedu.address.model.tag.Tag;
+  import seedu.address.commons.util.ToStringBuilder;
+  import seedu.address.model.entity.Entity;
+  import seedu.address.model.entity.EntityStatisticMap;
+  import seedu.address.model.person.statistics.Statistics;
+  import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -27,14 +29,14 @@ public class Person {
     private final InGameName ign;
     private final Rank rank;
     private final Set<Tag> tags = new HashSet<>();
-    private final Statistics statistics;
+    private final EntityStatisticMap entityStats = new EntityStatisticMap();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Role role,
-        InGameName ign, Rank rank, Set<Tag> tags, Statistics statistics) {
-        requireAllNonNull(name, phone, email, role, ign, rank, tags, statistics);
+        InGameName ign, Rank rank, Set<Tag> tags, EntityStatisticMap entityStats) {
+        requireAllNonNull(name, phone, email, role, ign, rank, tags, entityStats);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,7 +44,7 @@ public class Person {
         this.ign = ign;
         this.rank = rank;
         this.tags.addAll(tags);
-        this.statistics = statistics;
+        this.entityStats.putAll(entityStats);
     }
 
     public Name getName() {
@@ -77,8 +79,26 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Statistics getStatistics() {
-        return statistics;
+    /**
+     * Gets the overall statistics across all different entities, merged into one.
+     * @return overallStatistics
+     */
+    public Statistics getOverallStatistics() {
+        return entityStats.getOverallStatistics();
+    }
+
+    /**
+     * Gets the stats of a person on a particular entity.
+     */
+    public Statistics getEntityStatistics(Entity entity) {
+        return entityStats.getStatistics(entity);
+    }
+
+    /**
+     * Gets overall entity statistics
+     */
+    public EntityStatisticMap getOverallEntityStatistics() {
+        return entityStats;
     }
 
     /**
@@ -117,13 +137,13 @@ public class Person {
                 && ign.equals(otherPerson.ign)
                 && rank.equals(otherPerson.rank)
                 && tags.equals(otherPerson.tags)
-                && statistics.equals(otherPerson.statistics);
+                && entityStats.equals(otherPerson.entityStats);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, role, ign, rank, tags, statistics);
+        return Objects.hash(name, phone, email, role, ign, rank, tags, entityStats);
     }
 
     @Override
@@ -135,7 +155,7 @@ public class Person {
                 .add("role", role)
                 .add("rank", rank)
                 .add("tags", tags)
-                .add("statistics", statistics)
+                .add("entityStats", entityStats)
                 .toString();
     }
 

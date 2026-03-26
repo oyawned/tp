@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_STATISTIC_MAP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATS_SET_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -87,7 +89,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different stats -> returns false
-        editedAlice = new PersonBuilder(ALICE).withStatistics(VALID_STATS_SET_1).build();
+        editedAlice = new PersonBuilder(ALICE).withEntityStatistics(VALID_ENTITY_STATISTIC_MAP).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different rank -> returns false
@@ -100,14 +102,14 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
                 + ALICE.getPhone() + ", email=" + ALICE.getEmail()
                 + ", role=" + ALICE.getRole() + ", rank=" + ALICE.getRank() + ", tags=" + ALICE.getTags()
-                + ", statistics=" + ALICE.getStatistics() + "}";
+                + ", entityStats=" + ALICE.getOverallEntityStatistics() + "}";
         assertEquals(expected, ALICE.toString());
     }
 
     @Test
     public void getStatistics_success() {
-        Person person = new PersonBuilder(ALICE).withStatistics(VALID_STATS_SET_1).build();
-        assertEquals(VALID_STATS_SET_1, person.getStatistics());
+        Person person = new PersonBuilder(ALICE).withEntityStatistics(VALID_ENTITY_STATISTIC_MAP).build();
+        assertEquals(VALID_STATS_SET_1, person.getEntityStatistics(VALID_ENTITY_1));
     }
 
     @Test

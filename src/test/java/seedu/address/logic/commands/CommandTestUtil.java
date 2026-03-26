@@ -23,6 +23,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityStatisticMap;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.statistics.Assists;
@@ -61,6 +63,9 @@ public class CommandTestUtil {
     public static final String VALID_ASSISTS_SET_2 = "8";
     public static final Statistics VALID_STATS_SET_1;
     public static final Statistics VALID_STATS_SET_2;
+    public static final Entity VALID_ENTITY_1;
+    public static final Entity VALID_ENTITY_2;
+    public static final EntityStatisticMap VALID_ENTITY_STATISTIC_MAP;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -134,6 +139,12 @@ public class CommandTestUtil {
                 .withDeaths(VALID_DEATHS_SET_2)
                 .withAssists(VALID_ASSISTS_SET_2)
                 .build();
+        VALID_ENTITY_1 = new Entity("default1", "images/default1");
+        VALID_ENTITY_2 = new Entity("default2", "images/default2");
+
+        VALID_ENTITY_STATISTIC_MAP = new EntityStatisticMap.Builder()
+            .withEntity(VALID_ENTITY_1, VALID_STATS_SET_1)
+            .build();
     }
 
     /**
