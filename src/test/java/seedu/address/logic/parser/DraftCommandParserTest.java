@@ -6,22 +6,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DraftCommand;
-import seedu.address.model.person.Person;
 
 public class DraftCommandParserTest {
 
@@ -31,16 +26,16 @@ public class DraftCommandParserTest {
     private DraftCommandParser parser = new DraftCommandParser();
 
     /**
-     * Builds a command string with IGN arguments from the given persons.
+     * Builds a command string with IGN arguments from the given IGN strings.
      * Prefixes each IGN with PREFIX_IGN.
      */
-    private String buildIgnCommand(Person... persons) {
+    private String buildIgnCommand(String... igns) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < persons.length; i++) {
+        for (int i = 0; i < igns.length; i++) {
             if (i > 0) {
                 sb.append(" ");
             }
-            sb.append(PREFIX_IGN.getPrefix()).append(persons[i].getIgn().value);
+            sb.append(PREFIX_IGN.getPrefix()).append(igns[i]);
         }
         return sb.toString();
     }
@@ -51,8 +46,8 @@ public class DraftCommandParserTest {
                 INDEX_FIRST_PERSON,
                 INDEX_SECOND_PERSON,
                 INDEX_THIRD_PERSON,
-                Index.fromOneBased(4),
-                Index.fromOneBased(5)), List.of());
+                INDEX_FOURTH_PERSON,
+                INDEX_FIFTH_PERSON), List.of());
 
         assertParseSuccess(parser, "1 2 3 4 5", expectedCommand);
         assertParseSuccess(parser, "  1   2  3  4   5  ", expectedCommand);
@@ -61,20 +56,22 @@ public class DraftCommandParserTest {
     @Test
     public void parse_validIgnArgs_success() {
         DraftCommand expectedCommand = new DraftCommand(List.of(),
-                List.of(ALICE.getIgn().value, BENSON.getIgn().value, CARL.getIgn().value,
-                        DANIEL.getIgn().value, ELLE.getIgn().value));
+                List.of("AliceP99", "BensonM88", "CarlK77", "DanielM66", "ElleM55"));
 
-        assertParseSuccess(parser, buildIgnCommand(ALICE, BENSON, CARL, DANIEL, ELLE), expectedCommand);
+        assertParseSuccess(parser, buildIgnCommand("AliceP99", "BensonM88", "CarlK77", "DanielM66", "ElleM55"),
+                expectedCommand);
     }
 
     @Test
     public void parse_validHybridArgs_success() {
         DraftCommand expectedCommand = new DraftCommand(List.of(
-                Index.fromOneBased(1),
-                Index.fromOneBased(3)),
-                List.of(BENSON.getIgn().value, DANIEL.getIgn().value, ELLE.getIgn().value));
+                INDEX_FIRST_PERSON,
+                INDEX_THIRD_PERSON),
+                List.of("BensonM88", "DanielM66", "ElleM55"));
 
-        assertParseSuccess(parser, "1 " + buildIgnCommand(BENSON, DANIEL, ELLE) + " 3", expectedCommand);
+        assertParseSuccess(parser,
+                "1 " + buildIgnCommand("BensonM88", "DanielM66", "ElleM55") + " 3",
+                expectedCommand);
     }
 
     @Test
