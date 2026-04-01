@@ -5,14 +5,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.DataLoadingException;
 
 /**
  * Manages a list of Entity objects.
  * Entities are loaded from a JSON file and are not modifiable by users.
+ * However, the list of reference entities can be reloaded (future feature)
  */
 public class EntityReference {
 
+    private static List<Entity> loadedEntities;
     private final List<Entity> entities;
 
     /**
@@ -20,6 +21,7 @@ public class EntityReference {
      * @param entities List of Entity objects to store
      */
     public EntityReference(List<Entity> entities) {
+        EntityReference.loadedEntities = new ArrayList<>(entities);
         this.entities = new ArrayList<>(entities);
     }
 
@@ -31,37 +33,30 @@ public class EntityReference {
     }
 
     /**
-     * Finds an entity by name.
+     * Returns the currently set reference entity list.
+     */
+    public List<Entity> getLoadedEntities() {
+        return loadedEntities;
+    }
+
+    /**
+     * Finds an entity by name. Uses the loaded entity list.
      * @param name The name of the entity to find
      * @return Optional containing the entity if found, empty otherwise
      */
-    public Optional<Entity> findByName(String name) {
-        return entities.stream()
+    public static Optional<Entity> findByName(String name) {
+        return loadedEntities.stream()
                 .filter(entity -> entity.getName().equalsIgnoreCase(name))
                 .findFirst();
     }
 
     /**
-     * Checks if an entity with the given name exists.
+     * Checks if an entity with the given name exists. Uses the loaded entity list.
      * @param name The name to check
      * @return true if an entity with the name exists, false otherwise
      */
-    public boolean hasEntity(String name) {
+    public static boolean hasEntity(String name) {
         return findByName(name).isPresent();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof EntityReference)) {
-            return false;
-        }
-
-        EntityReference otherEntityReference = (EntityReference) other;
-        return entities.equals(otherEntityReference.entities);
     }
 
     @Override

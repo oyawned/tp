@@ -5,9 +5,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSISTS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSISTS_SET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEATHS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEATHS_SET_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_STATISTIC_MAP;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -34,7 +34,7 @@ public class StatsCommandTest {
     @Test
     public void execute_statisticsSpecifiedUnfilteredList_success() {
         Person firstPerson = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withStatistics(VALID_STATS_SET_1).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withEntityStatistics(VALID_ENTITY_STATISTIC_MAP).build();
         EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder()
                 .withKills(VALID_KILLS_SET_1)
                 .withDeaths(VALID_DEATHS_SET_1)

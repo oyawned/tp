@@ -15,13 +15,13 @@ import seedu.address.model.match.PlayerInMatch;
 import seedu.address.model.match.Result;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InGameName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rank;
-import seedu.address.model.person.Role;
-import seedu.address.model.person.statistics.Statistics;
-import seedu.address.model.tag.Tag;
+  import seedu.address.model.person.Name;
+  import seedu.address.model.person.Person;
+  import seedu.address.model.person.Phone;
+  import seedu.address.model.person.Rank;
+  import seedu.address.model.person.Role;
+  import seedu.address.model.entity.EntityStatisticMap;
+  import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -33,32 +33,32 @@ public class SampleDataUtil {
                 new Role("TOP"),
                 new InGameName("AlexY42"), new Rank("GOLD I"),
                 getTagSet("friends"),
-            Statistics.createDefault()),
+            new EntityStatisticMap()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Role("JUNGLE"),
                 new InGameName("Bern_Storm"), new Rank("PLATINUM II"),
                 getTagSet("colleagues", "friends"),
-            Statistics.createDefault()),
+            new EntityStatisticMap()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Role("MID"),
                 new InGameName("Charlie99"), new Rank("SILVER III"),
                 getTagSet("neighbours"),
-            Statistics.createDefault()),
+            new EntityStatisticMap()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Role("BOT"),
                 new InGameName("DavidLi91"), new Rank("DIAMOND IV"),
                 getTagSet("family"),
-            Statistics.createDefault()),
+            new EntityStatisticMap()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Role("SUPPORT"),
                 new InGameName("IrfanZ"), new Rank("GOLD III"),
                 getTagSet("classmates"),
-            Statistics.createDefault()),
+            new EntityStatisticMap()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Role("TOP"),
                 new InGameName("Roy_Vortex"), new Rank("CHALLENGER"),
                 getTagSet("colleagues"),
-            Statistics.createDefault())
+            new EntityStatisticMap())
         };
     }
 

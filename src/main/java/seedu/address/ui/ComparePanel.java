@@ -81,11 +81,11 @@ public class ComparePanel extends UiPart<HBox> {
         player1Name.setText(displayName);
         player1Role.setText(player.getRole().toString());
         player1Rank.setText(player.getRank().toString());
-        player1Kills.setText(player.getStatistics().getKills().toString());
-        player1Deaths.setText(player.getStatistics().getDeaths().toString());
-        player1Assists.setText(player.getStatistics().getAssists().toString());
+        player1Kills.setText(player.getOverallStatistics().getKills().toString());
+        player1Deaths.setText(player.getOverallStatistics().getDeaths().toString());
+        player1Assists.setText(player.getOverallStatistics().getAssists().toString());
 
-        double kdRatio = player.getStatistics().getKda();
+        double kdRatio = player.getOverallStatistics().getKda();
         player1KdRatio.setText(String.format("%.2f", kdRatio));
     }
 
@@ -97,11 +97,11 @@ public class ComparePanel extends UiPart<HBox> {
         player2Name.setText(displayName);
         player2Role.setText(player.getRole().toString());
         player2Rank.setText(player.getRank().toString());
-        player2Kills.setText(player.getStatistics().getKills().toString());
-        player2Deaths.setText(player.getStatistics().getDeaths().toString());
-        player2Assists.setText(player.getStatistics().getAssists().toString());
+        player2Kills.setText(player.getOverallStatistics().getKills().toString());
+        player2Deaths.setText(player.getOverallStatistics().getDeaths().toString());
+        player2Assists.setText(player.getOverallStatistics().getAssists().toString());
 
-        double kdRatio = player.getStatistics().getKda();
+        double kdRatio = player.getOverallStatistics().getKda();
         player2KdRatio.setText(String.format("%.2f", kdRatio));
     }
 
@@ -110,23 +110,23 @@ public class ComparePanel extends UiPart<HBox> {
      */
     private void setComparisons(Person player1, Person player2) {
         // Compare Kills
-        int kills1 = Integer.parseInt(player1.getStatistics().getKills().toString());
-        int kills2 = Integer.parseInt(player2.getStatistics().getKills().toString());
+        int kills1 = Integer.parseInt(player1.getOverallStatistics().getKills().toString());
+        int kills2 = Integer.parseInt(player2.getOverallStatistics().getKills().toString());
         setIndicators(player1KillsIndicator, player2KillsIndicator, kills1, kills2);
 
         // Compare Deaths (lower is better)
-        int deaths1 = Integer.parseInt(player1.getStatistics().getDeaths().toString());
-        int deaths2 = Integer.parseInt(player2.getStatistics().getDeaths().toString());
+        int deaths1 = Integer.parseInt(player1.getOverallStatistics().getDeaths().toString());
+        int deaths2 = Integer.parseInt(player2.getOverallStatistics().getDeaths().toString());
         setIndicatorsReverse(player1DeathsIndicator, player2DeathsIndicator, deaths1, deaths2);
 
         // Compare Assists
-        int assists1 = Integer.parseInt(player1.getStatistics().getAssists().toString());
-        int assists2 = Integer.parseInt(player2.getStatistics().getAssists().toString());
+        int assists1 = Integer.parseInt(player1.getOverallStatistics().getAssists().toString());
+        int assists2 = Integer.parseInt(player2.getOverallStatistics().getAssists().toString());
         setIndicators(player1AssistsIndicator, player2AssistsIndicator, assists1, assists2);
 
         // Compare KDA Ratio
-        double kd1 = player1.getStatistics().getKda();
-        double kd2 = player2.getStatistics().getKda();
+        double kd1 = player1.getOverallStatistics().getKda();
+        double kd2 = player2.getOverallStatistics().getKda();
         setIndicators(player1KdIndicator, player2KdIndicator, kd1, kd2);
     }
 

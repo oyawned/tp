@@ -5,19 +5,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 
-import java.util.List;
-import java.util.Optional;
+  import java.util.List;
+  import java.util.Optional;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.statistics.Assists;
-import seedu.address.model.person.statistics.Deaths;
-import seedu.address.model.person.statistics.Kills;
-import seedu.address.model.person.statistics.Statistics;
+  import seedu.address.commons.core.index.Index;
+  import seedu.address.commons.util.CollectionUtil;
+  import seedu.address.logic.Messages;
+  import seedu.address.logic.commands.exceptions.CommandException;
+  import seedu.address.model.Model;
+  import seedu.address.model.entity.Entity;
+  import seedu.address.model.entity.EntityStatisticMap;
+  import seedu.address.model.person.Person;
+  import seedu.address.model.person.statistics.Assists;
+  import seedu.address.model.person.statistics.Deaths;
+  import seedu.address.model.person.statistics.Kills;
+  import seedu.address.model.person.statistics.Statistics;
 
 /**
  * Updates the statistics of an existing person in the address book.
@@ -29,6 +31,7 @@ public class StatsCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
+            + "ENTITY"
             + "[" + PREFIX_KILLS + "KILLS] "
             + "[" + PREFIX_DEATHS + "DEATHS] "
             + "[" + PREFIX_ASSISTS + "ASSISTS]\n"
@@ -77,14 +80,26 @@ public class StatsCommand extends Command {
     private static Person createStatsEditedPerson(Person personToEdit, EditStatsDescriptor descriptor) {
         assert personToEdit != null;
 
-        Statistics currentStats = personToEdit.getStatistics();
+        EntityStatisticMap stats = personToEdit.getOverallEntityStatistics();
 
         // Build new statistics object using provided values or current ones
-        Statistics updatedStats = new Statistics.Builder()
-                .withKills(descriptor.getKills().orElse(currentStats.getKills()))
-                .withDeaths(descriptor.getDeaths().orElse(currentStats.getDeaths()))
-                .withAssists(descriptor.getAssists().orElse(currentStats.getAssists()))
-                .build();
+        if (stats.containsKey(descriptor.getEntity())) {
+            stats.putStatistics(descriptor.getEntity(),
+                stats.getStatistics(descriptor.getEntity())
+                .add(new Statistics.Builder()
+                .withKills(descriptor.getKills().orElse(new Kills("0")))
+                .withDeaths(descriptor.getDeaths().orElse(new Deaths("0")))
+                .withAssists(descriptor.getAssists().orElse(new Assists("0")))
+                .build()));
+        }
+        else {
+            stats.putStatistics(descriptor.getEntity(),
+                new Statistics.Builder()
+                .withKills(descriptor.getKills().orElse(new Kills("0")))
+                .withDeaths(descriptor.getDeaths().orElse(new Deaths("0")))
+                .withAssists(descriptor.getAssists().orElse(new Assists("0")))
+                .build());
+        }       
 
         return new Person(
                 personToEdit.getName(),
@@ -94,7 +109,7 @@ public class StatsCommand extends Command {
                 personToEdit.getIgn(),
                 personToEdit.getRank(),
                 personToEdit.getTags(),
-                updatedStats);
+                stats);
     }
 
     @Override
@@ -117,11 +132,14 @@ public class StatsCommand extends Command {
      * Stores the details to update the person's statistics with.
      * Each non-empty field value will replace the corresponding field value of the
      * person.
+     * 
+     * Entity cannot be null.
      */
     public static class EditStatsDescriptor {
         private Kills kills;
         private Deaths deaths;
         private Assists assists;
+        private Entity entity;
 
         public EditStatsDescriptor() {
         }
@@ -133,6 +151,7 @@ public class StatsCommand extends Command {
             setKills(toCopy.kills);
             setDeaths(toCopy.deaths);
             setAssists(toCopy.assists);
+            setEntity(toCopy.entity);
         }
 
         /**
@@ -164,6 +183,14 @@ public class StatsCommand extends Command {
 
         public Optional<Assists> getAssists() {
             return Optional.ofNullable(assists);
+        }
+
+        public Entity getEntity() {
+            return entity;
+        }
+
+        public void setEntity(Entity entity) {
+            this.entity = entity;
         }
 
         @Override
