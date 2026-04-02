@@ -1,6 +1,6 @@
 {
   "matches" : [ {
-    "date" : "2025-02-29T13:00",
+    "date" : "2025-02-29",
     "result" : "WIN",
     "players" : [ {
       "ign" : "AlexY42",
@@ -18,7 +18,7 @@
       }
     } ]
   }, {
-    "date" : "2025-02-02T14:00",
+    "date" : "2025-02-02",
     "result" : "NOT A RESULT",
     "players" : [ {
       "ign" : "Charlie99",
@@ -43,7 +43,7 @@
       }
     } ]
   }, {
-    "date" : "2025-03-03T15:00",
+    "date" : "2025-03-03",
     "result" : "DRAW",
     "players" : [ {
       "ign" : "Roy_Vortex",

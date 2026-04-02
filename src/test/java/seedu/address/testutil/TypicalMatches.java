@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.model.MatchRecord;
@@ -55,10 +55,10 @@ public class TypicalMatches {
                     .toList()
     );
 
-    public static final LocalDateTime DATE_1 = LocalDateTime.of(2025, 12, 1, 12, 0);
-    public static final LocalDateTime DATE_2 = LocalDateTime.of(2025, 11, 2, 14, 0);
-    public static final LocalDateTime DATE_3 = LocalDateTime.of(2025, 10, 3, 16, 0);
-    public static final LocalDateTime DATE_4 = LocalDateTime.of(2025, 9, 4, 18, 0);
+    public static final LocalDate DATE_1 = LocalDate.of(2025, 12, 1);
+    public static final LocalDate DATE_2 = LocalDate.of(2025, 11, 2);
+    public static final LocalDate DATE_3 = LocalDate.of(2025, 10, 3);
+    public static final LocalDate DATE_4 = LocalDate.of(2025, 9, 4);
 
     public static final Match WINNING_MATCH_4 = new Match(DATE_4, new Result(Result.WinType.WIN), FOUR_PLAYERS);
     public static final Match WINNING_MATCH_3 = new Match(DATE_3, new Result(Result.WinType.WIN), THREE_PLAYERS);

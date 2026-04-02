@@ -1,6 +1,6 @@
 package seedu.address.model.util;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -83,12 +83,12 @@ public class SampleDataUtil {
 
         return new Match[] {
             new Match(
-                    LocalDateTime.of(2025, 1, 1, 13, 0),
+                    LocalDate.of(2025, 1, 1),
                     new Result("WIN"), players1),
             new Match(
-                    LocalDateTime.of(2025, 2, 2, 14, 0),
+                    LocalDate.of(2025, 2, 2),
                     new Result("LOSE"), players2),
-            new Match(LocalDateTime.of(2025, 3, 3, 15, 0),
+            new Match(LocalDate.of(2025, 3, 3),
                     new Result("DRAW"), players3)
         };
     }

@@ -24,7 +24,7 @@ public class ResultCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a match to the Match Record. "
             + "Parameters: "
             + PREFIX_RESULT + "RESULT (must be one of: WIN, LOSE, DRAW) "
-            + "[" + PREFIX_DATE + "yyyy-MM-dd'T'HH:mm:ss] "
+            + "[" + PREFIX_DATE + "yyyy-MM-dd] "
             + PREFIX_IGN + "IGN (must exist in the list) "
             + PREFIX_KILLS + "KILLS "
             + PREFIX_DEATHS + "DEATHS "

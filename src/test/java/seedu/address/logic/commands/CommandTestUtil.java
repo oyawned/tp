@@ -66,7 +66,7 @@ public class CommandTestUtil {
     public static final String VALID_RESULT_WIN = "WIN";
     public static final String VALID_RESULT_LOSE = "LOSE";
     public static final String VALID_RESULT_DRAW = "DRAW";
-    public static final String VALID_DATE = "2025-12-01T12:00:00";
+    public static final String VALID_DATE = "2025-12-01";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

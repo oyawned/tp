@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +55,9 @@ public class JsonAdaptedMatch {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Date"));
         }
-        final LocalDateTime modelDate;
+        final LocalDate modelDate;
         try {
-            modelDate = LocalDateTime.parse(date);
+            modelDate = LocalDate.parse(date);
         } catch (Exception e) {
             throw new IllegalValueException(String.format(INVALID_DATE_MESSAGE_FORMAT, date));
         }

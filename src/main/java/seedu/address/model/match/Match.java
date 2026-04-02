@@ -2,7 +2,7 @@ package seedu.address.model.match;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,14 +13,14 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Match {
 
-    private final LocalDateTime date;
+    private final LocalDate date;
     private final Result result;
     private final PlayersInMatch players;
 
     /**
      * Every field must be present and not null.
      */
-    public Match(LocalDateTime date, Result result, PlayersInMatch players) {
+    public Match(LocalDate date, Result result, PlayersInMatch players) {
         requireAllNonNull(date, result, players);
 
         this.result = result;
@@ -33,10 +33,10 @@ public class Match {
      * The date is set to the current time when the match is created.
      */
     public Match(Result result, PlayersInMatch players) {
-        this(LocalDateTime.now(), result, players);
+        this(LocalDate.now(), result, players);
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

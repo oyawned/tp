@@ -31,7 +31,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ import seedu.address.model.person.statistics.Statistics;
 
 public class ResultCommandParserTest {
     private final ResultCommandParser parser = new ResultCommandParser();
-    private final LocalDateTime date = LocalDateTime.parse(VALID_DATE);
+    private final LocalDate date = LocalDate.parse(VALID_DATE);
 
     @Test
     public void parse_allFieldsPresent_success() {

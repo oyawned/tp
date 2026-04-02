@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Stream;
@@ -54,7 +54,7 @@ public class ResultCommandParser implements Parser<ResultCommand> {
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             try {
-                LocalDateTime date = LocalDateTime.parse(argMultimap.getValue(PREFIX_DATE).get());
+                LocalDate date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get());
                 match = new Match(date, result, players);
             } catch (DateTimeParseException e) {
                 throw new ParseException(e.getMessage());
