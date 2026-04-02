@@ -3,14 +3,14 @@
     "date" : "2025-01-01T13:00",
     "result" : "WIN",
     "players" : [ {
-      "name" : "Alex Yeoh",
+      "ign" : "AlexY42",
       "statistics" : {
         "kills" : "9",
         "deaths" : "1",
         "assists" : "19"
       }
     }, {
-      "name" : "Bernice Yu",
+      "ign" : "Bern_Storm",
       "statistics" : {
         "kills" : "1",
         "deaths" : "1",
@@ -21,21 +21,21 @@
     "date" : "2025-02-02T14:00",
     "result" : "LOSE",
     "players" : [ {
-      "name" : "Charlotte Oliveiro",
+      "ign" : "Charlie99",
       "statistics" : {
         "kills" : "2",
         "deaths" : "6",
         "assists" : "1"
       }
     }, {
-      "name" : "David Li",
+      "ign" : "DavidLi91",
       "statistics" : {
         "kills" : "9",
         "deaths" : "8",
         "assists" : "3"
       }
     }, {
-      "name" : "Irfan Ibrahim",
+      "ign" : "IrfanZ",
       "statistics" : {
         "kills" : "5",
         "deaths" : "8",
@@ -46,7 +46,7 @@
     "date" : "2025-03-03T15:00",
     "result" : "DRAW",
     "players" : [ {
-      "name" : "Roy Balakrishnan",
+      "ign" : "Roy_Vortex",
       "statistics" : {
         "kills" : "5",
         "deaths" : "5",

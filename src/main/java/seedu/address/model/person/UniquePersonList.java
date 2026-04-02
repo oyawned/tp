@@ -73,7 +73,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Find the persons with the name of the players provided and add the statistics to those persons.
+     * Find the persons with the ign of the players provided and add the statistics to those persons.
      * If one person cannot be found in the list, no other person's statistics will be updated.
      * @param players The list of players
      */
@@ -82,8 +82,8 @@ public class UniquePersonList implements Iterable<Person> {
         List<Person> targetPersons = new ArrayList<>();
         List<Person> editedPersons = new ArrayList<>();
         for (PlayerInMatch player : players) {
-            Name name = player.getName(); // Every person has a unique name
-            Optional<Person> found = internalList.stream().filter(p -> p.getName().equals(name)).findFirst();
+            InGameName ign = player.getInGameName(); // Every person has a unique ign
+            Optional<Person> found = internalList.stream().filter(p -> p.getIgn().equals(ign)).findFirst();
             if (found.isEmpty()) {
                 throw new PersonNotFoundException();
             }

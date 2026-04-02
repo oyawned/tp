@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.match.PlayerInMatch;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.InGameName;
 import seedu.address.model.person.statistics.Statistics;
 
 /**
@@ -15,16 +15,16 @@ public class JsonAdaptedPlayerInMatch {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Player's %s field is missing!";
 
-    private final String name;
+    private final String ign;
     private final JsonAdaptedStatistics statistics;
 
     /**
-     * Constructs a {@code JsonAdaptedPlayerInMatch} with the given player name and statistics.
+     * Constructs a {@code JsonAdaptedPlayerInMatch} with the given player ign and statistics.
      */
     @JsonCreator
-    public JsonAdaptedPlayerInMatch(@JsonProperty("name") String name,
+    public JsonAdaptedPlayerInMatch(@JsonProperty("ign") String ign,
             @JsonProperty("statistics") JsonAdaptedStatistics statistics) {
-        this.name = name;
+        this.ign = ign;
         this.statistics = statistics;
     }
 
@@ -32,7 +32,7 @@ public class JsonAdaptedPlayerInMatch {
      * Converts a given {@code PlayerInMatch} into this class for Jackson use.
      */
     public JsonAdaptedPlayerInMatch(PlayerInMatch source) {
-        name = source.getName().fullName;
+        ign = source.getInGameName().toString();
         statistics = new JsonAdaptedStatistics(source.getStatistics());
     }
 
@@ -41,20 +41,21 @@ public class JsonAdaptedPlayerInMatch {
      */
     public PlayerInMatch toModelType() throws IllegalValueException {
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (ign == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    InGameName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!InGameName.isValidIgn(ign)) {
+            throw new IllegalValueException(InGameName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final InGameName modelIgn = new InGameName(ign);
 
         if (statistics == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Statistics"));
         }
         final Statistics modelStatistics = statistics.toModelType();
 
-        return new PlayerInMatch(modelName, modelStatistics);
+        return new PlayerInMatch(modelIgn, modelStatistics);
 
     }
 

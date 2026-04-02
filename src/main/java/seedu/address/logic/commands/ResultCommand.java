@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
@@ -25,14 +26,14 @@ public class ResultCommand extends Command {
             + "Parameters: "
             + PREFIX_RESULT + "RESULT (must be one of: WIN, LOSE, DRAW) "
             + "[" + PREFIX_DATE + "yyyy-MM-dd'T'HH:mm:ss] "
-            + PREFIX_NAME + "NAME (must exist in the list) "
+            + PREFIX_IGN + "IGN (must exist in the list) "
             + PREFIX_KILLS + "KILLS "
             + PREFIX_DEATHS + "DEATHS "
             + PREFIX_ASSISTS + "ASSISTS\n"
             + "The number of names and number of statistics must match.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_RESULT + "WIN "
-            + PREFIX_NAME + "Harry " + PREFIX_KILLS + "20 " + PREFIX_DEATHS + "10 " + PREFIX_ASSISTS + "30 "
-            + PREFIX_NAME + "Harried " + PREFIX_KILLS + "0 " + PREFIX_DEATHS + "500 " + PREFIX_ASSISTS + "0 ";
+            + PREFIX_IGN + "IGN_1 " + PREFIX_KILLS + "20 " + PREFIX_DEATHS + "10 " + PREFIX_ASSISTS + "30 "
+            + PREFIX_IGN + "IGN_2 " + PREFIX_KILLS + "0 " + PREFIX_DEATHS + "500 " + PREFIX_ASSISTS + "0 ";
 
     public static final String MESSAGE_SUCCESS = "New match added: %1$s";
     public static final String MESSAGE_FIELD_QUANTITY_MISMATCH =

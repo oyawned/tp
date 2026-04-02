@@ -64,17 +64,17 @@ public class SampleDataUtil {
 
     public static Match[] getSampleMatches() {
         PlayerInMatch player1 = new PlayerInMatch(
-                new Name("Alex Yeoh"), Statistics.createRandom(10, 10, 20));
+                new InGameName("AlexY42"), Statistics.createRandom(10, 10, 20));
         PlayerInMatch player2 = new PlayerInMatch(
-                new Name("Bernice Yu"), Statistics.createRandom(10, 10, 20));
+                new InGameName("Bern_Storm"), Statistics.createRandom(10, 10, 20));
         PlayerInMatch player3 = new PlayerInMatch(
-                new Name("Charlotte Oliveiro"), Statistics.createRandom(10, 10, 20));
+                new InGameName("Charlie99"), Statistics.createRandom(10, 10, 20));
         PlayerInMatch player4 = new PlayerInMatch(
-                new Name("David Li"), Statistics.createRandom(10, 10, 20));
+                new InGameName("DavidLi91"), Statistics.createRandom(10, 10, 20));
         PlayerInMatch player5 = new PlayerInMatch(
-                new Name("Irfan Ibrahim"), Statistics.createRandom(10, 10, 20));
+                new InGameName("IrfanZ"), Statistics.createRandom(10, 10, 20));
         PlayerInMatch player6 = new PlayerInMatch(
-                new Name("Roy Balakrishnan"), Statistics.createRandom(10, 10, 20));
+                new InGameName("Roy_Vortex"), Statistics.createRandom(10, 10, 20));
 
         List<PlayerInMatch> players1 = List.of(player1, player2);
         List<PlayerInMatch> players2 = List.of(player3, player4, player5);

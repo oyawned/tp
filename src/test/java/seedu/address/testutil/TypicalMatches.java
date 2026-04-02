@@ -28,22 +28,22 @@ public class TypicalMatches {
 
     public static final List<PlayerInMatch> FOUR_PLAYERS = FOUR_PERSONS.stream()
             .map(person ->
-                    new PlayerInMatch(person.getName(),
+                    new PlayerInMatch(person.getIgn(),
                             Statistics.createRandom(10, 10, 20)))
             .toList();
     public static final List<PlayerInMatch> THREE_PLAYERS = THREE_PERSONS.stream()
             .map(person ->
-                    new PlayerInMatch(person.getName(),
+                    new PlayerInMatch(person.getIgn(),
                             Statistics.createRandom(10, 10, 20)))
             .toList();
     public static final List<PlayerInMatch> TWO_PLAYERS = TWO_PERSONS.stream()
             .map(person ->
-                    new PlayerInMatch(person.getName(),
+                    new PlayerInMatch(person.getIgn(),
                             Statistics.createRandom(10, 10, 20)))
             .toList();
     public static final List<PlayerInMatch> ONE_PLAYER = ONE_PERSON.stream()
             .map(person ->
-                    new PlayerInMatch(person.getName(),
+                    new PlayerInMatch(person.getIgn(),
                             Statistics.createRandom(10, 10, 20)))
             .toList();
 

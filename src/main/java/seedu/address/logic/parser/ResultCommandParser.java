@@ -5,8 +5,8 @@ import static seedu.address.logic.commands.ResultCommand.MESSAGE_FIELD_QUANTITY_
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.match.Match;
 import seedu.address.model.match.PlayerInMatch;
 import seedu.address.model.match.Result;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.InGameName;
 import seedu.address.model.person.statistics.Assists;
 import seedu.address.model.person.statistics.Deaths;
 import seedu.address.model.person.statistics.Kills;
@@ -41,20 +41,20 @@ public class ResultCommandParser implements Parser<ResultCommand> {
     @Override
     public ResultCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_RESULT, PREFIX_DATE, PREFIX_NAME, PREFIX_KILLS,
+                ArgumentTokenizer.tokenize(args, PREFIX_RESULT, PREFIX_DATE, PREFIX_IGN, PREFIX_KILLS,
                     PREFIX_DEATHS, PREFIX_ASSISTS);
-        if (!arePrefixesPresent(argMultimap, PREFIX_RESULT, PREFIX_NAME, PREFIX_KILLS,
+        if (!arePrefixesPresent(argMultimap, PREFIX_RESULT, PREFIX_IGN, PREFIX_KILLS,
                 PREFIX_DEATHS, PREFIX_ASSISTS) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResultCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_RESULT);
         Result result = ParserUtil.parseResult(argMultimap.getValue(PREFIX_RESULT).get());
-        List<String> argNames = argMultimap.getAllValues(PREFIX_NAME);
+        List<String> argIgn = argMultimap.getAllValues(PREFIX_IGN);
         List<String> argKills = argMultimap.getAllValues(PREFIX_KILLS);
         List<String> argDeaths = argMultimap.getAllValues(PREFIX_DEATHS);
         List<String> argAssists = argMultimap.getAllValues(PREFIX_ASSISTS);
-        int noPlayers = argNames.size();
+        int noPlayers = argIgn.size();
 
         if (noPlayers != argKills.size() || noPlayers != argDeaths.size()
                 || noPlayers != argAssists.size()) {
@@ -62,7 +62,7 @@ public class ResultCommandParser implements Parser<ResultCommand> {
         }
         List<PlayerInMatch> players = new ArrayList<>(noPlayers);
         for (int i = 0; i < noPlayers; i++) {
-            Name name = ParserUtil.parseName(argNames.get(i));
+            InGameName ign = ParserUtil.parseIgn(argIgn.get(i));
             Kills kills = ParserUtil.parseKills(argKills.get(i));
             Deaths deaths = ParserUtil.parseDeaths(argDeaths.get(i));
             Assists assists = ParserUtil.parseAssists(argAssists.get(i));
@@ -72,7 +72,7 @@ public class ResultCommandParser implements Parser<ResultCommand> {
                     .withDeaths(deaths)
                     .withAssists(assists)
                     .build();
-            players.add(new PlayerInMatch(name, statistics));
+            players.add(new PlayerInMatch(ign, statistics));
         }
 
         Match match;
