@@ -83,7 +83,7 @@ class JsonAdaptedEntityStatisticMap {
             }
             Entity entity = new Entity(name, iconPath);
             Statistics statistics = entry.getValue().getStatistics().toModelType();
-            entityStatisticMap.putStatistics(entity, statistics);
+            entityStatisticMap.addStatistics(entity, statistics);
         }
         return entityStatisticMap;
     }

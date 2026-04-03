@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSISTS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEATHS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_KILLS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.KILLS_DESC_SET_1;
-import static seedu.address.logic.commands.CommandTestUtil.STATS_DESC_SET_1;
+import static seedu.address.logic.commands.CommandTestUtil.STATS_DESC_SET_DEFAULT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -66,7 +66,7 @@ public class StatsCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1;
 
-        StatsCommand expectedCommand = new StatsCommand(targetIndex, STATS_DESC_SET_1);
+        StatsCommand expectedCommand = new StatsCommand(targetIndex, STATS_DESC_SET_DEFAULT);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

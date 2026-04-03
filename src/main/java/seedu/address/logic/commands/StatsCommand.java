@@ -79,12 +79,13 @@ public class StatsCommand extends Command {
      */
     private static Person createStatsEditedPerson(Person personToEdit, EditStatsDescriptor descriptor) {
         assert personToEdit != null;
+        assert descriptor.getEntity() != null; // Entity is required for stats update
 
         EntityStatisticMap stats = personToEdit.getOverallEntityStatistics();
 
         // Build new statistics object using provided values or current ones
         if (stats.containsKey(descriptor.getEntity())) {
-            stats.putStatistics(descriptor.getEntity(),
+            stats.addStatistics(descriptor.getEntity(),
                 stats.getStatistics(descriptor.getEntity())
                 .add(new Statistics.Builder()
                 .withKills(descriptor.getKills().orElse(new Kills("0")))
@@ -93,7 +94,7 @@ public class StatsCommand extends Command {
                 .build()));
         }
         else {
-            stats.putStatistics(descriptor.getEntity(),
+            stats.addStatistics(descriptor.getEntity(),
                 new Statistics.Builder()
                 .withKills(descriptor.getKills().orElse(new Kills("0")))
                 .withDeaths(descriptor.getDeaths().orElse(new Deaths("0")))
@@ -206,7 +207,8 @@ public class StatsCommand extends Command {
             EditStatsDescriptor otherDescriptor = (EditStatsDescriptor) other;
             return java.util.Objects.equals(kills, otherDescriptor.kills)
                     && java.util.Objects.equals(deaths, otherDescriptor.deaths)
-                    && java.util.Objects.equals(assists, otherDescriptor.assists);
+                    && java.util.Objects.equals(assists, otherDescriptor.assists)
+                    && java.util.Objects.equals(entity, otherDescriptor.entity);
         }
     }
 }

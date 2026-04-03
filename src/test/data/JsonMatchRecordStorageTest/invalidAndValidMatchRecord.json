@@ -4,6 +4,7 @@
     "result" : "WIN",
     "players" : [ {
       "name" : "Alex Yeoh",
+      "entity" : "default1",
       "statistics" : {
         "kills" : "9",
         "deaths" : "1",
@@ -11,6 +12,7 @@
       }
     }, {
       "name" : "Bernice Yu",
+      "entity" : "default1",
       "statistics" : {
         "kills" : "1",
         "deaths" : "1",
@@ -22,6 +24,7 @@
     "result" : "LOSE",
     "players" : [ {
       "name" : "Charlotte Oliveiro",
+      "entity" : "default1",
       "statistics" : {
         "kills" : "2",
         "deaths" : "6",
@@ -29,6 +32,7 @@
       }
     }, {
       "name" : "David Li",
+      "entity" : "default1",
       "statistics" : {
         "kills" : "9",
         "deaths" : "8",
@@ -36,6 +40,7 @@
       }
     }, {
       "name" : "Irfan Ibrahim",
+      "entity" : "default1",
       "statistics" : {
         "kills" : "5",
         "deaths" : "8",
@@ -47,6 +52,7 @@
     "result" : "DRAW",
     "players" : [ {
       "name" : "Roy Balakrishnan",
+      "entity" : "default1",
       "statistics" : {
         "kills" : "5",
         "deaths" : "5",

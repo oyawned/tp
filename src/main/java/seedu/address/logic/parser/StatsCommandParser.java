@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.commands.StatsCommand.EditStatsDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entity.Entity;
 
 /**
  * Parses input arguments and creates a new StatsCommand object
@@ -53,6 +54,9 @@ public class StatsCommandParser implements Parser<StatsCommand> {
         if (!editStatsDescriptor.isAnyFieldEdited()) {
             throw new ParseException(StatsCommand.MESSAGE_NOT_EDITED);
         }
+
+        //TODO: Set entity to default for now, will be updated when we have the feature to specify entity in stats command
+        editStatsDescriptor.setEntity(Entity.createDefault());
 
         return new StatsCommand(index, editStatsDescriptor);
     }

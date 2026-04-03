@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.ASSISTS_DESC_SET_2;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.DEATHS_DESC_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.DEATHS_DESC_SET_2;
+import static seedu.address.logic.commands.CommandTestUtil.ENTITY_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.ENTITY_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RESULT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.KILLS_DESC_SET_1;
@@ -20,6 +22,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSISTS_SET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEATHS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEATHS_SET_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_REFERENCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -34,7 +39,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityReference;
+import seedu.address.model.entity.EntityStatisticMap;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ResultCommand;
@@ -61,7 +71,9 @@ public class ResultCommandParserTest {
                                 new Statistics.Builder()
                                         .withAssists(new Assists(VALID_ASSISTS_SET_1))
                                         .withDeaths(new Deaths(VALID_DEATHS_SET_1))
-                                        .withKills(new Kills(VALID_KILLS_SET_1)).build())
+                                        .withKills(new Kills(VALID_KILLS_SET_1))
+                                        .build(),
+                                VALID_ENTITY_1)
                 ));
 
         Match expectedMatch2 = new Match(
@@ -71,31 +83,34 @@ public class ResultCommandParserTest {
                                 new Statistics.Builder()
                                         .withAssists(new Assists(VALID_ASSISTS_SET_1))
                                         .withDeaths(new Deaths(VALID_DEATHS_SET_1))
-                                        .withKills(new Kills(VALID_KILLS_SET_1)).build()),
+                                        .withKills(new Kills(VALID_KILLS_SET_1)).build(),
+                                VALID_ENTITY_1),
                         new PlayerInMatch(new Name(VALID_NAME_BOB),
                                 new Statistics.Builder()
                                         .withAssists(new Assists(VALID_ASSISTS_SET_2))
                                         .withDeaths(new Deaths(VALID_DEATHS_SET_2))
-                                        .withKills(new Kills(VALID_KILLS_SET_2)).build())
+                                        .withKills(new Kills(VALID_KILLS_SET_2)).build(),
+                                VALID_ENTITY_2)
                 ));
 
-        // Two players involved in the match
-        // Arguments in the order: result, name_1, name_2, kills_1, kills_1, deaths_1, deaths_1, assists_1, assists_2
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + NAME_DESC_BOB
+        // Two players involved in match
+        // Arguments in order: result, name_1, entity_1, name_2, entity_2, kills_1, kills_1, deaths_1, deaths_1, assists_1, assists_2
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + ENTITY_DESC_1 
+                + NAME_DESC_BOB + ENTITY_DESC_2
                 + KILLS_DESC_SET_1 + KILLS_DESC_SET_2 + DEATHS_DESC_SET_1 + DEATHS_DESC_SET_2
                 + ASSISTS_DESC_SET_1 + ASSISTS_DESC_SET_2 + DATE_DESC,
                 new ResultCommand(expectedMatch2));
 
-        // Two players involved in the match
-        // Arguments in the order: result, name_1, kills_1, deaths_1, assists_1, name_2, kills_2, deaths_2, assists_2
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + KILLS_DESC_SET_1
-                + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + NAME_DESC_BOB + KILLS_DESC_SET_2 + DEATHS_DESC_SET_2
-                + ASSISTS_DESC_SET_2 + DATE_DESC,
+        // Two players involved in match
+        // Arguments in order: result, name_1, entity_1, kills_1, deaths_1, assists_1, name_2, entity_2, kills_2, deaths_2, assists_2
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + ENTITY_DESC_1
+                + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + NAME_DESC_BOB + ENTITY_DESC_2 
+                + KILLS_DESC_SET_2 + DEATHS_DESC_SET_2 + ASSISTS_DESC_SET_2 + DATE_DESC,
                 new ResultCommand(expectedMatch2));
 
         // One player involved in the match
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + KILLS_DESC_SET_1
-                + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + ENTITY_DESC_1
+                + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
                 new ResultCommand(expectedMatch));
     }
 
@@ -103,18 +118,20 @@ public class ResultCommandParserTest {
     public void parse_noNamesAndStatsDoNotMatch_failure() {
 
         // Two players but only one statistic
-        String twoPlayersOneStatistic = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + NAME_DESC_BOB
+        String twoPlayersOneStatistic = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + ENTITY_DESC_1 
+                + NAME_DESC_BOB + ENTITY_DESC_2
                 + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC;
         assertParseFailure(parser, twoPlayersOneStatistic, MESSAGE_FIELD_QUANTITY_MISMATCH);
 
         // One player but two statistic
-        String onePlayerTwoStatistics = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_BOB
+        String onePlayerTwoStatistics = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_BOB + ENTITY_DESC_1
                 + KILLS_DESC_SET_1 + KILLS_DESC_SET_2 + DEATHS_DESC_SET_1 + DEATHS_DESC_SET_2
                 + ASSISTS_DESC_SET_1 + ASSISTS_DESC_SET_2 + DATE_DESC;
         assertParseFailure(parser, onePlayerTwoStatistics, MESSAGE_FIELD_QUANTITY_MISMATCH);
 
         // Two players but only one statistic and one partial statistic
-        String twoPlayerPartialStatistics = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + NAME_DESC_BOB
+        String twoPlayerPartialStatistics = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + ENTITY_DESC_1
+                + NAME_DESC_BOB + ENTITY_DESC_2
                 + KILLS_DESC_SET_1 + KILLS_DESC_SET_2 + DEATHS_DESC_SET_1 + DEATHS_DESC_SET_2
                 + ASSISTS_DESC_SET_1 + DATE_DESC;
         assertParseFailure(parser, twoPlayerPartialStatistics, MESSAGE_FIELD_QUANTITY_MISMATCH);
@@ -122,7 +139,8 @@ public class ResultCommandParserTest {
 
     @Test
     public void parse_repeatedResult_failure() {
-        String validExpectedMatchString = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + NAME_DESC_BOB
+        String validExpectedMatchString = PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + ENTITY_DESC_1
+                + NAME_DESC_BOB + ENTITY_DESC_2
                 + KILLS_DESC_SET_1 + KILLS_DESC_SET_2 + DEATHS_DESC_SET_1 + DEATHS_DESC_SET_2
                 + ASSISTS_DESC_SET_1 + ASSISTS_DESC_SET_2 + DATE_DESC;
 
@@ -136,7 +154,7 @@ public class ResultCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResultCommand.MESSAGE_USAGE);
 
         // missing result
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + KILLS_DESC_SET_1
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + ENTITY_DESC_1 + KILLS_DESC_SET_1
                 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
                 expectedMessage);
 
@@ -145,9 +163,14 @@ public class ResultCommandParserTest {
                 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
                 expectedMessage);
 
+        // missing entity
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + NAME_DESC_AMY + KILLS_DESC_SET_1
+                + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
+                expectedMessage);
+
         // missing statistics
         assertParseFailure(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN
-                + NAME_DESC_AMY + DATE_DESC,
+                + NAME_DESC_AMY + ENTITY_DESC_1 + DATE_DESC,
                 expectedMessage);
 
     }
@@ -155,22 +178,22 @@ public class ResultCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid result
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_RESULT_DESC + NAME_DESC_AMY
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_RESULT_DESC + NAME_DESC_AMY + ENTITY_DESC_1
                  + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
                 Result.MESSAGE_CONSTRAINTS);
 
         // invalid name
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + INVALID_NAME_DESC
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + RESULT_DESC_WIN + INVALID_NAME_DESC + ENTITY_DESC_1
                 + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid date
         assertThrows(ParseException.class, () ->
-                parser.parse(PREAMBLE_WHITESPACE + RESULT_DESC_WIN + INVALID_NAME_DESC
+                parser.parse(PREAMBLE_WHITESPACE + RESULT_DESC_WIN + INVALID_NAME_DESC + ENTITY_DESC_1
                     + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC));
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_RESULT_DESC + INVALID_NAME_DESC
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_RESULT_DESC + INVALID_NAME_DESC + ENTITY_DESC_1
                         + KILLS_DESC_SET_1 + DEATHS_DESC_SET_1 + ASSISTS_DESC_SET_1 + DATE_DESC,
                 Result.MESSAGE_CONSTRAINTS);
 

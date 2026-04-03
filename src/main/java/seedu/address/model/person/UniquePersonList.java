@@ -90,7 +90,7 @@ public class UniquePersonList implements Iterable<Person> {
 
             Person person = found.get();
             Statistics statistics = player.getStatistics();
-            Person editedPerson = person.addStatistics(statistics);
+            Person editedPerson = person.addEntityStatistics(statistics, player.getEntity());
             targetPersons.add(person);
             editedPersons.add(editedPerson);
         }

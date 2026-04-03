@@ -15,13 +15,15 @@ import seedu.address.model.match.PlayerInMatch;
 import seedu.address.model.match.Result;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InGameName;
-  import seedu.address.model.person.Name;
-  import seedu.address.model.person.Person;
-  import seedu.address.model.person.Phone;
-  import seedu.address.model.person.Rank;
-  import seedu.address.model.person.Role;
-  import seedu.address.model.entity.EntityStatisticMap;
-  import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.statistics.Statistics;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityStatisticMap;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -64,17 +66,17 @@ public class SampleDataUtil {
 
     public static Match[] getSampleMatches() {
         PlayerInMatch player1 = new PlayerInMatch(
-                new Name("Alex Yeoh"), Statistics.createRandom(10, 10, 20));
+                new Name("Alex Yeoh"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
         PlayerInMatch player2 = new PlayerInMatch(
-                new Name("Bernice Yu"), Statistics.createRandom(10, 10, 20));
+                new Name("Bernice Yu"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
         PlayerInMatch player3 = new PlayerInMatch(
-                new Name("Charlotte Oliveiro"), Statistics.createRandom(10, 10, 20));
+                new Name("Charlotte Oliveiro"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
         PlayerInMatch player4 = new PlayerInMatch(
-                new Name("David Li"), Statistics.createRandom(10, 10, 20));
+                new Name("David Li"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
         PlayerInMatch player5 = new PlayerInMatch(
-                new Name("Irfan Ibrahim"), Statistics.createRandom(10, 10, 20));
+                new Name("Irfan Ibrahim"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
         PlayerInMatch player6 = new PlayerInMatch(
-                new Name("Roy Balakrishnan"), Statistics.createRandom(10, 10, 20));
+                new Name("Roy Balakrishnan"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
 
         List<PlayerInMatch> players1 = List.of(player1, player2);
         List<PlayerInMatch> players2 = List.of(player3, player4, player5);

@@ -1,9 +1,13 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_REFERENCE;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.address.model.MatchRecord;
+import seedu.address.model.entity.Entity;
 import seedu.address.model.match.Match;
 import seedu.address.model.match.PlayerInMatch;
 import seedu.address.model.match.Result;
@@ -29,22 +33,26 @@ public class TypicalMatches {
     public static final List<PlayerInMatch> FOUR_PLAYERS = FOUR_PERSONS.stream()
             .map(person ->
                     new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20)))
+                            Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
             .toList();
     public static final List<PlayerInMatch> THREE_PLAYERS = THREE_PERSONS.stream()
             .map(person ->
                     new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20)))
+                            Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
             .toList();
     public static final List<PlayerInMatch> TWO_PLAYERS = TWO_PERSONS.stream()
             .map(person ->
                     new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20)))
+                            Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
             .toList();
     public static final List<PlayerInMatch> ONE_PLAYER = ONE_PERSON.stream()
             .map(person ->
                     new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20)))
+                            Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
             .toList();
 
     public static final LocalDateTime DATE_1 = LocalDateTime.of(2025, 12, 1, 12, 0);

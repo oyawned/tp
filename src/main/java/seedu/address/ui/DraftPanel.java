@@ -149,11 +149,11 @@ public class DraftPanel extends UiPart<HBox> {
         nameLabel.setText(displayName);
         roleLabel.setText(player.getRole().value.toString());
         rankLabel.setText(player.getRank().toString());
-        killsLabel.setText(player.getStatistics().getKills().toString());
-        deathsLabel.setText(player.getStatistics().getDeaths().toString());
-        assistsLabel.setText(player.getStatistics().getAssists().toString());
+        killsLabel.setText(player.getOverallStatistics().getKills().toString());
+        deathsLabel.setText(player.getOverallStatistics().getDeaths().toString());
+        assistsLabel.setText(player.getOverallStatistics().getAssists().toString());
 
-        double kdRatio = player.getStatistics().getKda();
+        double kdRatio = player.getOverallStatistics().getKda();
         kdLabel.setText(String.format("%.2f", kdRatio));
     }
 }

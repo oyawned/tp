@@ -1,14 +1,17 @@
 package seedu.address.storage;
 
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_REFERENCE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
+
 
 public class JsonSerializableMatchRecordTest {
 
@@ -16,6 +19,11 @@ public class JsonSerializableMatchRecordTest {
             Paths.get("src", "test", "data", "JsonSerializableMatchRecordTest");
     private static final Path INVALID_MATCH_FILE = TEST_DATA_FOLDER.resolve("invalidMatchRecord.json");
     private static final Path VALID_MATCH_FILE = TEST_DATA_FOLDER.resolve("validMatchRecord.json");
+
+    @BeforeAll
+    public static void setupAll() {
+        VALID_ENTITY_REFERENCE.reload(); // Ensure the EntityReference is loaded with the typical entities before tests run
+    }
 
     @Test
     public void toModelType_validMatchFile_success() throws Exception {

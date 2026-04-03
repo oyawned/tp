@@ -76,4 +76,8 @@ public class Entity {
                 .toString();
     }
 
+    public static Entity createDefault() {
+        return new Entity("Default Entity", "path/to/default/icon.png");
+    }
+
 }

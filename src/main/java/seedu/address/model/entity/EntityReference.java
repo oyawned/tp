@@ -40,6 +40,15 @@ public class EntityReference {
     }
 
     /**
+     * Reloads this objects entities into the static reference.
+     * @return
+     */
+
+    public void reload() {
+        EntityReference.loadedEntities = new ArrayList<>(this.entities);
+    }
+
+    /**
      * Finds an entity by name. Uses the loaded entity list.
      * @param name The name of the entity to find
      * @return Optional containing the entity if found, empty otherwise

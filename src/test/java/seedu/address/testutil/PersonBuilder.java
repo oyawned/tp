@@ -100,7 +100,8 @@ public class PersonBuilder {
      * Sets the {@code Statistics} of the {@code Person} that we are building.
      */
     public PersonBuilder withEntityStatistics(EntityStatisticMap map) {
-        this.entityStatisticMap = map;
+        this.entityStatisticMap = new EntityStatisticMap();
+        this.entityStatisticMap.putAll(map);
         return this;
     }
 

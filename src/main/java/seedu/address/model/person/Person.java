@@ -95,20 +95,20 @@ public class Person {
     }
 
     /**
+     * Adds the given statistics to the person's existing statistics for the specified entity.
+     * @param statsToAdd
+     * @param entity
+     */
+    public Person addEntityStatistics(Statistics statsToAdd, Entity entity) {
+        entityStats.addStatistics(entity, statsToAdd);
+        return this;
+    }
+
+    /**
      * Gets overall entity statistics
      */
     public EntityStatisticMap getOverallEntityStatistics() {
         return entityStats;
-    }
-
-    /**
-     * Add statistics to this person.
-     * @param statistics The statistics to add
-     * @return A new person with the added statistics
-     */
-    public Person addStatistics(Statistics statistics) {
-        Statistics updated = this.statistics.add(statistics);
-        return new Person(name, phone, email, role, ign, rank, tags, updated);
     }
 
     /**

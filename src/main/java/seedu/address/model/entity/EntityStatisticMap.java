@@ -56,7 +56,7 @@ public class EntityStatisticMap {
      * @param entity The entity to add/update
      * @param statistics The statistics to associate with the entity
      */
-    public void putStatistics(Entity entity, Statistics statistics) {
+    public void addStatistics(Entity entity, Statistics statistics) {
         requireNonNull(entity);
         requireNonNull(statistics);
         entityStats.put(entity, statistics);
@@ -124,7 +124,13 @@ public class EntityStatisticMap {
         }
 
         EntityStatisticMap otherEntityStatisticMap = (EntityStatisticMap) other;
-        return entityStats.equals(otherEntityStatisticMap.entityStats);
+        for (Entity entity : entityStats.keySet()) {
+            if (!otherEntityStatisticMap.containsKey(entity)
+                    || !this.getStatistics(entity).equals(otherEntityStatisticMap.getStatistics(entity))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -148,7 +154,7 @@ public class EntityStatisticMap {
         }
 
         public Builder withEntity(Entity entity, Statistics stat) {
-            map.putStatistics(entity, stat);
+            map.addStatistics(entity, stat);
             return this;
         }
 

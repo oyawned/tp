@@ -25,6 +25,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entity.Entity;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -94,7 +95,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_stats() throws Exception {
         final String kills = "10";
-        StatsCommand.EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(kills).build();
+        StatsCommand.EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withEntity(Entity.createDefault()).withKills(kills).build();
         StatsCommand command = (StatsCommand) parser.parseCommand(StatsCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_KILLS + kills);
         assertEquals(new StatsCommand(INDEX_FIRST_PERSON, descriptor), command);
