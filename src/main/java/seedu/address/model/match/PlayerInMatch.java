@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.InGameName;
 import seedu.address.model.person.statistics.Statistics;
 
 /**
@@ -14,22 +14,22 @@ import seedu.address.model.person.statistics.Statistics;
 public class PlayerInMatch {
 
     private final Statistics statistics;
-    private final Name name;
+    private final InGameName ign;
 
     /**
      * Constructs a {@code PlayerInMatch}
      *
-     * @param name The name of the player.
+     * @param ign The ign of the player.
      * @param statistics The statistics of the player in this match.
      */
-    public PlayerInMatch(Name name, Statistics statistics) {
-        requireAllNonNull(name, statistics);
-        this.name = name;
+    public PlayerInMatch(InGameName ign, Statistics statistics) {
+        requireAllNonNull(ign, statistics);
+        this.ign = ign;
         this.statistics = statistics;
     }
 
-    public Name getName() {
-        return name;
+    public InGameName getInGameName() {
+        return ign;
     }
 
     public Statistics getStatistics() {
@@ -47,18 +47,17 @@ public class PlayerInMatch {
             return false;
         }
 
-        return this.name.equals(otherPlayer.name) && this.statistics.equals(otherPlayer.statistics);
+        return this.ign.equals(otherPlayer.ign) && this.statistics.equals(otherPlayer.statistics);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, statistics);
+        return Objects.hash(ign, statistics);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
+        return new ToStringBuilder(ign.toString())
                 .add("statistics", statistics)
                 .toString();
     }

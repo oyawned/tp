@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.match.Match;
 import seedu.address.model.match.PlayerInMatch;
+import seedu.address.model.match.PlayersInMatch;
 import seedu.address.model.match.Result;
 
 /**
@@ -42,7 +43,7 @@ public class JsonAdaptedMatch {
     public JsonAdaptedMatch(Match source) {
         date = source.getDate().toString();
         result = source.getResult().toString();
-        players = source.getPlayers().stream().map(JsonAdaptedPlayerInMatch::new).toList();
+        players = source.getPlayers().asList().stream().map(JsonAdaptedPlayerInMatch::new).toList();
     }
 
     /**
@@ -54,9 +55,9 @@ public class JsonAdaptedMatch {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Date"));
         }
-        final LocalDateTime modelDate;
+        final LocalDate modelDate;
         try {
-            modelDate = LocalDateTime.parse(date);
+            modelDate = LocalDate.parse(date);
         } catch (Exception e) {
             throw new IllegalValueException(String.format(INVALID_DATE_MESSAGE_FORMAT, date));
         }
@@ -77,7 +78,11 @@ public class JsonAdaptedMatch {
             modelPlayers.add(player.toModelType());
         }
 
-        return new Match(modelDate, modelResult, modelPlayers);
+        if (!PlayersInMatch.isValidPlayerList(modelPlayers)) {
+            throw new IllegalValueException(PlayersInMatch.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Match(modelDate, modelResult, new PlayersInMatch(modelPlayers));
     }
 
 }
