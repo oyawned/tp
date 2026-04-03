@@ -72,7 +72,7 @@ public class CommandTestUtil {
     public static final String VALID_RESULT_WIN = "WIN";
     public static final String VALID_RESULT_LOSE = "LOSE";
     public static final String VALID_RESULT_DRAW = "DRAW";
-    public static final String VALID_DATE = "2025-12-01T12:00:00";
+    public static final String VALID_DATE = "2025-12-01";
     public static final Entity VALID_ENTITY_1;
     public static final String VALID_ENTITY_NAME_1 = "default1";
     public static final Entity VALID_ENTITY_2;

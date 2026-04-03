@@ -2,12 +2,13 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_1;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.model.MatchRecord;
 import seedu.address.model.match.Match;
 import seedu.address.model.match.PlayerInMatch;
+import seedu.address.model.match.PlayersInMatch;
 import seedu.address.model.match.Result;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.statistics.Statistics;
@@ -28,35 +29,42 @@ public class TypicalMatches {
     public static final List<Person> ONE_PERSON = PERSONS.subList(0, 1);
 
 
-    public static final List<PlayerInMatch> FOUR_PLAYERS = FOUR_PERSONS.stream()
-            .map(person ->
-                    new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20),
+    public static final PlayersInMatch FOUR_PLAYERS = new PlayersInMatch(
+            FOUR_PERSONS.stream()
+                    .map(person ->
+                            new PlayerInMatch(person.getIgn(),
+                                    Statistics.createRandom(10, 10, 20),
                             VALID_ENTITY_1))
-            .toList();
-    public static final List<PlayerInMatch> THREE_PLAYERS = THREE_PERSONS.stream()
-            .map(person ->
-                    new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20),
+                    .toList());
+    public static final PlayersInMatch THREE_PLAYERS = new PlayersInMatch(
+            THREE_PERSONS.stream()
+                    .map(person ->
+                            new PlayerInMatch(person.getIgn(),
+                                    Statistics.createRandom(10, 10, 20),
                             VALID_ENTITY_1))
-            .toList();
-    public static final List<PlayerInMatch> TWO_PLAYERS = TWO_PERSONS.stream()
-            .map(person ->
-                    new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20),
+                    .toList()
+    );
+    public static final PlayersInMatch TWO_PLAYERS = new PlayersInMatch(
+            TWO_PERSONS.stream()
+                    .map(person ->
+                            new PlayerInMatch(person.getIgn(),
+                                    Statistics.createRandom(10, 10, 20),
                             VALID_ENTITY_1))
-            .toList();
-    public static final List<PlayerInMatch> ONE_PLAYER = ONE_PERSON.stream()
-            .map(person ->
-                    new PlayerInMatch(person.getName(),
-                            Statistics.createRandom(10, 10, 20),
+                    .toList()
+    );
+    public static final PlayersInMatch ONE_PLAYER = new PlayersInMatch(
+            ONE_PERSON.stream()
+                    .map(person ->
+                            new PlayerInMatch(person.getIgn(),
+                                    Statistics.createRandom(10, 10, 20),
                             VALID_ENTITY_1))
-            .toList();
+                    .toList()
+    );
 
-    public static final LocalDateTime DATE_1 = LocalDateTime.of(2025, 12, 1, 12, 0);
-    public static final LocalDateTime DATE_2 = LocalDateTime.of(2025, 11, 2, 14, 0);
-    public static final LocalDateTime DATE_3 = LocalDateTime.of(2025, 10, 3, 16, 0);
-    public static final LocalDateTime DATE_4 = LocalDateTime.of(2025, 9, 4, 18, 0);
+    public static final LocalDate DATE_1 = LocalDate.of(2025, 12, 1);
+    public static final LocalDate DATE_2 = LocalDate.of(2025, 11, 2);
+    public static final LocalDate DATE_3 = LocalDate.of(2025, 10, 3);
+    public static final LocalDate DATE_4 = LocalDate.of(2025, 9, 4);
 
     public static final Match WINNING_MATCH_4 = new Match(DATE_4, new Result(Result.WinType.WIN), FOUR_PLAYERS);
     public static final Match WINNING_MATCH_3 = new Match(DATE_3, new Result(Result.WinType.WIN), THREE_PLAYERS);

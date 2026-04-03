@@ -10,6 +10,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Entity {
 
+    public static final String NOT_FOUND = "Entity %s not found!";
+
     // Identity fields
     private final String name;
 

@@ -17,11 +17,11 @@ public class PlayerInMatchTest {
         PlayerInMatch player1 = TypicalMatches.FOUR_PLAYERS.get(0);
         PlayerInMatch player2 = TypicalMatches.FOUR_PLAYERS.get(1);
         PlayerInMatch same = new PlayerInMatch(
-            player1.getName(), player1.getStatistics(), Entity.createDefault());
+            player1.getInGameName(), player1.getStatistics(), Entity.createDefault());
         PlayerInMatch differentStatistics = new PlayerInMatch(
-            player1.getName(), player2.getStatistics(), Entity.createDefault());
+            player1.getInGameName(), player2.getStatistics(), Entity.createDefault());
         PlayerInMatch differentName = new PlayerInMatch(
-            player2.getName(), player1.getStatistics(), Entity.createDefault());
+            player2.getInGameName(), player1.getStatistics(), Entity.createDefault());
         assertEquals(player1, same);
 
         // same object -> returns true
@@ -47,8 +47,7 @@ public class PlayerInMatchTest {
     @Test
     public void toStringMethod() {
         PlayerInMatch player = TypicalMatches.FOUR_PLAYERS.get(2);
-        String expected = PlayerInMatch.class.getCanonicalName() + "{name=" + player.getName() + ", statistics="
-                + player.getStatistics() + "}";
+        String expected = player.getInGameName() + "{statistics=" + player.getStatistics() + "}";
         assertEquals(expected, player.toString());
     }
 

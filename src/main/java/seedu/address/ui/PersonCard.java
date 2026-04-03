@@ -28,6 +28,7 @@ public class PersonCard extends UiPart<Region> {
     private static final int ICON_SIZE = 40;
 
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Person person;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -36,8 +37,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public final Person person;
 
     @FXML
     private HBox cardPane;
@@ -80,10 +79,9 @@ public class PersonCard extends UiPart<Region> {
         this.entityButtonMap = new HashMap<>();
 
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
+        name.setText( person.getIgn().toString() + "(" + person.getName().fullName + ")");
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        inGameName.setText("IGN: " + person.getIgn().toString());
         role.setText("Role: " + person.getRole().toString());
         rank.setText("Rank: " + person.getRank().toString());
         person.getTags().stream()

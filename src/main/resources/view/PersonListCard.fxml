@@ -34,7 +34,6 @@
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="inGameName" styleClass="cell_small_label" text="\$ign" />
       <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
       <Label fx:id="rank" styleClass="cell_small_label" text="\$rank" />
       <Label fx:id="stats" styleClass="cell_small_label" text="\$stats" />

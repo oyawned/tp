@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityReference;
 import seedu.address.model.match.PlayerInMatch;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.InGameName;
 import seedu.address.model.person.statistics.Statistics;
 
 /**
@@ -17,18 +17,18 @@ public class JsonAdaptedPlayerInMatch {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Player's %s field is missing!";
 
-    private final String name;
+    private final String ign;
     private final String entity;
     private final JsonAdaptedStatistics statistics;
 
     /**
-     * Constructs a {@code JsonAdaptedPlayerInMatch} with the given player name, entity, and statistics.
+     * Constructs a {@code JsonAdaptedPlayerInMatch} with the given player ign, entity, and statistics.
      */
     @JsonCreator
-    public JsonAdaptedPlayerInMatch(@JsonProperty("name") String name,
+    public JsonAdaptedPlayerInMatch(@JsonProperty("ign") String ign,
             @JsonProperty("entity") String entity,
             @JsonProperty("statistics") JsonAdaptedStatistics statistics) {
-        this.name = name;
+        this.ign = ign;
         this.entity = entity;
         this.statistics = statistics;
     }
@@ -37,7 +37,7 @@ public class JsonAdaptedPlayerInMatch {
      * Converts a given {@code PlayerInMatch} into this class for Jackson use.
      */
     public JsonAdaptedPlayerInMatch(PlayerInMatch source) {
-        name = source.getName().fullName;
+        ign = source.getInGameName().toString();
         entity = source.getEntity().getName();
         statistics = new JsonAdaptedStatistics(source.getStatistics());
     }
@@ -47,14 +47,18 @@ public class JsonAdaptedPlayerInMatch {
      */
     public PlayerInMatch toModelType() throws IllegalValueException {
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (ign == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    InGameName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!InGameName.isValidIgn(ign)) {
+            throw new IllegalValueException(InGameName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final InGameName modelIgn = new InGameName(ign);
 
+        if (entity == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Entity"));
+        }
         if (entity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Entity"));
         }
@@ -67,7 +71,7 @@ public class JsonAdaptedPlayerInMatch {
         }
         final Statistics modelStatistics = statistics.toModelType();
 
-        return new PlayerInMatch(modelName, modelStatistics, modelEntity);
+        return new PlayerInMatch(modelIgn, modelStatistics, modelEntity);
 
     }
 
