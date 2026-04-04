@@ -1,5 +1,7 @@
 package seedu.address.model.entity;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,6 +21,7 @@ public class Entity {
      * Every field must be present and not null.
      */
     public Entity(String name) {
+        requireNonNull(name);
         this.name = name;
     }
 
@@ -27,21 +30,7 @@ public class Entity {
     }
 
     /**
-     * Returns true if both entities have the same name.
-     * This defines a weaker notion of equality between two entities.
-     */
-    public boolean isSameEntity(Entity otherEntity) {
-        if (otherEntity == this) {
-            return true;
-        }
-
-        return otherEntity != null
-                && otherEntity.getName().equals(getName());
-    }
-
-    /**
-     * Returns true if both entities have the same identity and data fields.
-     * This defines a stronger notion of equality between two entities.
+     * Returns true if both entities have the same identity.
      */
     @Override
     public boolean equals(Object other) {

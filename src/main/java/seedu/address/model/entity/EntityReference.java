@@ -1,5 +1,7 @@
 package seedu.address.model.entity;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +29,7 @@ public class EntityReference {
      * @param entities List of Entity objects to store
      */
     public EntityReference(List<EntityPathPair> entities) {
+        requireNonNull(entities);
         this.entities = entities.stream()
                 .map(x -> x.getEntity())
                 .collect(Collectors.toList());
@@ -55,7 +58,7 @@ public class EntityReference {
     /**
      * Returns the currently set reference entity list.
      */
-    public List<Entity> getLoadedEntities() {
+    public static List<Entity> getLoadedEntities() {
         return loadedEntities;
     }
 

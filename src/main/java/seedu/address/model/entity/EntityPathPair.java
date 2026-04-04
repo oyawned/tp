@@ -1,5 +1,7 @@
 package seedu.address.model.entity;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
 
 /**
@@ -15,6 +17,8 @@ public class EntityPathPair {
      * @param path
      */
     public EntityPathPair(Entity entity, Path path) {
+        requireNonNull(entity);
+        requireNonNull(path);
         this.entity = entity;
         this.path = path;
     }
@@ -31,5 +35,21 @@ public class EntityPathPair {
      */
     public Path getPath() {
         return this.path;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EntityPathPair)) {
+            return false;
+        }
+
+        EntityPathPair otherEntity = (EntityPathPair) other;
+        return otherEntity.getEntity().equals(this.getEntity()) &&
+            otherEntity.getPath().equals(this.getPath());
     }
 }
