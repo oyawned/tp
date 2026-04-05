@@ -54,8 +54,8 @@ public class PersonCardTest {
             System.setProperty("prism.verbose", "true");
             System.setProperty("prism.order", "sw");
             Platform.startup(() -> {});
-        } catch (IllegalStateException e) {
-            // JavaFX already initialized
+        } catch (IllegalStateException | UnsupportedOperationException e) {
+            // JavaFX already initialized or not supported in this environment
         }
     }
 
