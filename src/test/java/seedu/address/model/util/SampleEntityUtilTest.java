@@ -60,9 +60,9 @@ public class SampleEntityUtilTest {
         for (EntityPathPair pair : entities) {
             assertNotNull(pair.getPath(), "Image path should not be null");
             String pathString = pair.getPath().toString();
-            assertTrue(pathString.startsWith("/images/") || pathString.startsWith("\\images\\"), 
+            assertTrue(pathString.startsWith("/images/") || pathString.startsWith("\\images\\"),
                 String.format("Image path should start with /images/ or \\images\\, but path is %s", pathString));
-            assertTrue(pathString.endsWith(".png"), 
+            assertTrue(pathString.endsWith(".png"),
                 String.format("Image path should end with .png, but is %s", pathString));
         }
     }
@@ -72,13 +72,13 @@ public class SampleEntityUtilTest {
         List<EntityPathPair> entities = SampleEntityUtil.getSampleEntities();
         for (EntityPathPair pair : entities) {
             String pathString = pair.getPath().toString();
-            
+
             // Extract the filename (between /images/ and .png)
             String filename = pathString.substring(pathString.indexOf("/") + 1, pathString.indexOf(".png"));
             String lowercaseFilename = filename.toLowerCase();
-            
+
             assertEquals(lowercaseFilename, filename,
-                String.format("Image filename should be in lowercase for %s, but is %s", 
+                String.format("Image filename should be in lowercase for %s, but is %s",
                     pair.getEntity().getName(), pathString));
         }
     }
