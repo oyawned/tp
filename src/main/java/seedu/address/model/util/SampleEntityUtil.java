@@ -23,6 +23,7 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Aatrox"), Path.of("/images/aatrox.png")));
         entities.add(new EntityPathPair(new Entity("Ahri"), Path.of("/images/ahri.png")));
         entities.add(new EntityPathPair(new Entity("Akali"), Path.of("/images/akali.png")));
+        entities.add(new EntityPathPair(new Entity("Ambessa"), Path.of("/images/ambessa.png")));
         entities.add(new EntityPathPair(new Entity("Akshan"), Path.of("/images/akshan.png")));
         entities.add(new EntityPathPair(new Entity("Alistar"), Path.of("/images/alistar.png")));
         entities.add(new EntityPathPair(new Entity("Amumu"), Path.of("/images/amumu.png")));
@@ -31,8 +32,10 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Aphelios"), Path.of("/images/aphelios.png")));
         entities.add(new EntityPathPair(new Entity("Ashe"), Path.of("/images/ashe.png")));
         entities.add(new EntityPathPair(new Entity("Aurelion Sol"), Path.of("/images/aurelionsol.png")));
+        entities.add(new EntityPathPair(new Entity("Aurora"), Path.of("/images/aurora.png")));
         entities.add(new EntityPathPair(new Entity("Azir"), Path.of("/images/azir.png")));
         entities.add(new EntityPathPair(new Entity("Bard"), Path.of("/images/bard.png")));
+        entities.add(new EntityPathPair(new Entity("Briar"), Path.of("/images/briar.png")));
         entities.add(new EntityPathPair(new Entity("Bel'Veth"), Path.of("/images/belveth.png")));
         entities.add(new EntityPathPair(new Entity("Blitzcrank"), Path.of("/images/blitzcrank.png")));
         entities.add(new EntityPathPair(new Entity("Brand"), Path.of("/images/brand.png")));
@@ -61,6 +64,7 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Graves"), Path.of("/images/graves.png")));
         entities.add(new EntityPathPair(new Entity("Gwen"), Path.of("/images/gwen.png")));
         entities.add(new EntityPathPair(new Entity("Hecarim"), Path.of("/images/hecarim.png")));
+        entities.add(new EntityPathPair(new Entity("Hwei"), Path.of("/images/hwei.png")));
         entities.add(new EntityPathPair(new Entity("Heimerdinger"), Path.of("/images/heimerdinger.png")));
         entities.add(new EntityPathPair(new Entity("Illaoi"), Path.of("/images/illaoi.png")));
         entities.add(new EntityPathPair(new Entity("Irelia"), Path.of("/images/irelia.png")));
@@ -81,6 +85,7 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Kayn"), Path.of("/images/kayn.png")));
         entities.add(new EntityPathPair(new Entity("Kennen"), Path.of("/images/kennen.png")));
         entities.add(new EntityPathPair(new Entity("Kha'Zix"), Path.of("/images/khazix.png")));
+        entities.add(new EntityPathPair(new Entity("K'Sante"), Path.of("/images/ksante.png")));
         entities.add(new EntityPathPair(new Entity("Kindred"), Path.of("/images/kindred.png")));
         entities.add(new EntityPathPair(new Entity("Kled"), Path.of("/images/kled.png")));
         entities.add(new EntityPathPair(new Entity("Kog'Maw"), Path.of("/images/kogmaw.png")));
@@ -96,10 +101,13 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Malzahar"), Path.of("/images/malzahar.png")));
         entities.add(new EntityPathPair(new Entity("Maokai"), Path.of("/images/maokai.png")));
         entities.add(new EntityPathPair(new Entity("Master Yi"), Path.of("/images/masteryi.png")));
+        entities.add(new EntityPathPair(new Entity("Mel"), Path.of("/images/mel.png")));
         entities.add(new EntityPathPair(new Entity("Miss Fortune"), Path.of("/images/missfortune.png")));
+        entities.add(new EntityPathPair(new Entity("Milio"), Path.of("/images/milio.png")));
         entities.add(new EntityPathPair(new Entity("Mordekaiser"), Path.of("/images/mordekaiser.png")));
         entities.add(new EntityPathPair(new Entity("Morgana"), Path.of("/images/morgana.png")));
         entities.add(new EntityPathPair(new Entity("Nami"), Path.of("/images/nami.png")));
+        entities.add(new EntityPathPair(new Entity("Naafiri"), Path.of("/images/naafiri.png")));
         entities.add(new EntityPathPair(new Entity("Nasus"), Path.of("/images/nasus.png")));
         entities.add(new EntityPathPair(new Entity("Nautilus"), Path.of("/images/nautilus.png")));
         entities.add(new EntityPathPair(new Entity("Neeko"), Path.of("/images/neeko.png")));
@@ -126,6 +134,7 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Rumble"), Path.of("/images/rumble.png")));
         entities.add(new EntityPathPair(new Entity("Ryze"), Path.of("/images/ryze.png")));
         entities.add(new EntityPathPair(new Entity("Samira"), Path.of("/images/samira.png")));
+        entities.add(new EntityPathPair(new Entity("Smolder"), Path.of("/images/smolder.png")));
         entities.add(new EntityPathPair(new Entity("Sejuani"), Path.of("/images/sejuani.png")));
         entities.add(new EntityPathPair(new Entity("Senna"), Path.of("/images/senna.png")));
         entities.add(new EntityPathPair(new Entity("Seraphine"), Path.of("/images/seraphine.png")));
@@ -157,6 +166,7 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Urgot"), Path.of("/images/urgot.png")));
         entities.add(new EntityPathPair(new Entity("Varus"), Path.of("/images/varus.png")));
         entities.add(new EntityPathPair(new Entity("Vayne"), Path.of("/images/vayne.png")));
+        entities.add(new EntityPathPair(new Entity("Vex"), Path.of("/images/vex.png")));
         entities.add(new EntityPathPair(new Entity("Veigar"), Path.of("/images/veigar.png")));
         entities.add(new EntityPathPair(new Entity("Vel'Koz"), Path.of("/images/velkoz.png")));
         entities.add(new EntityPathPair(new Entity("Vi"), Path.of("/images/vi.png")));
@@ -172,8 +182,10 @@ public class SampleEntityUtil {
         entities.add(new EntityPathPair(new Entity("Yasuo"), Path.of("/images/yasuo.png")));
         entities.add(new EntityPathPair(new Entity("Yone"), Path.of("/images/yone.png")));
         entities.add(new EntityPathPair(new Entity("Yorick"), Path.of("/images/yorick.png")));
+        entities.add(new EntityPathPair(new Entity("Yunara"), Path.of("/images/yunara.png")));
         entities.add(new EntityPathPair(new Entity("Yuumi"), Path.of("/images/yuumi.png")));
         entities.add(new EntityPathPair(new Entity("Zac"), Path.of("/images/zac.png")));
+        entities.add(new EntityPathPair(new Entity("Zaahen"), Path.of("/images/zaahen.png")));
         entities.add(new EntityPathPair(new Entity("Zed"), Path.of("/images/zed.png")));
         entities.add(new EntityPathPair(new Entity("Zeri"), Path.of("/images/zeri.png")));
         entities.add(new EntityPathPair(new Entity("Ziggs"), Path.of("/images/ziggs.png")));
