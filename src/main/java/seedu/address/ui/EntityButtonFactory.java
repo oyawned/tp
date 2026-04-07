@@ -35,6 +35,9 @@ public class EntityButtonFactory {
         button.setMaxSize(ICON_SIZE, ICON_SIZE);
         button.setStyle("-fx-background-radius: 0%; -fx-cursor: hand; -fx-padding: 0;");
 
+        // Store entity reference in userData for later retrieval
+        button.setUserData(entity);
+
         Path iconPath = EntityReference.getIconPath(entity);
 
         if (iconPath != null && iconPath.toFile().canRead()) {

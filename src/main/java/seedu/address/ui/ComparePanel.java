@@ -123,9 +123,8 @@ public class ComparePanel extends UiPart<VBox> {
         List<Entity> entities = new ArrayList<>(uniqueEntities);
         List<Button> entityButtons = EntityButtonFactory.createEntityButtons(entities);
 
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            Button entityButton = entityButtons.get(i);
+        for (Button entityButton : entityButtons) {
+            Entity entity = (Entity) entityButton.getUserData();
 
             boolean player1HasStats = player1Stats.containsKey(entity);
             boolean player2HasStats = player2Stats.containsKey(entity);

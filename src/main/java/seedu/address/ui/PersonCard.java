@@ -97,9 +97,8 @@ public class PersonCard extends UiPart<Region> {
         List<Entity> entities = new ArrayList<>(person.getOverallEntityStatistics().getMap().keySet());
         List<Button> entityButtons = EntityButtonFactory.createEntityButtons(entities);
 
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            Button entityButton = entityButtons.get(i);
+        for (Button entityButton : entityButtons) {
+            Entity entity = (Entity) entityButton.getUserData();
             entityButton.setOnAction(event -> selectEntity(entity));
             entityButtonMap.put(entity, entityButton);
             entityIconsGrid.getChildren().add(entityButton);

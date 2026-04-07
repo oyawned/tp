@@ -141,6 +141,30 @@ public class EntityButtonFactoryTest {
     }
 
     @Test
+    public void createEntityButton_withValidImage_storesEntityInUserData() {
+        Button button = EntityButtonFactory.createEntityButton(entityWithValidImage);
+
+        // Verify button stores the entity in userData property
+        assertNotNull(button.getUserData(), "Button userData should not be null");
+        assertTrue(button.getUserData() instanceof Entity,
+                "Button userData should be an Entity instance");
+        assertEquals(entityWithValidImage, button.getUserData(),
+                "Button userData should contain the same entity reference");
+    }
+
+    @Test
+    public void createEntityButton_withInvalidPath_storesEntityInUserData() {
+        Button button = EntityButtonFactory.createEntityButton(entityWithInvalidPath);
+
+        // Verify button stores the entity in userData property (fallback case)
+        assertNotNull(button.getUserData(), "Button userData should not be null");
+        assertTrue(button.getUserData() instanceof Entity,
+                "Button userData should be an Entity instance");
+        assertEquals(entityWithInvalidPath, button.getUserData(),
+                "Button userData should contain the same entity reference");
+    }
+
+    @Test
     public void createEntityButton_multipleEntities_createsDistinctButtons() {
         Button buttonWithImage = EntityButtonFactory.createEntityButton(entityWithValidImage);
         Button buttonWithFallback = EntityButtonFactory.createEntityButton(entityWithInvalidPath);
