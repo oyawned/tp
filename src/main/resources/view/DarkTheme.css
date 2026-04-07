@@ -407,3 +407,31 @@
     -fx-font-size: 16px;
     -fx-font-family: "Segoe UI Semibold";
 }
+
+/* Entity Button Styles */
+.entity-button-green {
+    -fx-border-color: #4caf50;
+    -fx-border-width: 2px;
+}
+
+.entity-button-red {
+    -fx-border-color: #f44336;
+    -fx-border-width: 2px;
+}
+
+.entity-button-selected {
+    -fx-background-color: #4a90e2 !important;
+}
+
+/* Entity ScrollPane background */
+.entity-scroll-pane {
+    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-border-color: derive(#1d1d1d, 45%);
+    -fx-border-width: 1;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+}
+
+.entity-flow-pane {
+    -fx-background-color: derive(#1d1d1d, 40%);
+}
