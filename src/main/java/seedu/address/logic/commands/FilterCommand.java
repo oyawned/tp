@@ -4,27 +4,32 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
-import seedu.address.model.person.TagsContainsKeywordsPredicate;
+import seedu.address.model.person.CompositePredicate;
 
 /**
- * Finds and lists all persons in address book whose tags contain any of the argument keywords.
+ * Filters and lists all persons in address book based on tag, role, entity played, or any combination.
  * Keyword matching is case insensitive.
  */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = "Filters all persons whose tags match "
+    public static final String MESSAGE_USAGE = "Filters all persons whose tags/roles/entities match "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.";
 
-    public static final String PARAMETERS = "Parameters: KEYWORD [MORE_KEYWORDS]...\n";
+    public static final String PARAMETERS = "Parameters: "
+            + "[" + CliSyntax.PREFIX_TAG + "KEYWORD [MORE_KEYWORDS]...] "
+            + "[" + CliSyntax.PREFIX_ROLE + "KEYWORD [MORE_KEYWORDS]...] "
+            + "[" + CliSyntax.PREFIX_ENTITY + "KEYWORD [MORE_KEYWORDS]...]\n";
 
-    public static final String EXAMPLE = "Example: " + COMMAND_WORD + " mid top bot";
+    public static final String EXAMPLE = "Example: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG + "mid top "
+            + CliSyntax.PREFIX_ROLE + "jungle " + CliSyntax.PREFIX_ENTITY + "ahri yasuo";
 
-    private final TagsContainsKeywordsPredicate predicate;
+    private final CompositePredicate predicate;
 
-    public FilterCommand(TagsContainsKeywordsPredicate predicate) {
+    public FilterCommand(CompositePredicate predicate) {
         this.predicate = predicate;
     }
 
