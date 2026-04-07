@@ -27,7 +27,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_noPrefix_throwsParseException() {
-        assertParseFailure(parser, "friends owesMoney", 
+        assertParseFailure(parser, "friends owesMoney",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.PARAMETERS));
     }
 
@@ -87,7 +87,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyPrefixValue_throwsParseException() {
-        assertParseFailure(parser, " t/    ", 
+        assertParseFailure(parser, " t/    ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.PARAMETERS));
     }
 }
