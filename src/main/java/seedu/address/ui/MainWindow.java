@@ -181,6 +181,8 @@ public class MainWindow extends UiPart<Stage> {
     private void showComparePanel() {
         personListPanelPlaceholder.setVisible(false);
         personListPanelPlaceholder.setManaged(false);
+        draftPanelPlaceholder.setVisible(false);
+        draftPanelPlaceholder.setManaged(false);
         comparePanelPlaceholder.setVisible(true);
         comparePanelPlaceholder.setManaged(true);
     }
