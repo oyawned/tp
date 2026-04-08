@@ -58,6 +58,26 @@ public class KillsTest {
     }
 
     @Test
+    public void add() {
+        Kills kills1 = new Kills("5");
+        Kills kills2 = new Kills("10");
+        assertEquals(new Kills("15"), kills1.add(kills2));
+    }
+
+    @Test
+    public void add_withOverflow_returnsMaxValue() {
+        Kills kills1 = new Kills(String.valueOf(Integer.MAX_VALUE - 1));
+        Kills kills2 = new Kills("5");
+        assertEquals(new Kills(String.valueOf(Integer.MAX_VALUE)), kills1.add(kills2));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Kills kills = new Kills("15");
+        assertEquals("15", kills.toString());
+    }
+
+    @Test
     public void hashCodeMethod() {
         Kills kills1 = new Kills("10");
         Kills kills2 = new Kills("10");

@@ -65,6 +65,13 @@ public class AssistsTest {
     }
 
     @Test
+    public void add_withOverflow_returnsMaxValue() {
+        Assists assists1 = new Assists(String.valueOf(Integer.MAX_VALUE - 1));
+        Assists assists2 = new Assists("5");
+        assertEquals(new Assists(String.valueOf(Integer.MAX_VALUE)), assists1.add(assists2));
+    }
+
+    @Test
     public void toStringMethod() {
         Assists assists = new Assists("15");
         assertEquals("15", assists.toString());
