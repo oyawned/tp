@@ -30,11 +30,11 @@ public class DeathsTest {
         assertFalse(Deaths.isValidDeaths(" ")); // spaces only
         assertFalse(Deaths.isValidDeaths("911a")); // contains letters
         assertFalse(Deaths.isValidDeaths("-1")); // negative number
+        assertFalse(Deaths.isValidDeaths("124293842033123")); // long number exceeding Integer.MAX_VALUE
 
         // valid deaths count
         assertTrue(Deaths.isValidDeaths("911")); // normal number
         assertTrue(Deaths.isValidDeaths("0")); // zero
-        assertTrue(Deaths.isValidDeaths("124293842033123")); // long number
     }
 
     @Test

@@ -8,7 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * {@link #isValidDeaths(String)}
  */
 public class Deaths {
-    public static final String MESSAGE_CONSTRAINTS = "Deaths should be a non-negative integer";
+    public static final String MESSAGE_CONSTRAINTS =
+        "Deaths should be a non-negative integer and must not exceed Integer.MAX_VALUE";
     public static final String VALIDATION_REGEX = "\\d+";
     public final Integer value;
 
@@ -31,7 +32,15 @@ public class Deaths {
      * Returns true if a given string is a valid deaths count.
      */
     public static boolean isValidDeaths(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        try {
+            Integer.parseInt(test);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
