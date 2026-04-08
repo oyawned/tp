@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.DraftCommand.MESSAGE_DUPLICATE_PLAYER;
 import static seedu.address.logic.commands.DraftCommand.MESSAGE_INVALID_IGN_NOT_FOUND;
+import static seedu.address.logic.commands.DraftCommand.MESSAGE_INVALID_TEAM_SIZE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
@@ -161,6 +163,48 @@ public class DraftCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         assertCommandSuccess(draftCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_lessThanFivePlayers_failure() {
+        // Only 4 players provided
+        DraftCommand draftCommand = new DraftCommand(List.of(
+                INDEX_FIRST_PERSON,
+                INDEX_SECOND_PERSON,
+                INDEX_THIRD_PERSON,
+                INDEX_FOURTH_PERSON), List.of());
+
+        assertCommandFailure(draftCommand, model, String.format(MESSAGE_INVALID_TEAM_SIZE, 4));
+    }
+
+    @Test
+    public void execute_moreThanFivePlayers_failure() {
+        // 6 players provided
+        DraftCommand draftCommand = new DraftCommand(List.of(
+                INDEX_FIRST_PERSON,
+                INDEX_SECOND_PERSON,
+                INDEX_THIRD_PERSON,
+                INDEX_FOURTH_PERSON,
+                INDEX_FIFTH_PERSON,
+                INDEX_SIXTH_PERSON), List.of());
+
+        assertCommandFailure(draftCommand, model, String.format(MESSAGE_INVALID_TEAM_SIZE, 6));
+    }
+
+    @Test
+    public void execute_duplicatePlayer_failure() {
+        // Same player selected twice using index
+        DraftCommand draftCommand = new DraftCommand(List.of(
+                INDEX_FIRST_PERSON,
+                INDEX_SECOND_PERSON,
+                INDEX_THIRD_PERSON,
+                INDEX_FOURTH_PERSON,
+                INDEX_FIRST_PERSON), List.of());
+
+        Person duplicatePlayer = model.getAddressBook().getPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+        assertCommandFailure(draftCommand, model,
+                String.format(MESSAGE_DUPLICATE_PLAYER, duplicatePlayer.getName()));
     }
 
     @Test
