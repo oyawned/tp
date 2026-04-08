@@ -33,6 +33,8 @@ public class DraftCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Draft validation complete: %1$s";
     public static final String MESSAGE_INVALID_IGN_NOT_FOUND = "Player with IGN '%1$s' not found";
     public static final String MESSAGE_INVALID_IGN_EMPTY = "IGN cannot be empty. Use format: i/playername";
+    public static final String MESSAGE_INVALID_TEAM_SIZE = "Draft requires exactly 5 players. You provided %1$d";
+    public static final String MESSAGE_DUPLICATE_PLAYER = "Duplicate player selected: %1$s";
 
     private static final int REQUIRED_TEAM_SIZE = 5;
     private static final int REQUIRED_PLAYERS_PER_ROLE = 1;
@@ -82,6 +84,21 @@ public class DraftCommand extends Command {
             if (!found) {
                 throw new CommandException(String.format(MESSAGE_INVALID_IGN_NOT_FOUND, ign));
             }
+        }
+
+        // Check for duplicate players
+        for (int i = 0; i < selectedPlayers.size(); i++) {
+            for (int j = i + 1; j < selectedPlayers.size(); j++) {
+                if (selectedPlayers.get(i).isSamePerson(selectedPlayers.get(j))) {
+                    throw new CommandException(String.format(MESSAGE_DUPLICATE_PLAYER,
+                            selectedPlayers.get(i).getName()));
+                }
+            }
+        }
+
+        // Check for exactly 5 unique players
+        if (selectedPlayers.size() != REQUIRED_TEAM_SIZE) {
+            throw new CommandException(String.format(MESSAGE_INVALID_TEAM_SIZE, selectedPlayers.size()));
         }
 
         // Validate composition and generate result message
