@@ -4,12 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Player's total number of assists.
- * Guarantees: immutable; is valid as declared in {@link #isValidAssists(String)}
+ * Represents a Player's total number of assists. Guarantees: immutable; is valid as declared in
+ * {@link #isValidAssists(String)}
  */
 public class Assists {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Assists should be a non-negative integer";
+    public static final String MESSAGE_CONSTRAINTS = "Assists should be a non-negative integer";
     public static final String VALIDATION_REGEX = "\\d+";
     public final Integer value;
 
@@ -37,10 +36,14 @@ public class Assists {
 
     /**
      * Returns a new Assists containing the sum of this Assists and the other Assists.
+     *
      * @param other the other assists
      * @return a new Assists containing the sum
      */
     public Assists add(Assists other) {
+        if (Integer.MAX_VALUE - this.value < other.value) {
+            return new Assists(Integer.MAX_VALUE);
+        }
         return new Assists(this.value + other.value);
     }
 

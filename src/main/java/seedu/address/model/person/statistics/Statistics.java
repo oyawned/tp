@@ -60,8 +60,8 @@ public class Statistics {
      */
     public double getKda() {
         int d = deaths.value;
-        int sumKA = kills.value + assists.value;
-        return d == 0 ? sumKA : (double) sumKA / d;
+        double sumKA = (double) kills.value + (double) assists.value;
+        return d == 0 ? sumKA : sumKA / d;
     }
 
     /**
