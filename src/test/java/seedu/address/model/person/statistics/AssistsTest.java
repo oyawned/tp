@@ -30,11 +30,11 @@ public class AssistsTest {
         assertFalse(Assists.isValidAssists(" ")); // spaces only
         assertFalse(Assists.isValidAssists("911a")); // contains letters
         assertFalse(Assists.isValidAssists("-1")); // negative number
+        assertFalse(Assists.isValidAssists("124293842033123")); // long number exceeding Integer.MAX_VALUE
 
         // valid assists count
         assertTrue(Assists.isValidAssists("911")); // normal number
         assertTrue(Assists.isValidAssists("0")); // zero
-        assertTrue(Assists.isValidAssists("124293842033123")); // long number
     }
 
     @Test
