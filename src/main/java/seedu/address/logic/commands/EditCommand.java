@@ -20,6 +20,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -42,10 +43,10 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = "Edits the details of the person identified "
-            + "by the index number or in-game name (IGN) used in the displayed person list. "
+            + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.";
 
-    public static final String PARAMETERS = "Parameters: INDEX (must be a positive integer) or i/IGN "
+    public static final String PARAMETERS = "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -59,13 +60,15 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_RANK + "PLATINUM\n"
-            + COMMAND_WORD + " i/PlayerName "
-            + PREFIX_PHONE + "91234567";
+            + COMMAND_WORD + " 2 "
+            + PREFIX_IGN + "NewPlayerName";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_IGN_NOT_FOUND = "No person with IGN '%1$s' found.";
+    public static final String MESSAGE_INDEX_REQUIRED =
+            "Edit command requires an INDEX (not IGN) to identify the person to edit.";
 
     private final String targetIdentifier;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -87,28 +90,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> addressBookList = model.getAddressBook().getPersonList();
 
-        Person personToEdit;
-
-        // Check if identifier is an index (numeric)
-        if (targetIdentifier.matches("\\d+")) {
-            int index = Integer.parseInt(targetIdentifier) - 1; // Convert to zero-based
-            if (index < 0 || index >= addressBookList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            personToEdit = addressBookList.get(index);
-        } else {
-            // It's an IGN
-            personToEdit = null;
-            for (Person person : addressBookList) {
-                if (person.getIgn().value.equals(targetIdentifier)) {
-                    personToEdit = person;
-                    break;
-                }
-            }
-            if (personToEdit == null) {
-                throw new CommandException(String.format(MESSAGE_IGN_NOT_FOUND, targetIdentifier));
-            }
-        }
+        Person personToEdit = CommandUtil.findPersonByIdentifier(addressBookList, targetIdentifier);
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 

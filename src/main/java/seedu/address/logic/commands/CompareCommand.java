@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -48,36 +49,13 @@ public class CompareCommand extends Command {
         requireNonNull(model);
         List<Person> addressBookList = model.getAddressBook().getPersonList();
 
-        Person person1 = findPersonByIdentifier(addressBookList, targetIdentifier1);
-        Person person2 = findPersonByIdentifier(addressBookList, targetIdentifier2);
+        Person person1 = CommandUtil.findPersonByIdentifier(addressBookList, targetIdentifier1);
+        Person person2 = CommandUtil.findPersonByIdentifier(addressBookList, targetIdentifier2);
 
         return new CommandResult(
                 String.format(MESSAGE_COMPARE_SUCCESS, Messages.format(person1), Messages.format(person2)),
                 false, false, true, person1, person2
         );
-    }
-
-    /**
-     * Finds a person in the address book by either index or IGN.
-     * @throws CommandException if the person cannot be found.
-     */
-    private Person findPersonByIdentifier(List<Person> addressBookList, String identifier) throws CommandException {
-        // Check if identifier is an index (numeric)
-        if (identifier.matches("\\d+")) {
-            int index = Integer.parseInt(identifier) - 1; // Convert to zero-based
-            if (index < 0 || index >= addressBookList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            return addressBookList.get(index);
-        } else {
-            // It's an IGN
-            for (Person person : addressBookList) {
-                if (person.getIgn().value.equals(identifier)) {
-                    return person;
-                }
-            }
-            throw new CommandException(String.format(MESSAGE_IGN_NOT_FOUND, identifier));
-        }
     }
 
     @Override

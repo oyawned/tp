@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -42,28 +43,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> addressBookList = model.getAddressBook().getPersonList();
 
-        Person personToDelete;
-
-        // Check if identifier is an index (numeric)
-        if (targetIdentifier.matches("\\d+")) {
-            int index = Integer.parseInt(targetIdentifier) - 1; // Convert to zero-based
-            if (index < 0 || index >= addressBookList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            personToDelete = addressBookList.get(index);
-        } else {
-            // It's an IGN
-            personToDelete = null;
-            for (Person person : addressBookList) {
-                if (person.getIgn().value.equals(targetIdentifier)) {
-                    personToDelete = person;
-                    break;
-                }
-            }
-            if (personToDelete == null) {
-                throw new CommandException(String.format(MESSAGE_IGN_NOT_FOUND, targetIdentifier));
-            }
-        }
+        Person personToDelete = CommandUtil.findPersonByIdentifier(addressBookList, targetIdentifier);
 
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
