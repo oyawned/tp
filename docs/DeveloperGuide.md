@@ -9,9 +9,16 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+This project is adapted from AddressBook-Level3, which is made by the SE-EDU initiative.
+
 * League of Legends is a game made by Riot Games. All images and other associated intellectual property belongs to them.
-* AI was used for code autocompletion, bug finding and fixing, as well as ensuring the accuracy of documentation.
+* Multiple AI tools were used for code autocompletion, bug finding and fixing, as well as ensuring the accuracy of documentation.
 * The Help function code was reused from Jun Hung's IP.
+
+Furthermore, the following third-party libraries/frameworks are used.
+* JavaFX for GUI
+* Jackson for JSON utilities
+* JUnit 5 for testing
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -198,24 +205,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | list all players               | view all players in the team                                           |
 | `* * *`  | user                                       | find a player by name          | locate details of players without having to go through the entire list |
 | `* * *`  | user                                       | add match results              | update the stats of the team players and keep track of past matches    |
-| `* * *`  | user                                       | clear all players              | remove all players from the roster to start fresh                      |
 | `* * *`  | user                                       | compare two players            | see side-by-side comparisons of their statistics and attributes       |
 | `* * *`  | user                                       | filter players by tags         | quickly find players with specific characteristics or categories        |
 | `* * *`  | user                                       | filter players by roles        | find players who play specific roles in the game                       |
 | `* * *`  | user                                       | filter players by entities     | find players who have statistics for specific characters/champions     |
 | `* * *`  | team manager                               | draft a team                   | validate team composition with proper role distribution                 |
 | `* * *`  | user                                       | update player statistics       | track and improve player performance over time                         |
-| `* * *`  | user                                       | exit the application           | safely close the app after finishing my work                          |
 | `* * *`  | user                                       | view detailed statistics       | see kill/death/assist data for specific entities                        |
-| `* * *`  | team manager                               | filter by multiple criteria    | find players who match several conditions simultaneously               |
-| `* * *`  | user                                       | view match history             | review past match results and player performance                       |
 | `* *`    | user                                       | view overall player statistics | see aggregated performance across all entities                         |
-| `* *`    | user                                       | filter by tags and roles      | find players who meet multiple classification requirements              |
+
+
+
+
+#### Yet to be implemented
+
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| `* * *`  | user                                       | view match history             | review past match results and player performance                       |
 | `* *`    | data analyst                               | track performance trends       | identify players who are improving or declining over time              |
 | `* *`    | team manager                               | identify best entity pickers   | know which players perform best on specific entities                   |
-| `*`      | user                                       | archive old match data         | maintain clean records by moving historical data to archives           |
 | `*`      | user                                       | import player data             | quickly populate the roster from external sources                       |
 | `*`      | user                                       | export player data             | share team information with other coaches or platforms                 |
+| `*`      | user                                       | archive old match data         | maintain clean records by moving historical data to archives           |
 
 ### Use cases
 
@@ -553,10 +563,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 players without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Data should be automatically saved to JSON files after every modifying command (add, delete, edit, result, stats).
+5.  No data loss should occur if the application crashes unexpectedly (data should be saved before each command completes).
+6.  The application should validate all input data before saving (phone/email format, rank validity, role types).
+7.  The application should not crash if provided with invalid commands; instead, it should display appropriate error messages.
+8.  New commands can be added by creating command and parser classes and registering them in CommandRegistry without modifying existing command handling logic.
+9. Should support up to 50 different entities/champions per player without performance degradation.
+10. Should support up to 100 tags per player without performance degradation.
+11. Should maintain a match history of up to 500 matches without affecting application performance.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -572,7 +589,6 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### Launch and shutdown
@@ -581,38 +597,193 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file (or use `java -jar draftdeck.jar`)<br>
+      Expected: Shows the GUI with sample player data. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Player management
 
-### Deleting a person
+1. Adding players
 
-1. Deleting a person while all persons are being shown
+   1. Prerequisites: Player `JohnD88` and `BetsyCrowe`does not exist.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com i/JohnD88 r/MID rank/GOLD I`<br>
+      Expected: Player is added to the list with the specified details.
+
+   1. Test case: `add n/Betsy Crowe t/friend e/betsycrowe@example.com i/Betsycrowe r/BOT rank/PLATINUM I p/1234567`<br>
+      Expected: Player is added with the phone field in a different position.
+
+1. Deleting players
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First player is deleted from the list. Details of the deleted player shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Editing players
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Prerequisites: List all players using the `list` command.
 
-1. _{ more test cases …​ }_
+   1. Test case: `edit 1 p/91234567 e/johndoe@example.com`<br>
+      Expected: First player's phone and email are updated.
 
-### Saving data
+   1. Test case: `edit 2 n/Betsy Crower t/`<br>
+      Expected: Second player's name is updated and all tags are cleared.
+
+1. Listing all players
+
+   1. Test case: `list`<br>
+      Expected: All players are displayed in the list.
+
+### Search and discovery
+
+1. Finding players by name
+
+   1. Prerequisites: Multiple players with different names in the list.
+
+   1. Test case: `find John`<br>
+      Expected: Players with names containing "John" are displayed (case-insensitive).
+
+   1. Test case: `find alex david`<br>
+      Expected: Players with names containing either "alex" or "david" are displayed.
+
+   1. Test case: `find NonExistentPlayer`<br>
+      Expected: Empty list is displayed.
+
+1. Filtering players
+
+   1. Prerequisites: Players with various tags, roles, and entities in the list.
+
+   1. Test case: `filter t/friend`<br>
+      Expected: Players tagged with "friend" are displayed.
+
+   1. Test case: `filter t/pro r/bot ent/Jinx`<br>
+      Expected: Players who are tagged "pro", have role "BOT", AND have statistics for entity "Jinx".
+
+### Sports and analytics
+
+1. Comparing players
+
+   1. Test case: `compare 1 2`<br>
+      Expected: Side-by-side comparison of players at indices 1 and 2 is displayed.
+
+   1. Test case: `compare i/AlexY42 2` (assuming AlexY42 exists)<br>
+      Expected: Side-by-side comparison of player with IGN "AlexY42" and player at index 2.
+
+1. Drafting teams
+
+   1. Test case: `draft 1 2 3 4 5` (assuming indices 1-5 cover all roles: TOP, JUNGLE, MID, BOT, SUPPORT)<br>
+      Expected: Success message showing valid team composition with role assignments.
+
+   1. Test case: `draft i/PlayerA i/PlayerB i/PlayerC i/PlayerD i/PlayerE`<br>
+      Expected: Success message showing valid team composition (assuming 5 different players with valid roles).
+
+1. Updating player statistics
+
+   1. Test case: `stats 1 ent/Ahri k/50 d/10 a/20`<br>
+      Expected: Player 1's Ahri statistics are updated with the specified values.
+
+   1. Test case: `stats 1 ent/Ahri k/10` (adding to existing stats)<br>
+      Expected: Player 1's Ahri kills are increased by 10 (cumulative).
+
+1. Adding match results
+
+   1. Test case: `result w/WIN i/PlayerA ent/Ahri s/10-2-8 i/PlayerB ent/Leona s/1-1-12 i/PlayerC ent/Evelynn s/5-6-15 i/PlayerD ent/Irelia s/2-19-4 i/PlayerE ent/Kayn s/6-3-8`<br>
+      Expected: Match is recorded with WIN result and all player statistics are updated.
+
+   1. Test case: `result w/LOSE i/PlayerA ent/Ahri s/10-2-8 date/2025-12-31` (only 1 player)<br>
+      Expected: Error message indicating exactly 5 players are required.
+
+   1. Test case: `result w/INVALID i/PlayerA ent/Ahri s/10-2-8 ...`<br>
+      Expected: Error message indicating result must be WIN, LOSE, or DRAW.
+
+   1. Test case: `result w/WIN i/NonExistent ent/Ahri s/10-2-8 ...`<br>
+      Expected: Error message indicating player not found.
+
+### Data persistence
+
+1. Automatic saving
+
+   1. Add a new player using `add` command. Close the application. Re-launch.<br>
+      Expected: The newly added player is still present.
+
+   1. Delete a player using `delete` command. Close the application. Re-launch.<br>
+      Expected: The deleted player is not present.
+
+   1. Edit a player using `edit` command. Close the application. Re-launch.<br>
+      Expected: The edited player's details are preserved.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Close the application. Delete or rename the `data/addressbook.json` file. Re-launch.<br>
+      Expected: Application starts with a preset player list and creates a new data file.
 
-1. _{ more test cases …​ }_
+   1. Close the application. Corrupt the `data/addressbook.json` file (e.g., add invalid JSON). Re-launch.<br>
+      Expected: Application starts with a preset player list and a new valid data file is created.
+
+### Error handling
+
+1. Invalid command formats
+
+   1. Test case: `invalidcommand`<br>
+      Expected: Error message indicating unknown command.
+
+   1. Test case: `add` (missing required parameters)<br>
+      Expected: Error message showing correct command usage.
+
+   1. Test case: `list extra parameters`<br>
+      Expected: Command executes (extra parameters are ignored).
+
+1. Invalid parameter values
+
+   1. Test case: `add n/12345 p/98765432 e/test@test.com i/Test r/MID rank/GOLD I` (name contains only numbers)<br>
+      Expected: Player is added (name validation allows alphanumeric characters).
+
+   1. Test case: `add n/Test p/abc e/test@test.com i/Test r/MID rank/GOLD I` (invalid phone format)<br>
+      Expected: Error message indicating invalid phone format.
+
+    1. Test case: `add n/Test p/98765432 e/invalidemail i/Test r/MID rank/GOLD I` (invalid email format)<br>
+       Expected: Error message indicating invalid email format.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Key Achievements
+**Data Model Expansion**
+- Implemented multi-entity statistics tracking where each player can have performance data across multiple game characters
+- Added 15+ new model classes across entity/, match/, and person/statistics/ packages
+
+**Command Architecture Enhancement**
+- Added 5 new commands: `compare`, `draft`, `filter`, `stats`, `result` with complex parsing logic
+- Implemented CommandRegistry mechanism, making adding new Commands easier. (No need to manually add new commands to a switch case.)
+
+**Game-Agnostic Entity System**
+- The default EntityReference used for input validation is League Of Legends based. However, the app is able to load custom `entities.json` files to change this validation. Thus, the app is able to be adapted by an advanced user to support a different esports games. The dynamic loading of images, as well as the fallback tooltip mechanisms further support this. 
+
+### Effort Required (High level overview)
+
+**Model Layer**: 15+ new classes including Entity, EntityStatisticMap, Match, MatchRecord, Result, PlayerInMatch, and supporting statistics classes (Kills, Deaths, Assists)
+
+**Logic Layer**: 5 new command classes (CompareCommand, DraftCommand, FilterCommand, StatsCommand, ResultCommand), corrseponding parsers, and other various utilities to support these classes.
+
+**Storage Layer**: 10+ new JSON adapters (JsonAdaptedEntity, JsonAdaptedEntityPathPair, JsonAdaptedEntityStatisticMap, JsonAdaptedMatch, JsonAdaptedPlayerInMatch, JsonAdaptedStatistics, etc.) and full integration into StorageManager
+
+**UI Layer**: 3 new UI components for the Compare, Draft, and Help commands.
+
+### Challenges Faced
+
+**Statistics Aggregation**: Designing efficient statistics tracking and display across multiple entities per player, with cumulative updates and overall performance calculation
+
+**Game-Agnostic Design**: Creating an extensible entity system that allows easy game switching while maintaining data integrity and validation.
+
+**UI Integration**: Displaying complex statistics data (multiple entities per player) in a clean, user-friendly interface without overwhelming the user.
+
+### Reuse and it's impact
+
+- CommandRegistry idea taken from IP, albeit modified to fit the AB3's implementation of separate Parser and Command classes
+- AB3 architecture and project scaffold for implementation of new commands, allowed for easy parsing of complex arguments, reducing setup and boilerplate effort.
