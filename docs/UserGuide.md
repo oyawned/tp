@@ -19,6 +19,10 @@ DraftDeck is a **desktop app for managing gaming teams and players, optimized fo
 
 1. Copy the file to the folder you want to use as the _home folder_ for your DraftDeck.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Important:**
+Ensure the folder is **not write-protected**. DraftDeck will not work properly if placed in a write-protected directory, as it needs to create data files and configuration files.
+</div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If you wish to use images, place the downloaded images folder here as well!
 </div>
@@ -26,6 +30,10 @@ If you wish to use images, place the downloaded images folder here as well!
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar draftdeck.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Note for Windows users:**
+Double-clicking the jar file might not work on some systems. If this happens, use the command line method: open Command Prompt, navigate to the folder containing the jar file, and type `java -jar draftdeck.jar`.
+</div>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -127,7 +135,7 @@ Format: `delete INDEX`
 
 Edits an existing person in the player list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [i/IGN] [r/ROLE] [rank/RANK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [i/IGN] [r/ROLE] [rank/RANK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -303,7 +311,7 @@ Action | Format, Examples
 **Compare** | `compare INDEX1 INDEX2`<br> e.g., `compare 1 2`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Draft** | `draft (INDEX | i/IGN) [(INDEX | i/IGN)]…​`<br> e.g., `draft 1 2 i/CarlK77 4 i/ElleM55`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [i/IGN] [r/ROLE] [rank/RANK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee r/JUNGLE rank/GOLD I`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [i/IGN] [r/ROLE] [rank/RANK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee r/JUNGLE rank/GOLD`
 **Exit** | `exit`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter [t/KEYWORD [MORE_KEYWORDS]...] [r/KEYWORD [MORE_KEYWORDS]...] [ent/KEYWORD [MORE_KEYWORDS]...]`<br> e.g., `filter t/pro r/bot ent/Jinx`
