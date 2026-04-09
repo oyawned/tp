@@ -272,12 +272,6 @@ Your team is now set up and ready for the tournament! You can continue to use Dr
 - Analyze team performance with the `filter` and `compare` commands
 - Draft different team compositions for different strategies
 
-## Next Steps
-
-- Explore the [User Guide](UserGuide.html) for detailed command reference
-- Check out the [FAQ](UserGuide.html#faq) for common questions
-- Start using DraftDeck for real team management!
-
 ---
 
 <div markdown="span" class="alert alert-primary">:bulb: **Pro Tip:**
