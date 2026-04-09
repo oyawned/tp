@@ -238,16 +238,28 @@ Examples:
 
 Adds a match result to the match record.
 
-Format: `result w/RESULT [date/yyyy-MM-dd] i/IGN ent/ENTITY k/KILLS d/DEATHS a/ASSISTS [(i/IGN ent/ENTITY k/KILLS d/DEATHS a/ASSISTS)]…​`
+Format: `result w/RESULT [date/yyyy-MM-dd] i/IGN_i ent/ENTITY_i k/KILLS_i d/DEATHS_i a/ASSISTS_i`
 
-* `w/RESULT` must be one of: WIN, LOSE, DRAW
+* All players and entities must exist in DraftDeck.
+* Also updates the statistics of all players involved in the match.
+* `w/RESULT` must be one of: `WIN`, `LOSE`, `DRAW`. Not case-sensitive.
 * `date/yyyy-MM-dd` is optional. If not provided, uses the current date.
-* Each player in the match must have their IGN, entity, kills, deaths, and assists specified.
-* The number of IGNs, entities, and statistics groups must match.
+* There must be exactly 5 of `IGN`, `ENTITY`, `KILLS`, `DEATHS`, `ASSISTS`.
+* The parameters can be in any order, the i-th occurrence of `ENTITY`, `KILLS`, `DEATHS`, `ASSISTS` will be
+  mapped to the player with the i-th `IGN`.
 
 Example:
-* `result w/WIN i/PlayerA ent/Ahri k/10 d/2 a/8 i/PlayerB ent/Leona k/1 d/1 a/12` Records a win where PlayerA played Ahri and PlayerB played Leona.
-* `result w/LOSE date/2026-04-08 i/PlayerC ent/Yasuo k/5 d/8 a/2` Records a loss on a specific date.
+* `result w/WIN i/PlayerA ent/Ahri k/10 d/2 a/8 i/PlayerB ent/Leona k/1 d/1 a/12 i/PlayerC ent/Evelynn k/5 d/6 a/15
+i/PlayerD ent/Irelia k/2 d/19 a/4 i/PlayerE ent/Kayn k/6 d/3 a/8` Records a win today where
+  * PlayerA played Ahri, killed 10 times, died 2 times and assisted 8 times.
+  * PlayerB played Leona, killed 1 time, died 1 time and assisted 12 times.
+  * PlayerC played Evelynn, killed 5 times, died 6 times and assisted 15 times.
+  * PlayerD played Irelia, killed 2 times, died 19 times and assisted 4 times.
+  * PlayerE played Kayn, killed 6 times, died 3 times and assisted 8 times.
+* `result W/WIN i/PlayerA i/PlayerB i/PlayerC i/PlayerD i/PlayerE ent/Ahri ent/Leona ent/Evelynn ent/Irelia ent/Kayn
+k/10 k/1 k/5 k/2 k/6 d/2 d/1 d/6 d/19 d/3 a/8 a/12 a/15 a/4 a/8` Records the exact same match as the above command.
+* `result w/LOSE date/2026-04-08 i/PlayerA ent/Ahri k/10 d/2 a/8 i/PlayerB ent/Leona k/1 d/1 a/12 i/PlayerC ent/Evelynn k/5 d/6 a/15
+i/PlayerD ent/Irelia k/2 d/19 a/4 i/PlayerE ent/Kayn k/6 d/3 a/8` Records a loss on a specific date.
 
 
 ### Saving the data
