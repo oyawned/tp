@@ -42,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     PREFIX_ROLE, PREFIX_RANK, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_IGN,
-                PREFIX_ROLE, PREFIX_RANK)
+                PREFIX_ROLE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -54,7 +54,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         InGameName ign = ParserUtil.parseIgn(argMultimap.getValue(PREFIX_IGN).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
-        Rank rank = ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK).get());
+        Rank rank = argMultimap.getValue(PREFIX_RANK).isPresent() 
+            ? ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK).get()) 
+            : null;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Statistics statistics = Statistics.createDefault();
         Person person = new Person(name, phone, email, role, ign, rank, tagList, statistics);

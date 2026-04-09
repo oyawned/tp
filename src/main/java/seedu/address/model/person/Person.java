@@ -14,6 +14,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
+ * Rank field is optional and can be null.
  */
 public class Person {
 
@@ -30,11 +31,11 @@ public class Person {
     private final Statistics statistics;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null, except rank which is optional.
      */
     public Person(Name name, Phone phone, Email email, Role role,
         InGameName ign, Rank rank, Set<Tag> tags, Statistics statistics) {
-        requireAllNonNull(name, phone, email, role, ign, rank, tags, statistics);
+        requireAllNonNull(name, phone, email, role, ign, tags, statistics);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -125,7 +126,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && role.equals(otherPerson.role)
                 && ign.equals(otherPerson.ign)
-                && rank.equals(otherPerson.rank)
+                && Objects.equals(rank, otherPerson.rank)
                 && tags.equals(otherPerson.tags)
                 && statistics.equals(otherPerson.statistics);
     }
@@ -133,7 +134,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, role, ign, rank, tags, statistics);
+        return Objects.hash(name, phone, email, role, ign, Objects.hashCode(rank), tags, statistics);
     }
 
     @Override

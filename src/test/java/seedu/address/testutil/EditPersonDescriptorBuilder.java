@@ -96,7 +96,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Rank} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withRank(String rank) {
-        descriptor.setRank(new Rank(rank));
+        descriptor.setRank(rank != null ? new Rank(rank) : null);
         return this;
     }
 

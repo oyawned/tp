@@ -96,6 +96,24 @@ public class PersonTest {
         // different rank -> returns false
         editedAlice = new PersonBuilder(ALICE).withRank(VALID_RANK_BOB).build();
         assertNotEquals(ALICE, editedAlice);
+
+        // same person with null rank -> returns true
+        Person aliceNoRank = new PersonBuilder(ALICE).withoutRank().build();
+        Person aliceNoRank2 = new PersonBuilder(ALICE).withoutRank().build();
+        assertEquals(aliceNoRank, aliceNoRank2);
+
+        // person with rank vs person without rank -> returns false
+        assertNotEquals(ALICE, aliceNoRank);
+    }
+
+    @Test
+    public void hashCode_withNullRank_success() {
+        Person person1 = new PersonBuilder(ALICE).withoutRank().build();
+        Person person2 = new PersonBuilder(ALICE).withoutRank().build();
+        assertEquals(person1.hashCode(), person2.hashCode());
+
+        Person person3 = new PersonBuilder(ALICE).withRank(VALID_RANK_BOB).build();
+        assertNotEquals(person1.hashCode(), person3.hashCode());
     }
 
     @Test

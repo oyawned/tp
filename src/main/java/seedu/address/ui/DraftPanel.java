@@ -148,7 +148,7 @@ public class DraftPanel extends UiPart<HBox> {
         String displayName = player.getIgn().toString() + " (" + player.getName().fullName + ")";
         nameLabel.setText(displayName);
         roleLabel.setText(player.getRole().value.toString());
-        rankLabel.setText(player.getRank().toString());
+        rankLabel.setText(player.getRank() != null ? player.getRank().toString() : "N/A");
         killsLabel.setText(player.getStatistics().getKills().toString());
         deathsLabel.setText(player.getStatistics().getDeaths().toString());
         assistsLabel.setText(player.getStatistics().getAssists().toString());

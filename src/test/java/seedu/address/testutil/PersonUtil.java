@@ -38,7 +38,9 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_IGN + person.getIgn().value + " ");
         sb.append(PREFIX_ROLE + person.getRole().value.toString() + " ");
-        sb.append(PREFIX_RANK + person.getRank().toString() + " ");
+        if (person.getRank() != null) {
+            sb.append(PREFIX_RANK + person.getRank().toString() + " ");
+        }
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

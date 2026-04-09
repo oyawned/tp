@@ -66,7 +66,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         ign = source.getIgn().value;
         role = source.getRole().value.toString();
-        rank = source.getRank().toString();
+        rank = source.getRank() != null ? source.getRank().toString() : null;
         statistics = new JsonAdaptedStatistics(source.getStatistics());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -125,13 +125,13 @@ class JsonAdaptedPerson {
         }
         final InGameName modelIgn = new InGameName(ign);
 
-        if (rank == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rank.class.getSimpleName()));
+        Rank modelRank = null;
+        if (rank != null) {
+            if (!Rank.isValidRank(rank)) {
+                throw new IllegalValueException(Rank.MESSAGE_CONSTRAINTS);
+            }
+            modelRank = new Rank(rank);
         }
-        if (!Rank.isValidRank(rank)) {
-            throw new IllegalValueException(Rank.MESSAGE_CONSTRAINTS);
-        }
-        final Rank modelRank = new Rank(rank);
 
         if (statistics == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Statistics"));

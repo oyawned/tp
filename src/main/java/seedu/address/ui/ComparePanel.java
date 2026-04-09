@@ -80,7 +80,7 @@ public class ComparePanel extends UiPart<HBox> {
         String displayName = player.getIgn().toString() + " (" + player.getName().fullName + ")";
         player1Name.setText(displayName);
         player1Role.setText(player.getRole().toString());
-        player1Rank.setText(player.getRank().toString());
+        player1Rank.setText(player.getRank() != null ? player.getRank().toString() : "N/A");
         player1Kills.setText(player.getStatistics().getKills().toString());
         player1Deaths.setText(player.getStatistics().getDeaths().toString());
         player1Assists.setText(player.getStatistics().getAssists().toString());
@@ -96,7 +96,7 @@ public class ComparePanel extends UiPart<HBox> {
         String displayName = player.getIgn().toString() + " (" + player.getName().fullName + ")";
         player2Name.setText(displayName);
         player2Role.setText(player.getRole().toString());
-        player2Rank.setText(player.getRank().toString());
+        player2Rank.setText(player.getRank() != null ? player.getRank().toString() : "N/A");
         player2Kills.setText(player.getStatistics().getKills().toString());
         player2Deaths.setText(player.getStatistics().getDeaths().toString());
         player2Assists.setText(player.getStatistics().getAssists().toString());

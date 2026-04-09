@@ -178,6 +178,15 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_rankMissing_success() {
+        // rank is optional - should succeed without rank prefix
+        Person expectedPerson = new PersonBuilder(AMY).withoutRank().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + IGN_DESC_AMY + ROLE_DESC_AMY,
+                new AddCommand(expectedPerson));
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 

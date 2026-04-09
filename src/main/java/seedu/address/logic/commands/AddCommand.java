@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_IGN + "IGN "
             + PREFIX_ROLE + "ROLE "
-            + PREFIX_RANK + "RANK "
+            + "[" + PREFIX_RANK + "RANK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_IGN + "JohnD88 "
             + PREFIX_ROLE + "MID "
-            + PREFIX_RANK + "GOLD "
+            + PREFIX_RANK + "GOLD I "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

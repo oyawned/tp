@@ -61,7 +61,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         inGameName.setText("IGN: " + person.getIgn().toString());
         role.setText("Role: " + person.getRole().toString());
-        rank.setText("Rank: " + person.getRank().toString());
+        rank.setText("Rank: " + (person.getRank() != null ? person.getRank().toString() : "N/A"));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

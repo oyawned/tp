@@ -124,7 +124,15 @@ public class PersonBuilder {
      * Sets the {@code Rank} of the {@code Person} that we are building.
      */
     public PersonBuilder withRank(String rank) {
-        this.rank = new Rank(rank);
+        this.rank = rank != null ? new Rank(rank) : null;
+        return this;
+    }
+
+    /**
+     * Clears the {@code Rank} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withoutRank() {
+        this.rank = null;
         return this;
     }
 
