@@ -59,7 +59,7 @@ public class EditCommand extends Command {
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_RANK + "PLATINUM\n"
+            + PREFIX_RANK + "PLATINUM III \n"
             + COMMAND_WORD + " 2 "
             + PREFIX_IGN + "NewPlayerName";
 

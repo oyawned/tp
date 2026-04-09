@@ -39,7 +39,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_IGN + "JohnD88 "
             + PREFIX_ROLE + "MID "
-            + PREFIX_RANK + "GOLD "
+            + PREFIX_RANK + "GOLD IV "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
