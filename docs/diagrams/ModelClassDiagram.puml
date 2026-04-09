@@ -7,6 +7,7 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nReadOnlyMatchRecord" as ReadOnlyMatchRecord
 Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
@@ -26,6 +27,14 @@ Class Statistics
 Class Kills
 Class Deaths
 Class Assists
+Class MatchRecord
+Class MatchList
+Class Match
+Class Result
+Class LocalDate
+Class PlayersInMatch
+Class PlayerInMatch
+Class Entity
 
 Class I #FFFFFF
 }
@@ -34,16 +43,20 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+MatchRecord .up.|> ReadOnlyMatchRecord
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .right.> ReadOnlyMatchRecord
 ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" MatchRecord
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+UniquePersonList .right.> Match
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -57,6 +70,16 @@ Person *--> "1" Statistics
 Statistics *--> "1" Kills
 Statistics *--> "1" Deaths
 Statistics *--> "1" Assists
+
+MatchRecord *--> "1" MatchList
+MatchList --> "~*" Match
+Match *--> "1" LocalDate
+Match *--> "1" Result
+Match --> "1" PlayersInMatch
+PlayersInMatch --> "5" PlayerInMatch
+PlayerInMatch *--> "1" Statistics
+PlayerInMatch *--> "1" IGN
+PlayerInMatch *--> "1" Entity
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
