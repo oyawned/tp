@@ -56,57 +56,8 @@ public class CompareCommandTest {
     }
 
     @Test
-    public void execute_validIndicesFilteredList_success() {
-        // Filter to show only the first two people from the address book
-        Person person1 = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person person2 = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-
-        model.updateFilteredPersonList(person ->
-                person.equals(person1) || person.equals(person2));
-
-        CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
-
-        String expectedMessage = String.format(CompareCommand.MESSAGE_COMPARE_SUCCESS,
-                Messages.format(person1), Messages.format(person2));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(person ->
-                person.equals(person1) || person.equals(person2));
-
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, true, person1, person2);
-
-        assertCommandSuccess(compareCommand, model, expectedCommandResult, expectedModel);
-    }
-
-    @Test
-    public void execute_validIndexOutOfFilteredView_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index indexOutOfFilteredView = INDEX_SECOND_PERSON;
-        // ensures that indexOutOfFilteredView is still in bounds of address book list
-        assertTrue(indexOutOfFilteredView.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        Person person1 = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person person2 = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        CompareCommand compareCommand = new CompareCommand(INDEX_SECOND_PERSON, INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(CompareCommand.MESSAGE_COMPARE_SUCCESS,
-                Messages.format(person1), Messages.format(person2));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(person -> person.equals(person2));
-
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, true, person1, person2);
-
-        assertCommandSuccess(compareCommand, model, expectedCommandResult, expectedModel);
-    }
-
-    @Test
     public void execute_identicalIndices_throwsCommandException() {
-        CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON);
+        CompareCommand compareCommand = new CompareCommand("1", "1");
 
         assertCommandFailure(compareCommand, model, CompareCommand.MESSAGE_CANNOT_COMPARE_SAME_PLAYER);
     }

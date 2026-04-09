@@ -33,8 +33,6 @@ public class CompareCommand extends Command {
 
     public static final String MESSAGE_CANNOT_COMPARE_SAME_PLAYER = "The two identifiers must be different.";
 
-    private final Index targetIndex1;
-    private final Index targetIndex2;
     private final String targetIdentifier1;
     private final String targetIdentifier2;
 
@@ -59,7 +57,7 @@ public class CompareCommand extends Command {
         if (person1.equals(person2)) {
             throw new CommandException(MESSAGE_CANNOT_COMPARE_SAME_PLAYER);
         }
-  
+
         return new CommandResult(
                 String.format(MESSAGE_COMPARE_SUCCESS, Messages.format(person1), Messages.format(person2)),
                 false, false, true, person1, person2
