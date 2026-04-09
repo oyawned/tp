@@ -15,7 +15,7 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
+class EntityStatisticMap
 Class Email
 Class Name
 Class Phone
@@ -60,12 +60,11 @@ UniquePersonList .right.> Match
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
 Person *--> "*" Tag
 Person *--> "1" Role
 Person *--> "1" IGN
 Person *--> "1" Rank
-Person *--> "1" Statistics
+Person *--> "1" EntityStatisticMap
 
 Statistics *--> "1" Kills
 Statistics *--> "1" Deaths
@@ -76,17 +75,21 @@ MatchList --> "~*" Match
 Match *--> "1" LocalDate
 Match *--> "1" Result
 Match --> "1" PlayersInMatch
+
+EntityStatisticMap --> "*" Entity
+EntityStatisticMap --> "*" Statistics
+
 PlayersInMatch --> "5" PlayerInMatch
 PlayerInMatch *--> "1" Statistics
 PlayerInMatch *--> "1" IGN
 PlayerInMatch *--> "1" Entity
 
+
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 @enduml
