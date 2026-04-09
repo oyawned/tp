@@ -39,31 +39,40 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         List<Predicate<Person>> predicates = new ArrayList<>();
 
-        // Parse tag predicates
-        if (argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()) {
-            String tagArgs = argMultimap.getValue(CliSyntax.PREFIX_TAG).get();
+        // Parse tag predicates (OR all tag keywords from all occurrences)
+        List<String> allTagKeywords = new ArrayList<>();
+        List<String> allTagValues = argMultimap.getAllValues(CliSyntax.PREFIX_TAG);
+        for (String tagArgs : allTagValues) {
             if (!tagArgs.trim().isEmpty()) {
-                String[] tagKeywords = tagArgs.trim().split("\\s+");
-                predicates.add(new TagsContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
+                allTagKeywords.addAll(Arrays.asList(tagArgs.trim().split("\\s+")));
             }
         }
+        if (!allTagKeywords.isEmpty()) {
+            predicates.add(new TagsContainsKeywordsPredicate(allTagKeywords));
+        }
 
-        // Parse role predicates
-        if (argMultimap.getValue(CliSyntax.PREFIX_ROLE).isPresent()) {
-            String roleArgs = argMultimap.getValue(CliSyntax.PREFIX_ROLE).get();
+        // Parse role predicates (OR all role keywords from all occurrences)
+        List<String> allRoleKeywords = new ArrayList<>();
+        List<String> allRoleValues = argMultimap.getAllValues(CliSyntax.PREFIX_ROLE);
+        for (String roleArgs : allRoleValues) {
             if (!roleArgs.trim().isEmpty()) {
-                String[] roleKeywords = roleArgs.trim().split("\\s+");
-                predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(roleKeywords)));
+                allRoleKeywords.addAll(Arrays.asList(roleArgs.trim().split("\\s+")));
             }
         }
+        if (!allRoleKeywords.isEmpty()) {
+            predicates.add(new RoleContainsKeywordsPredicate(allRoleKeywords));
+        }
 
-        // Parse entity predicates
-        if (argMultimap.getValue(CliSyntax.PREFIX_ENTITY).isPresent()) {
-            String entityArgs = argMultimap.getValue(CliSyntax.PREFIX_ENTITY).get();
+        // Parse entity predicates (OR all entity keywords from all occurrences)
+        List<String> allEntityKeywords = new ArrayList<>();
+        List<String> allEntityValues = argMultimap.getAllValues(CliSyntax.PREFIX_ENTITY);
+        for (String entityArgs : allEntityValues) {
             if (!entityArgs.trim().isEmpty()) {
-                String[] entityKeywords = entityArgs.trim().split("\\s+");
-                predicates.add(new EntityContainsKeywordsPredicate(Arrays.asList(entityKeywords)));
+                allEntityKeywords.addAll(Arrays.asList(entityArgs.trim().split("\\s+")));
             }
+        }
+        if (!allEntityKeywords.isEmpty()) {
+            predicates.add(new EntityContainsKeywordsPredicate(allEntityKeywords));
         }
 
         // Check if at least one filter was provided

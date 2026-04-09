@@ -7,12 +7,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.EntityContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
 import seedu.address.model.person.TagsContainsKeywordsPredicate;
 
@@ -34,7 +36,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_tagPrefix_returnsFilterCommand() {
         // no leading and trailing whitespaces
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new TagsContainsKeywordsPredicate(Arrays.asList("friends", "owesMoney")));
         FilterCommand expectedFilterCommand = new FilterCommand(new CompositePredicate(predicates));
@@ -46,7 +48,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_rolePrefix_returnsFilterCommand() {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList("jungle")));
         FilterCommand expectedFilterCommand = new FilterCommand(new CompositePredicate(predicates));
@@ -58,7 +60,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_entityPrefix_returnsFilterCommand() {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new EntityContainsKeywordsPredicate(Arrays.asList("ahri", "yasuo")));
         FilterCommand expectedFilterCommand = new FilterCommand(new CompositePredicate(predicates));
@@ -70,7 +72,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_multiplePrefixes_returnsFilterCommand() {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new TagsContainsKeywordsPredicate(Arrays.asList("friends")));
         predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList("jungle")));
@@ -89,5 +91,47 @@ public class FilterCommandParserTest {
     public void parse_emptyPrefixValue_throwsParseException() {
         assertParseFailure(parser, " t/    ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.PARAMETERS));
+    }
+
+    @Test
+    public void parse_multipleSameRolePrefixes_returnsFilterCommand() {
+        // Multiple role prefixes should create a single predicate with OR logic
+        List<Predicate<Person>> predicates =
+                new ArrayList<>();
+        predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList("jungle", "support")));
+        FilterCommand expectedFilterCommand = new FilterCommand(new CompositePredicate(predicates));
+        assertParseSuccess(parser, " r/jungle r/support", expectedFilterCommand);
+    }
+
+    @Test
+    public void parse_multipleSameTagPrefixes_returnsFilterCommand() {
+        // Multiple tag prefixes should create a single predicate with OR logic
+        List<Predicate<Person>> predicates =
+                new ArrayList<>();
+        predicates.add(new TagsContainsKeywordsPredicate(Arrays.asList("friends", "owesMoney")));
+        FilterCommand expectedFilterCommand = new FilterCommand(new CompositePredicate(predicates));
+        assertParseSuccess(parser, " t/friends t/owesMoney", expectedFilterCommand);
+    }
+
+    @Test
+    public void parse_multipleSameEntityPrefixes_returnsFilterCommand() {
+        // Multiple entity prefixes should create a single predicate with OR logic
+        List<Predicate<Person>> predicates =
+                new ArrayList<>();
+        predicates.add(new EntityContainsKeywordsPredicate(Arrays.asList("ahri", "yasuo")));
+        FilterCommand expectedFilterCommand = new FilterCommand(new CompositePredicate(predicates));
+        assertParseSuccess(parser, " ent/ahri ent/yasuo", expectedFilterCommand);
+    }
+
+    @Test
+    public void parse_mixedMultipleSamePrefixes_returnsFilterCommand() {
+        // Mix of single and multiple occurrences of same prefix (OR within each category)
+        List<Predicate<Person>> predicates =
+                new ArrayList<>();
+        predicates.add(new TagsContainsKeywordsPredicate(Arrays.asList("friends", "owesMoney")));
+        predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList("jungle", "support")));
+        predicates.add(new EntityContainsKeywordsPredicate(Arrays.asList("ahri")));
+        FilterCommand expectedFilterCommand = new FilterCommand(new CompositePredicate(predicates));
+        assertParseSuccess(parser, " t/friends owesMoney r/jungle r/support ent/ahri", expectedFilterCommand);
     }
 }
