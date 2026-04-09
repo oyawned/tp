@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.EntityContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
 import seedu.address.model.person.TagsContainsKeywordsPredicate;
 
@@ -31,9 +33,9 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> firstPredicates =
+        List<Predicate<Person>> firstPredicates =
                 Arrays.asList(new TagsContainsKeywordsPredicate(Collections.singletonList("first")));
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> secondPredicates =
+        List<Predicate<Person>> secondPredicates =
                 Arrays.asList(new TagsContainsKeywordsPredicate(Collections.singletonList("second")));
 
         CompositePredicate firstPredicate = new CompositePredicate(firstPredicates);
@@ -89,7 +91,7 @@ public class FilterCommandTest {
     @Test
     public void toStringMethod() {
         TagsContainsKeywordsPredicate tagPredicate = new TagsContainsKeywordsPredicate(Arrays.asList("keyword"));
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 Arrays.asList(tagPredicate);
         CompositePredicate compositePredicate = new CompositePredicate(predicates);
         FilterCommand filterCommand = new FilterCommand(compositePredicate);
@@ -101,7 +103,7 @@ public class FilterCommandTest {
      * Parses {@code userInput} into a {@code CompositePredicate} with tag filter.
      */
     private CompositePredicate prepareTagPredicate(String userInput) {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new TagsContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
         return new CompositePredicate(predicates);
@@ -111,7 +113,7 @@ public class FilterCommandTest {
      * Parses {@code userInput} into a {@code CompositePredicate} with role filter.
      */
     private CompositePredicate prepareRolePredicate(String userInput) {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
         return new CompositePredicate(predicates);
@@ -121,7 +123,7 @@ public class FilterCommandTest {
      * Parses {@code userInput} into a {@code CompositePredicate} with entity filter.
      */
     private CompositePredicate prepareEntityPredicate(String userInput) {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new EntityContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
         return new CompositePredicate(predicates);
@@ -131,7 +133,7 @@ public class FilterCommandTest {
      * Parses {@code userInput} into a {@code CompositePredicate} with multiple filters.
      */
     private CompositePredicate prepareCombinedPredicate(String tagInput, String roleInput) {
-        List<java.util.function.Predicate<seedu.address.model.person.Person>> predicates =
+        List<Predicate<Person>> predicates =
                 new ArrayList<>();
         predicates.add(new TagsContainsKeywordsPredicate(Arrays.asList(tagInput.split("\\s+"))));
         predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(roleInput.split("\\s+"))));
