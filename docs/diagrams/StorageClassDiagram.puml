@@ -19,6 +19,7 @@ Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
+Class JsonAdaptedEntityStatisticMap
 Class JsonAdaptedTag
 }
 
@@ -29,6 +30,13 @@ Class JsonSerializableMatchRecord
 Class JsonAdaptedMatch
 }
 
+package "Entity Storage" #F4F6F6{
+Class "<<interface>>\nEntityStorage" as EntityStorage
+Class JsonEntityStorage
+Class JsonAdaptedEntityPathPair
+}
+
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -38,6 +46,7 @@ StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
 StorageManager -up-> "1" MatchRecordStorage
+StorageManager -up-> "1" EntityStorage
 
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
@@ -48,9 +57,13 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson --> "1" JsonAdaptedEntityStatisticMap
 
 JsonMatchRecordStorage .up.|> MatchRecordStorage
 JsonMatchRecordStorage ..> JsonSerializableMatchRecord
 JsonSerializableMatchRecord --> "*" JsonAdaptedMatch
+
+JsonEntityStorage .up.|> EntityStorage
+JsonEntityStorage --> "*" JsonAdaptedEntityPathPair
 
 @enduml
