@@ -56,6 +56,13 @@ public class CompareCommandTest {
     }
 
     @Test
+    public void execute_identicalIndices_throwsCommandException() {
+        CompareCommand compareCommand = new CompareCommand("1", "1");
+
+        assertCommandFailure(compareCommand, model, CompareCommand.MESSAGE_CANNOT_COMPARE_SAME_PLAYER);
+    }
+
+    @Test
     public void equals() {
         CompareCommand compareFirstSecondCommand = new CompareCommand("1", "2");
         CompareCommand compareSecondFirstCommand = new CompareCommand("2", "1");

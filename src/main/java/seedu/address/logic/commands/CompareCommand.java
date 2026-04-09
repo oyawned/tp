@@ -23,13 +23,15 @@ public class CompareCommand extends Command {
             + " or in-game names (IGNs) in the displayed person list.";
 
     public static final String PARAMETERS =
-        "Parameters: INDEX1 INDEX2 or i/IGN1 i/IGN2 or combinations (must be two identifiers)\n";
+        "Parameters: INDEX1 INDEX2 or i/IGN1 i/IGN2 or combinations (must be two different identifiers)\n";
 
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 2\n" + COMMAND_WORD + " i/Player1 i/Player2\n"
             + COMMAND_WORD + " 1 i/Player2";
 
     public static final String MESSAGE_COMPARE_SUCCESS = "Comparing players:\n%1$s\n%2$s";
     public static final String MESSAGE_IGN_NOT_FOUND = "No person with IGN '%1$s' found.";
+
+    public static final String MESSAGE_CANNOT_COMPARE_SAME_PLAYER = "The two identifiers must be different.";
 
     private final String targetIdentifier1;
     private final String targetIdentifier2;
@@ -51,6 +53,10 @@ public class CompareCommand extends Command {
 
         Person person1 = CommandUtil.findPersonByIdentifier(addressBookList, targetIdentifier1);
         Person person2 = CommandUtil.findPersonByIdentifier(addressBookList, targetIdentifier2);
+
+        if (person1.equals(person2)) {
+            throw new CommandException(MESSAGE_CANNOT_COMPARE_SAME_PLAYER);
+        }
 
         return new CommandResult(
                 String.format(MESSAGE_COMPARE_SUCCESS, Messages.format(person1), Messages.format(person2)),
