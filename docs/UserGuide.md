@@ -77,6 +77,9 @@ First time using this app? Consider going through the [walkthrough](#walkthrough
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* In this guide, `INDEX` means the global index number shown beside each player in the list.<br>
+  These index numbers are based on the full address book and remain the same in filtered views.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -128,7 +131,7 @@ Deletes the specified person from the player list.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the global index number shown in the list (based on the full address book, including filtered views).
 * The index **must be a positive integer** 1, 2, 3, …​
 
 #### Editing a person : `edit`
@@ -137,7 +140,8 @@ Edits an existing person in the player list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [i/IGN] [r/ROLE] [rank/RANK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the global index number shown in the list (based on the full address book, including filtered views).
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -186,6 +190,7 @@ Format: `filter [t/KEYWORD [MORE_KEYWORDS]...] [r/KEYWORD [MORE_KEYWORDS]...] [e
 * Within each category (tags, roles, entities), persons matching at least one keyword will be returned (i.e. `OR` search).
 * Multiple categories are combined with `AND` logic - a person must match at least one keyword from each specified category.
 * Only full words will be matched e.g. `friend` will not match `friends`
+* Filtering changes which players are displayed, but the displayed index numbers remain global indices based on the full address book.
 
 Examples:
 * `filter t/friend` Returns people tagged with `friend`
@@ -202,7 +207,7 @@ Compares two players identified by their index numbers.
 Format: `compare (INDEX1 | i/IGN1) (INDEX2 | i/IGN2)`
 
 * Displays details of both players side by side.
-* The indices refer to the index numbers shown in the displayed person list.
+* The indices refer to the global index numbers shown in the list (based on the full address book, including filtered views).
 * Indices **must be positive integers** 1, 2, 3, …​
 * The two players must be different.
 
@@ -217,6 +222,7 @@ Tests if a specific team composition is valid.
 Format: `draft (INDEX | i/IGN) (INDEX | i/IGN) (INDEX | i/IGN) (INDEX | i/IGN) (INDEX | i/IGN)​`
 
 * Selects 5 players by their index numbers or in-game names (IGN).
+* If an index is used, it refers to the global index number shown in the list (based on the full address book, including filtered views).
 * A valid team requires exactly 5 players with one player per role (TOP, JUNGLE, MID, BOT, SUPPORT).
 * You can mix indices and IGNs in the same command.
 * The `i/` prefix can optionally be omitted for non-numeric IGNs (e.g., `PlayerA` instead of `i/PlayerA`).
@@ -236,7 +242,8 @@ Updates the statistics of a player for a specific entity.
 
 Format: `stats (INDEX | i/IGN) ent/ENTITY [k/KILLS] [d/DEATHS] [a/ASSISTS]`
 
-* Updates the person at the specified `INDEX`, or with the specified IGN. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Updates the person at the specified `INDEX`, or with the specified IGN. The index refers to the global index number shown in the list (based on the full address book, including filtered views).
+* The index **must be a positive integer** 1, 2, 3, …​
 * `ent/ENTITY` is required and specifies which champion the statistics are for.
 * At least one of the statistics fields (kills, deaths, assists) must be provided.
 * Existing statistics for the entity will be added to the new values.
