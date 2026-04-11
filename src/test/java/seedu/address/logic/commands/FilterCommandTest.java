@@ -62,8 +62,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_tagFilter_filtersPersonsByTag() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3)
-            + "\n" + MESSAGE_GLOBAL_INDEX_CUE;
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        expectedMessage += "\n" + MESSAGE_GLOBAL_INDEX_CUE;
         CompositePredicate predicate = prepareTagPredicate("friends owesMoney");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -72,8 +72,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_roleFilter_filtersPersonsByRole() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2)
-            + "\n" + MESSAGE_GLOBAL_INDEX_CUE;
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        expectedMessage += "\n" + MESSAGE_GLOBAL_INDEX_CUE;
         CompositePredicate predicate = prepareRolePredicate("jungle");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -82,8 +82,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_combinedFilter_filtersPersonsByTagAndRole() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1)
-            + "\n" + MESSAGE_GLOBAL_INDEX_CUE;
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expectedMessage += "\n" + MESSAGE_GLOBAL_INDEX_CUE;
         CompositePredicate predicate = prepareCombinedPredicate("friends", "jungle");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
