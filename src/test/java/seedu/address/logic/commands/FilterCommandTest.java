@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_GLOBAL_INDEX_CUE;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -61,7 +62,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_tagFilter_filtersPersonsByTag() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3)
+            + "\n" + MESSAGE_GLOBAL_INDEX_CUE;
         CompositePredicate predicate = prepareTagPredicate("friends owesMoney");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -70,7 +72,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_roleFilter_filtersPersonsByRole() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2)
+            + "\n" + MESSAGE_GLOBAL_INDEX_CUE;
         CompositePredicate predicate = prepareRolePredicate("jungle");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -79,7 +82,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_combinedFilter_filtersPersonsByTagAndRole() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1)
+            + "\n" + MESSAGE_GLOBAL_INDEX_CUE;
         CompositePredicate predicate = prepareCombinedPredicate("friends", "jungle");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

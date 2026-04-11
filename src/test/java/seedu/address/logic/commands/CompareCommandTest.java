@@ -33,7 +33,8 @@ public class CompareCommandTest {
         CompareCommand compareCommand = new CompareCommand("1", "2");
 
         String expectedMessage = String.format(CompareCommand.MESSAGE_COMPARE_SUCCESS,
-                Messages.format(person1), Messages.format(person2));
+            Messages.format(person1), Messages.format(person2));
+        expectedMessage += "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE;
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, person1, person2);
         assertCommandSuccess(compareCommand, model, expectedCommandResult, model);

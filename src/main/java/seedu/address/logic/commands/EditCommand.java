@@ -42,7 +42,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = "Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the list. "
             + "Existing values will be overwritten by the input values.";
 
     public static final String PARAMETERS = "Parameters: INDEX (must be a positive integer) "
@@ -98,7 +98,8 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson))
+            + "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE);
     }
 
     /**

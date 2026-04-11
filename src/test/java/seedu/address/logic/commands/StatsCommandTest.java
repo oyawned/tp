@@ -49,6 +49,7 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(StatsCommand.MESSAGE_STATS_SUCCESS, Messages.format(editedPerson));
+        expectedMessage += "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -73,6 +74,7 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(StatsCommand.MESSAGE_STATS_SUCCESS, Messages.format(editedPerson));
+        expectedMessage += "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -101,6 +103,7 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(StatsCommand.MESSAGE_STATS_SUCCESS, Messages.format(editedPerson));
+        expectedMessage += "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);

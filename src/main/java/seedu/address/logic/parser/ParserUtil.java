@@ -39,7 +39,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_IDENTIFIER =
-        "Invalid identifier. Must be either a positive integer index or an IGN prefixed with 'i/'.";
+        "Invalid identifier. Must be either a global positive integer index shown beside a player in the list "
+            + "or an IGN prefixed with 'i/'.";
     public static final String MESSAGE_INVALID_STATISTICS_FORMAT =
         "Invalid statistics. The format of statistics is s/kills-deaths-assists";
 

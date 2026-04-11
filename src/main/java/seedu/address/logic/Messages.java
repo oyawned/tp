@@ -17,6 +17,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_GLOBAL_INDEX_CUE = "Note: The displayed index is a global index based on "
+            + "the full player list; find/filter changes visibility only and does not renumber indices.";
+    public static final String MESSAGE_GLOBAL_INDEX_COMMAND_CUE = "Note: This command interprets index inputs as "
+            + "global indices from the full player list.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 

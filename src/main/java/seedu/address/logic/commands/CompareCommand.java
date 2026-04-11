@@ -20,7 +20,7 @@ public class CompareCommand extends Command {
 
     public static final String MESSAGE_USAGE =
             "Compares two players identified by their index numbers"
-            + " or in-game names (IGNs) in the displayed person list.";
+            + " or in-game names (IGNs).";
 
     public static final String PARAMETERS =
         "Parameters: INDEX1 INDEX2 or i/IGN1 i/IGN2 or combinations (must be two different identifiers)\n";
@@ -59,7 +59,8 @@ public class CompareCommand extends Command {
         }
 
         return new CommandResult(
-                String.format(MESSAGE_COMPARE_SUCCESS, Messages.format(person1), Messages.format(person2)),
+            String.format(MESSAGE_COMPARE_SUCCESS, Messages.format(person1), Messages.format(person2))
+                + "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE,
                 false, false, true, person1, person2
         );
     }

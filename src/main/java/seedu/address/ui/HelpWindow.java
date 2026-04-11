@@ -25,6 +25,8 @@ import seedu.address.logic.commands.CommandRegistry;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s2-cs2103t-w09-2.github.io/tp/UserGuide.html";
+    public static final String GLOBAL_INDEX_HELP_RULE = "Note: The displayed index is a global index based on the "
+        + "full player list; find/filter changes visibility only and does not renumber indices.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -51,7 +53,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        urlLabel.setText("Refer to the user guide: " + USERGUIDE_URL);
+        urlLabel.setText(GLOBAL_INDEX_HELP_RULE + "\n" + "Refer to the user guide: " + USERGUIDE_URL);
         setupCommandTable();
     }
 

@@ -29,7 +29,7 @@ public class StatsCommand extends Command {
     public static final String COMMAND_WORD = "stats";
 
     public static final String MESSAGE_USAGE = "Updates the statistics of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the list. "
             + "Existing values will be overwritten by the input values.";
 
     public static final String PARAMETERS = "Parameters: INDEX (must be a positive integer) "
@@ -74,7 +74,8 @@ public class StatsCommand extends Command {
         Person editedPerson = createStatsEditedPerson(personToEdit, editStatsDescriptor);
 
         model.setPerson(personToEdit, editedPerson);
-        return new CommandResult(String.format(MESSAGE_STATS_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_STATS_SUCCESS, Messages.format(editedPerson))
+            + "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE);
     }
 
     /**

@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE =
-        "Deletes the person identified by the index number or in-game name (IGN) used in the displayed person list.";
+        "Deletes the person identified by the index number or in-game name (IGN).";
 
     public static final String PARAMETERS = "Parameters: INDEX (must be a positive integer) or i/IGN\n";
 
@@ -46,7 +46,8 @@ public class DeleteCommand extends Command {
         Person personToDelete = CommandUtil.findPersonByIdentifier(addressBookList, targetIdentifier);
 
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete))
+            + "\n" + Messages.MESSAGE_GLOBAL_INDEX_COMMAND_CUE);
     }
 
     @Override
