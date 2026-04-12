@@ -294,11 +294,11 @@ i/PlayerD ent/Irelia s/2-19-4 i/PlayerE ent/Kayn s/6-3-8` Records a win today wh
   * PlayerC played Evelynn, killed 5 times, died 6 times and assisted 15 times.
   * PlayerD played Irelia, killed 2 times, died 19 times and assisted 4 times.
   * PlayerE played Kayn, killed 6 times, died 3 times and assisted 8 times.
-* `result W/WIN i/PlayerA i/PlayerB i/PlayerC i/PlayerD i/PlayerE ent/Ahri ent/Leona ent/Evelynn ent/Irelia ent/Kayn
+* `result w/WIN i/PlayerA i/PlayerB i/PlayerC i/PlayerD i/PlayerE ent/Ahri ent/Leona ent/Evelynn ent/Irelia ent/Kayn
 s/10-2-8 s/1-1-12 s/5-6-15 s/2-19-4 s/6-3-8` Records the exact same match as the above command.
 * `result w/LOSE i/PlayerA ent/Ahri s/10-2-8 i/PlayerB ent/Leona s/1-1-12 i/PlayerC ent/Evelynn s/5-6-15
 i/PlayerD ent/Irelia s/2-19-4 i/PlayerE ent/Kayn s/6-3-8 date/2025-12-31`
-Records a loss on that took place on 31st December 2025.
+Records a loss that took place on 31st December 2025.
 
 
 ### Saving the data
@@ -352,7 +352,7 @@ Action | Format, Examples
 ### Glossary
 
 * **IGN**: In-Game Name, a player's username in the game
-* **Entity**: An umbrella term for a character that the player plays in the game. In League of Legends, this refers to a 'Champion'. In other games, this may refer to an 'Agent', 'Operator', 'Hero', or whatever term that particular game uses.
+* **Entity**: An umbrella term for a character played by the player in the game. In League of Legends, this refers to a 'Champion'. In other games, this may refer to an 'Agent', 'Operator', 'Hero', or whatever term that particular game uses.
 
 
 # Walkthrough: Setting Up the National Esports Team
@@ -415,11 +415,11 @@ If the list is empty, or contains fewer than 11 players, you probably imported t
 {:.no_toc}
 
 Between the last Asian Games and the current one, some new talent has emerged.
-Specifically, a certain 'Koh Kai Jie' from team 'FaerieCharm'. His IGN is 'Dust', his rank is Challenger, and he plays the top lane.
-Suppose his phone number is 93032101, and his email is kkj@gmail.com. Then, the command to add him will like as follows:
+Specifically, a certain 'Koh Kai Jie' from team 'FaerieCharm'. His IGN is 'Dust', his rank is CHALLENGER, and he plays the top lane.
+Suppose his phone number is 93032101, and his email is kkj@gmail.com. Then, the command to add him is as follows:
 
 ```
-add n/Koh Kai Jie p/93032101 e/kkj@gmail.com i/Dust r/TOP rank/Challenger t/FaerieCharm
+add n/Koh Kai Jie p/93032101 e/kkj@gmail.com i/Dust r/TOP rank/CHALLENGER t/FaerieCharm
 ```
 
 **Expected Output:**
@@ -489,6 +489,7 @@ filter r/top
 
 **Expected Output:**
 4 players are listed.
+![Filter](images/WalkthroughFilter.png)
 
 ### Filter by Multiple Criteria
 {:.no_toc}
@@ -502,6 +503,7 @@ filter r/top t/Impunity
 
 **Expected Output:**
 Only 1 player is listed, CYH.
+![FilterMultiple](images/WalkthroughFilterMultiple.png)
 
 ---
 
@@ -543,14 +545,8 @@ draft 12 2 3 4 5
 ```
 
 **Expected Output:**
-```
-✓ Valid team composition!
-TOP: Dust
-JUNGLE: CraliX
-MID: Raven
-BOT: Ciela
-SUPPORT: Kra
-```
+A valid team composition message:
+![DraftValid](images/WalkthroughDraftValid.png)
 
 ### Try an Invalid Composition
 {:.no_toc}
@@ -564,6 +560,7 @@ draft 12 2 3 4 6
 
 **Expected Output:**
 An error message indicating the team composition is invalid, because you're missing a SUPPORT player (index 6 is Blaire, a TOP laner).
+![DraftInvalid](images/WalkthroughDraftInvalid.png)
 
 ---
 
@@ -615,7 +612,7 @@ Confirmation that Dust's phone number has been updated.
 ### Removing a Player
 {:.no_toc}
 
-If you need to remove a player from your the list:
+If you need to remove a player from your list:
 
 **Command:**
 ```

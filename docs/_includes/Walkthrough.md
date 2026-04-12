@@ -67,11 +67,11 @@ If the list is empty, or contains fewer than 11 players, you probably imported t
 {:.no_toc}
 
 Between the last Asian Games and the current one, some new talent has emerged.
-Specifically, a certain 'Koh Kai Jie' from team 'FaerieCharm'. His IGN is 'Dust', his rank is Challenger, and he plays the top lane.
-Suppose his phone number is 93032101, and his email is kkj@gmail.com. Then, the command to add him will like as follows:
+Specifically, a certain 'Koh Kai Jie' from team 'FaerieCharm'. His IGN is 'Dust', his rank is CHALLENGER, and he plays the top lane.
+Suppose his phone number is 93032101, and his email is kkj@gmail.com. Then, the command to add him is as follows:
 
 ```
-add n/Koh Kai Jie p/93032101 e/kkj@gmail.com i/Dust r/TOP rank/Challenger t/FaerieCharm
+add n/Koh Kai Jie p/93032101 e/kkj@gmail.com i/Dust r/TOP rank/CHALLENGER t/FaerieCharm
 ```
 
 **Expected Output:**
@@ -267,7 +267,7 @@ Confirmation that Dust's phone number has been updated.
 ### Removing a Player
 {:.no_toc}
 
-If you need to remove a player from your the list:
+If you need to remove a player from your list:
 
 **Command:**
 ```

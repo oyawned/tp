@@ -67,9 +67,9 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components from being coupled to a component's implementation), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -81,9 +81,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -121,7 +121,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g., during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -135,7 +135,7 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * uses global index numbers for index-based commands; these numbers are based on the full player list and stay the same after `find`/`filter`.
 * rationale for global indices: keeping indices stable across filtered and unfiltered views avoids ambiguity in multi-step workflows (e.g. filter -> compare/edit/draft), where users can continue using the same index references without re-numbering.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
@@ -162,7 +162,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 To add a new command, here are two key things to note.
 
-* Ensure your new command and it's associated parser is added to `CommandRegistry.java`
+* Ensure your new command and its associated parser is added to `CommandRegistry.java`
 * Ensure your new command class has the public static variables `COMMAND_WORD`, `MESSAGE_USAGE`, `PARAMETERS`, and `EXAMPLE` are declared.
 
 Doing so ensures that the app's HelpWindow will be automatically populated with your newly added command's information. Having the `COMMAND_WORD` declared also ensures that the new command will be added into the `AddressBookParser.java`, meaning your command will be usable! No need to modify any other files or switch cases.
@@ -185,13 +185,13 @@ Doing so ensures that the app's HelpWindow will be automatically populated with 
 
 **Target user profile**:
 
-* has a need to manage a significant number of players and their player details, statistics, roles, and availability
+* has a need to manage a significant number of players and their player details, statistics, and roles
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage team operations and analyze player data (statistics, roles, availability) faster and more efficiently than a typical mouse/GUI driven app
+**Value proposition**: manage team operations and analyze player data (statistics, roles) faster and more efficiently than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -267,7 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1c. DraftDeck detects that a player with the same details already exists.
+* 1c. DraftDeck detects that another player with the same IGN already exists.
 
     * 1c1. DraftDeck displays an error message indicating the duplicate.
 
@@ -277,14 +277,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   **Guarantees**
 
-  * The specified player is deleted from DraftDeck if the index is valid.
-  * No player is deleted if the index is invalid.
+   * The specified player is deleted from DraftDeck if the index or IGN is valid.
+   * No player is deleted if the index is invalid or the IGN is not found.
   * All other players remain unchanged, except for their index.
 
   **MSS**
 
-1.  User lists all players (UC10).
-2.  User requests to delete a specific player in the list by index.
+1.  User <ins>lists all players (UC10)</ins>.
+2.  User requests to delete a specific player in the list by index or IGN.
 3.  DraftDeck deletes the player.
 
     Use case ends.
@@ -294,6 +294,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given index is invalid (not a positive integer or out of range).
 
     * 2a1. DraftDeck shows an error message.
+
+    Use case resumes at step 1.
+
+* 2b. The given IGN is not found in the player list.
+
+   * 2b1. DraftDeck shows an error message.
 
     Use case resumes at step 1.
 
@@ -307,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   **MSS**
 
-1.  User lists all players (UC10).
+1.  User <ins>lists all players (UC10)</ins>.
 2.  User requests to filter players by tags, roles, entities, or any combination.
 3.  DraftDeck shows a filtered list of players matching the specified criteria.
 
@@ -315,9 +321,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No players match the filter criteria.
+* 2a. No filter criteria are provided.
 
-    * 2a1. DraftDeck shows an empty list.
+    * 2a1. DraftDeck displays an error message showing the correct command usage.
+
+    Use case ends.
+
+* 2b. No players match the filter criteria.
+
+    * 2b1. DraftDeck shows an empty list.
 
     Use case ends.
 
@@ -326,8 +338,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User lists all players (UC10).
-2.  User requests to compare two specific players by their indices or IGNs.
+1.  User <ins>lists all players (UC10)</ins>.
+2.  User requests to compare two specific players by index or IGN.
 3.  DraftDeck displays a side-by-side comparison of the selected players.
 
     Use case ends.
@@ -337,19 +349,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given index is invalid (not a positive integer or out of range).
 
-    * 2a1. DraftDeck shows an error message.
+   * 2a1. DraftDeck displays an error message.
 
     Use case resumes at step 1.
 
 * 2b. The given IGN is not found in the player list.
 
-    * 2b1. DraftDeck shows an error message.
+   * 2b1. DraftDeck displays an error message.
 
     Use case resumes at step 1.
 
-* 2c. Both indices or both IGNs refer to the same player.
+* 2c. The same player is selected twice.
 
-    * 2c1. DraftDeck shows an error message indicating that different players must be selected.
+   * 2c1. DraftDeck displays an error message indicating that different players must be selected.
 
     Use case resumes at step 1.
 
@@ -358,8 +370,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User lists all players (UC10).
-2. User requests to edit a specific player in the list with one or more fields.
+1. User <ins>lists all players (UC10)</ins>.
+2. User requests to edit a specific player by index with one or more fields.
 3. DraftDeck updates the player and shows a success message.
 
    Use case ends.
@@ -378,9 +390,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case resumes at step 1.
 
-* 2c. The edited player would be a duplicate of another player.
+* 2c. At least one parameter value is invalid (e.g., invalid phone format, invalid role, invalid rank).
 
-   * 2c1. DraftDeck displays an error message indicating the duplicate.
+   * 2c1. DraftDeck displays an error message specific to the invalid field.
+
+   Use case resumes at step 1.
+
+* 2d. The edited player would be a duplicate of another player.
+
+   * 2d1. DraftDeck displays an error message indicating the duplicate.
 
    Use case resumes at step 1.
 
@@ -390,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a match result with match outcome (WIN/LOSE/DRAW), optional date, and player statistics.
-2. DraftDeck adds the match to the match record and updates the statistics of all players involved.
+2. DraftDeck adds the match to the match record and updates the statistics of all players involved. If an entity is supported but not previously tracked for a player, DraftDeck adds it as a new entity entry for that player.
 
    Use case ends.
 
@@ -420,13 +438,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
+* 1e. At least one specified entity is invalid or unknown.
+
+   * 1e1. DraftDeck displays an error message notifying the user that all entities must be valid supported entities.
+
+    Use case resumes at step 1.
+
+* 1f. The provided date is invalid or not in the expected format.
+
+   * 1f1. DraftDeck displays an error message notifying the user that the date must follow yyyy-MM-dd.
+
+    Use case resumes at step 1.
+
 **Use case: UC07 - Draft a team**
 
 
 **MSS**
 
-1. User lists all players (UC10).
-2. User requests to draft a team by selecting 5 players using indices or IGNs.
+1. User <ins>lists all players (UC10)</ins>.
+2. User requests to draft a team by selecting 5 players by index or IGN.
 3. DraftDeck validates the team composition and displays the result.
 
    Use case ends.
@@ -441,13 +471,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The given index is invalid (not a positive integer or out of range).
 
-    * 2b1. DraftDeck shows an error message.
+   * 2b1. DraftDeck displays an error message.
 
     Use case resumes at step 1.
 
 * 2c. The given IGN is not found in the player list.
 
-    * 2c1. DraftDeck shows an error message.
+   * 2c1. DraftDeck displays an error message.
 
     Use case resumes at step 1.
 
@@ -468,9 +498,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User lists all players (UC10).
-2. User requests to update statistics for a specific player and entity with kills, deaths, and/or assists.
-3. DraftDeck updates the player's statistics for that entity and shows a success message.
+1. User <ins>lists all players (UC10)</ins>.
+2. User requests to update statistics for a specific player by index or IGN and entity with kills, deaths, and/or assists.
+3. DraftDeck updates the player's statistics for that entity and shows a success message. If the entity is supported but not previously tracked for the player, DraftDeck adds it as a new entity entry for that player.
 
    Use case ends.
 
@@ -490,7 +520,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2c. No statistics fields are provided.
 
-    * 2c1. DraftDeck displays an error message notifying the user that at least one statistic field must be provided.
+   * 2c1. DraftDeck displays an error message notifying the user that at least one statistic field must be provided.
+
+    Use case resumes at step 1.
+
+* 2d. The specified entity is invalid or unknown.
+
+   * 2d1. DraftDeck displays an error message notifying the user that the entity must be a valid supported entity.
 
     Use case resumes at step 1.
 
@@ -499,7 +535,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User lists all players (UC10).
+1. User <ins>lists all players (UC10)</ins>.
 2. User requests to find players by name keywords.
 3. DraftDeck shows a list of players whose names match any of the keywords.
 
@@ -507,9 +543,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. No players match the keywords.
+* 2a. No name keywords are provided.
 
-    * 2a1. DraftDeck shows an empty list.
+    * 2a1. DraftDeck displays an error message showing the correct command usage.
+
+    Use case ends.
+
+* 2b. No players match the keywords.
+
+    * 2b1. DraftDeck shows an empty list.
 
     Use case ends.
 
@@ -613,7 +655,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding players
 
-   1. Prerequisites: Player `JohnD88` and `BetsyCrowe`does not exist.
+   1. Prerequisites: Players `JohnD88` and `BetsyCrowe` do not exist.
 
    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com i/JohnD88 r/MID rank/GOLD I`<br>
       Expected: Player is added to the list with the specified details.
@@ -762,16 +804,16 @@ testers are expected to do more *exploratory* testing.
 
 **Command Architecture Enhancement**
 - Added 5 new commands: `compare`, `draft`, `filter`, `stats`, `result` with complex parsing logic
-- Implemented CommandRegistry mechanism, making adding new Commands easier. (No need to manually add new commands to a switch case.)
+- Implemented the CommandRegistry mechanism, making it easier to add new commands. (No need to manually add new commands to a switch case.)
 
 **Game-Agnostic Entity System**
-- The default EntityReference used for input validation is League Of Legends based. However, the app is able to load custom `entities.json` files to change this validation. Thus, the app is able to be adapted by an advanced user to support a different esports games. The dynamic loading of images, as well as the fallback tooltip mechanisms further support this. 
+- The default EntityReference used for input validation is League of Legends based. However, the app is able to load custom `entities.json` files to change this validation. Thus, the app can be adapted by an advanced user to support a different esports game. The dynamic loading of images, as well as the fallback tooltip mechanisms, further supports this.
 
 ### Effort Required (High level overview)
 
 **Model Layer**: 15+ new classes including Entity, EntityStatisticMap, Match, MatchRecord, Result, PlayerInMatch, and supporting statistics classes (Kills, Deaths, Assists)
 
-**Logic Layer**: 5 new command classes (CompareCommand, DraftCommand, FilterCommand, StatsCommand, ResultCommand), corrseponding parsers, and other various utilities to support these classes.
+**Logic Layer**: 5 new command classes (CompareCommand, DraftCommand, FilterCommand, StatsCommand, ResultCommand), corresponding parsers, and various utilities to support these classes.
 
 **Storage Layer**: 10+ new JSON adapters (JsonAdaptedEntity, JsonAdaptedEntityPathPair, JsonAdaptedEntityStatisticMap, JsonAdaptedMatch, JsonAdaptedPlayerInMatch, JsonAdaptedStatistics, etc.) and full integration into StorageManager
 
@@ -785,7 +827,7 @@ testers are expected to do more *exploratory* testing.
 
 **UI Integration**: Displaying complex statistics data (multiple entities per player) in a clean, user-friendly interface without overwhelming the user.
 
-### Reuse and it's impact
+### Reuse and its impact
 
 - CommandRegistry idea taken from IP, albeit modified to fit the AB3's implementation of separate Parser and Command classes
 - AB3 architecture and project scaffold for implementation of new commands, allowed for easy parsing of complex arguments, reducing setup and boilerplate effort.
