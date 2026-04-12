@@ -28,6 +28,7 @@ public class InGameNameTest {
         assertFalse(InGameName.isValidIgn("")); // empty string
         assertFalse(InGameName.isValidIgn(" ")); // spaces only
         assertFalse(InGameName.isValidIgn("   ")); // multiple spaces
+        assertFalse(InGameName.isValidIgn("12345678901234567")); // exceeds 16 characters
 
         // valid IGN - can contain any characters except leading whitespace
         assertTrue(InGameName.isValidIgn("AlexY42"));
@@ -38,6 +39,7 @@ public class InGameNameTest {
         assertTrue(InGameName.isValidIgn("Player Name")); // with space in middle
         assertTrue(InGameName.isValidIgn("IGN!@#")); // special characters
         assertTrue(InGameName.isValidIgn("123")); // numbers only
+        assertTrue(InGameName.isValidIgn("1234567890123456")); // exactly 16 characters
     }
 
     @Test

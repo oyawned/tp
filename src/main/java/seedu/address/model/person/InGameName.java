@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class InGameName {
 
+    public static final int MAX_LENGTH = 16;
     public static final String MESSAGE_CONSTRAINTS = "IGN (In-Game Name) can take any values, "
-            + "and it should not be blank";
+            + "it should not be blank, and it must be at most " + MAX_LENGTH + " characters long";
 
     /*
      * The first character of the IGN must not be a whitespace,
@@ -35,7 +36,7 @@ public class InGameName {
      * Returns true if a given string is a valid IGN.
      */
     public static boolean isValidIgn(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
     @Override
