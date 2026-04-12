@@ -11,13 +11,14 @@ public class InGameName {
 
     public static final int MAX_LENGTH = 16;
     public static final String MESSAGE_CONSTRAINTS = "IGN (In-Game Name) can take any values, "
-            + "it should not be blank, and it must be at most " + MAX_LENGTH + " characters long";
+            + "it should not be blank, it should not contain whitespace, and it must be at most "
+            + MAX_LENGTH + " characters long";
 
     /*
-     * The first character of the IGN must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * IGN must contain at least one non-whitespace character and
+     * must not contain any whitespace characters.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "\\S+";
 
     public final String value;
 

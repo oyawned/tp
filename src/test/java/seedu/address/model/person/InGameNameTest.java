@@ -28,15 +28,17 @@ public class InGameNameTest {
         assertFalse(InGameName.isValidIgn("")); // empty string
         assertFalse(InGameName.isValidIgn(" ")); // spaces only
         assertFalse(InGameName.isValidIgn("   ")); // multiple spaces
+        assertFalse(InGameName.isValidIgn("Player Name")); // whitespace in middle
+        assertFalse(InGameName.isValidIgn("Player\tName")); // tab whitespace
+        assertFalse(InGameName.isValidIgn("Player\nName")); // newline whitespace
         assertFalse(InGameName.isValidIgn("12345678901234567")); // exceeds 16 characters
 
-        // valid IGN - can contain any characters except leading whitespace
+        // valid IGN - can contain any non-whitespace characters
         assertTrue(InGameName.isValidIgn("AlexY42"));
         assertTrue(InGameName.isValidIgn("Bern_Storm"));
         assertTrue(InGameName.isValidIgn("Charlie99"));
         assertTrue(InGameName.isValidIgn("a")); // single character
         assertTrue(InGameName.isValidIgn("ProGamer123"));
-        assertTrue(InGameName.isValidIgn("Player Name")); // with space in middle
         assertTrue(InGameName.isValidIgn("IGN!@#")); // special characters
         assertTrue(InGameName.isValidIgn("123")); // numbers only
         assertTrue(InGameName.isValidIgn("1234567890123456")); // exactly 16 characters

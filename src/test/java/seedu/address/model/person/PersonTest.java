@@ -50,9 +50,9 @@ public class PersonTest {
         Person editedBob = new PersonBuilder(BOB).withIgn(VALID_IGN_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
-        // ign has trailing spaces, all other attributes same -> returns false
-        String ignWithTrailingSpaces = VALID_IGN_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withIgn(ignWithTrailingSpaces).build();
+        // ign has an additional character, all other attributes same -> returns false
+        String ignWithSuffix = VALID_IGN_BOB + "x";
+        editedBob = new PersonBuilder(BOB).withIgn(ignWithSuffix).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
 

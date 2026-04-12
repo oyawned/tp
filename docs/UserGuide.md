@@ -489,6 +489,7 @@ filter r/top
 
 **Expected Output:**
 4 players are listed.
+![Filter](images/WalkthroughFilter.png)
 
 ### Filter by Multiple Criteria
 {:.no_toc}
@@ -502,6 +503,7 @@ filter r/top t/Impunity
 
 **Expected Output:**
 Only 1 player is listed, CYH.
+![FilterMultiple](images/WalkthroughFilterMultiple.png)
 
 ---
 
@@ -543,14 +545,8 @@ draft 12 2 3 4 5
 ```
 
 **Expected Output:**
-```
-✓ Valid team composition!
-TOP: Dust
-JUNGLE: CraliX
-MID: Raven
-BOT: Ciela
-SUPPORT: Kra
-```
+A valid team composition message:
+![DraftValid](images/WalkthroughDraftValid.png)
 
 ### Try an Invalid Composition
 {:.no_toc}
@@ -564,6 +560,7 @@ draft 12 2 3 4 6
 
 **Expected Output:**
 An error message indicating the team composition is invalid, because you're missing a SUPPORT player (index 6 is Blaire, a TOP laner).
+![DraftInvalid](images/WalkthroughDraftInvalid.png)
 
 ---
 
