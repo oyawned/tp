@@ -8,6 +8,7 @@ import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.entity.Entity;
@@ -276,6 +277,9 @@ public class ComparePanel extends UiPart<VBox> {
             Label kdIndicator, Statistics stats, String statsLabelText) {
         String displayName = player.getIgn().toString() + " (" + player.getName().fullName + ")";
         nameLabel.setText(displayName);
+        Tooltip nameTooltip = new Tooltip(displayName);
+        nameLabel.setTooltip(nameTooltip);
+        
         roleLabel.setText(player.getRole().toString());
         rankLabel.setText(player.getRank().toString());
 

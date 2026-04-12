@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -76,7 +77,12 @@ public class PersonCard extends UiPart<Region> {
         this.entityButtonMap = new HashMap<>();
 
         id.setText(displayedIndex + ". ");
-        name.setText(person.getIgn().toString() + "(" + person.getName().fullName + ")");
+        String nameText = person.getIgn().toString() + "(" + person.getName().fullName + ")";
+        name.setText(nameText);
+        
+        Tooltip nameTooltip = new Tooltip(nameText);
+        name.setTooltip(nameTooltip);
+        
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         role.setText("Role: " + person.getRole().toString());

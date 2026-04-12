@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import seedu.address.model.entity.Entity;
@@ -162,6 +163,10 @@ public class DraftPanel extends UiPart<HBox> {
                                    Label killsLabel, Label deathsLabel, Label assistsLabel,
                                    Label kdLabel, FlowPane entityFlowPane) {
         nameLabel.setText(player.getIgn().toString());
+        String fullNameAndIgn = player.getIgn().toString() + " (" + player.getName().fullName + ")";
+        Tooltip nameTooltip = new Tooltip(fullNameAndIgn);
+        nameLabel.setTooltip(nameTooltip);
+        
         roleLabel.setText(player.getRole().value.toString());
         rankLabel.setText(player.getRank().toString());
         killsLabel.setText(player.getOverallStatistics().getKills().toString());
