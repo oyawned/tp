@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -44,9 +44,12 @@
 
           <!-- Commands Table below -->
           <TableView fx:id="commandTable" fixedCellSize="-1" VBox.vgrow="ALWAYS">
+            <columnResizePolicy>
+              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
             <columns>
-              <TableColumn fx:id="commandColumn" prefWidth="70.0" resizable="false" text="Word" />
-              <TableColumn fx:id="usageColumn" prefWidth="500.0" resizable="false" text="Usage" />
+              <TableColumn fx:id="commandColumn" prefWidth="70.0" text="Word" />
+              <TableColumn fx:id="usageColumn" prefWidth="500.0" text="Usage" />
             </columns>
             <VBox.margin>
               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
