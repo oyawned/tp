@@ -132,7 +132,10 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the match history data i.e., all `Match` objects (which are contained in a `MatchRecord` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* provides a way to update player statistics from match results through the `AddressBook`.
+* associates each `Person` with an `EntityStatisticMap` which maps `Entity` objects to their respective `Statistics`
 * uses global index numbers for index-based commands; these numbers are based on the full player list and stay the same after `find`/`filter`.
 * rationale for global indices: keeping indices stable across filtered and unfiltered views avoids ambiguity in multi-step workflows (e.g. filter -> compare/edit/draft), where users can continue using the same index references without re-numbering.
 * stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
@@ -146,9 +149,14 @@ The `Model` component,
 <img src="images/StorageClassDiagram.svg" width="800">
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save address book data, match record data, entity metadata, and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `MatchRecordStorage`, `EntityStorage`, and `UserPrefStorage`, which means it can be treated as any one of them.
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
+* manages four distinct JSON files:
+    * `data/addressbook.json`: Stores all player profiles, including their tags and aggregated performance statistics across different entities.
+    * `data/matchrecord.json`: Stores the chronological history of all recorded match outcomes and individual player statistics for those matches.
+    * `data/entities.json`: Stores metadata for game entities (e.g., icon paths for champions).
+    * `preferences.json`: Stores UI settings and user preferences.
 
 ### Common classes
 
