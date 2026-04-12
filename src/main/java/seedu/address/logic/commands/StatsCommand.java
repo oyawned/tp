@@ -29,8 +29,7 @@ public class StatsCommand extends Command {
     public static final String COMMAND_WORD = "stats";
 
     public static final String MESSAGE_USAGE = "Updates the statistics of the person identified "
-            + "by the index number or IGN. "
-            + "Existing values will be overwritten by the input values.";
+            + "by the index number or IGN. ";
 
     public static final String PARAMETERS = "Parameters: (INDEX | i/IGN) "
             + PREFIX_ENTITY + "ENTITY "
