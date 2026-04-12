@@ -110,7 +110,7 @@ Format: `exit`
 
 ### Player management
 
-#### Adding a person: `add`
+#### Adding a player: `add`
 
 Adds a player to the player list. The player added must be unique.
 
@@ -130,7 +130,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com i/JohnD88 r/MID rank/GOLD II`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com i/Betsycrowe r/BOT rank/PLATINUM I p/1234567`
 
-#### Deleting a person : `delete`
+#### Deleting a player : `delete`
 
 Deletes the specified person from the player list.
 
@@ -141,9 +141,9 @@ Format: `delete INDEX`
 * These numbers are global: they are based on the full player list and stay the same after `find`/`filter`.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-#### Editing a person : `edit`
+#### Editing a player : `edit`
 
-Edits an existing person in the player list.
+Edits an existing player in the player list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [i/IGN] [r/ROLE] [rank/RANK] [t/TAG]…​`
 
@@ -161,17 +161,17 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 r/JUNGLE rank/DIAMOND I` Edits the role and rank of the 3rd person.
 
-#### Listing all persons : `list`
+#### Listing all players : `list`
 
-Shows a list of all persons in the player list.
+Shows a list of all players in the player list.
 
 Format: `list`
 
 ### Search and Discovery
 
-#### Locating persons by name: `find`
+#### Locating players by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds players whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -179,7 +179,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Players matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Changes which players are displayed, but the index numbers stay the same.
 * These numbers are global: they are based on the full player list and stay the same after `find`/`filter`.
@@ -189,15 +189,15 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### Filtering persons : `filter`
+#### Filtering players : `filter`
 
-Finds persons whose tags, roles, or entities contain any of the given keywords.
+Finds players whose tags, roles, or entities contain any of the given keywords.
 
 Format: `filter [t/KEYWORD [MORE_KEYWORDS]...] [r/KEYWORD [MORE_KEYWORDS]...] [ent/KEYWORD [MORE_KEYWORDS]...]`
 
 * The search is case-insensitive. e.g `friend` will match `friend`, `Friend`, or `FRIEND`
 * You can filter by tags (`t/`), roles (`r/`), entities (`ent/`), or any combination of these.
-* Within each category (tags, roles, entities), persons matching at least one keyword will be returned (i.e. `OR` search).
+* Within each category (tags, roles, entities), players matching at least one keyword will be returned (i.e. `OR` search).
 * Multiple categories are combined with `AND` logic - a person must match at least one keyword from each specified category.
 * Only full words will be matched e.g. `friend` will not match `friends`
 * Changes which players are displayed, but the index numbers stay the same.
@@ -213,7 +213,7 @@ Examples:
 
 #### Comparing players : `compare`
 
-Compares two players identified by their index numbers.
+Compares two players identified by index or IGN.
 
 Format: `compare (INDEX1 | i/IGN1) (INDEX2 | i/IGN2)`
 
@@ -260,7 +260,7 @@ Updates the statistics of a player for a specific entity.
 
 Format: `stats (INDEX | i/IGN) ent/ENTITY [k/KILLS] [d/DEATHS] [a/ASSISTS]`
 
-* Updates the person at the specified `INDEX`, or with the specified IGN. The index refers to the index number shown beside each player in the list.
+* Updates the player at the specified `INDEX`, or with the specified IGN. The index refers to the index number shown beside each player in the list.
 * These numbers are global: they are based on the full player list and stay the same after `find`/`filter`.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `ent/ENTITY` is required and specifies which champion the statistics are for.
