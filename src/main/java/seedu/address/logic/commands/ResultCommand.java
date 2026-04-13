@@ -63,13 +63,12 @@ public class ResultCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
-
         try {
             model.addMatch(toAdd);
         } catch (PersonNotFoundException e) {
-            throw new CommandException(String.format(MESSAGE_PLAYER_DOES_NOT_EXIST, Messages.format(toAdd)));
+            return new CommandResult(String.format(MESSAGE_PLAYER_DOES_NOT_EXIST, Messages.format(toAdd)));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
