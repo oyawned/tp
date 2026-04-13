@@ -30,7 +30,7 @@ public class TypicalMatches {
     public static final List<Person> PERSONS_2 = List.of(TypicalPersons.CARL, TypicalPersons.DANIEL,
             TypicalPersons.ELLE, TypicalPersons.FIONA, TypicalPersons.GEORGE);
     public static final List<Person> PERSONS_1 = List.of(TypicalPersons.DANIEL, TypicalPersons.ELLE,
-            TypicalPersons.FIONA, TypicalPersons.GEORGE, TypicalPersons.HOON);
+            TypicalPersons.FIONA, TypicalPersons.GEORGE, TypicalPersons.HOON); // Last person not in typical AddressBook
 
 
     public static final PlayersInMatch PLAYERS_4 = new PlayersInMatch(
